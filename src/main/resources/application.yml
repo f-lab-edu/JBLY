@@ -8,3 +8,15 @@ spring:
     username: root
     password: 1234
 
+  jpa:
+    database: mysql
+    open-in-view: false # OSIV 설정
+    hibernate: # application 실행 시 table create and drop
+      ddl-auto: create
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties: # 실행 시 어떤 쿼리가 발생하는지 확인하기 위한 설정
+      hibernate:
+        format_sql: true
+
+# todo : ddl 형상관리 툴인 flyway에 관한 설정은 개발이 어느정도 진행된 후 적용
