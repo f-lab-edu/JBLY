@@ -1,14 +1,27 @@
 package com.flab.jbly.domain.user;
 
-import java.time.LocalDateTime;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import java.time.Instant;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity
+@Table(name = "user")
 public class User {
 
+		@Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
+		@Column(name = "user_id")
 		private Long id;
 
 		private String userId;
@@ -23,8 +36,12 @@ public class User {
 
 		private String address;
 
-		private LocalDateTime createdAt;
+		@CreationTimestamp
+		@Column(name = "created_at")
+		private Instant createdAt;
 
-		private LocalDateTime updatedAt;
+		@UpdateTimestamp
+		@Column(name = "updated_at")
+		private Instant updatedAt;
 }
 

@@ -18,5 +18,6 @@ spring:
     properties: # 실행 시 어떤 쿼리가 발생하는지 확인하기 위한 설정
       hibernate:
         format_sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
 
 # todo : ddl 형상관리 툴인 flyway에 관한 설정은 개발이 어느정도 진행된 후 적용
