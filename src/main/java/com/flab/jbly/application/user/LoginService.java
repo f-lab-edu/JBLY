@@ -1,18 +1,18 @@
 package com.flab.jbly.application.user;
 
 import com.flab.jbly.application.user.command.LoginCommand;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.flab.jbly.domain.user.PasswordEncryption;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class LoginService {
 
-		Logger logger = LoggerFactory.getLogger(this.getClass());
+		private final PasswordEncryption encryption;
 
 		public void login(LoginCommand command) {
-
-				logger.info("service layer is working");
-
+				// TODO: 2023/02/13 password encryption
+				// TODO: 2023/02/13 session publishing
 		}
 }
