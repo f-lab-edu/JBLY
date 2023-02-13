@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import java.time.Instant;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -24,8 +25,10 @@ public class User {
 		@Column(name = "user_id")
 		private Long id;
 
+		@NotNull
 		private String userId;
 
+		@NotNull
 		private String password;
 
 		private String name;
@@ -38,6 +41,7 @@ public class User {
 
 		@CreationTimestamp
 		@Column(name = "created_at")
+		@NotNull
 		private Instant createdAt;
 
 		@UpdateTimestamp
