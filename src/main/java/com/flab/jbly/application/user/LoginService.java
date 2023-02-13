@@ -1,9 +1,11 @@
 package com.flab.jbly.application.user;
 
 import com.flab.jbly.application.user.command.LoginCommand;
+import com.flab.jbly.application.user.result.LoginResult;
 import com.flab.jbly.domain.user.PasswordEncryption;
 import com.flab.jbly.domain.user.User;
 import com.flab.jbly.domain.user.UserRepository;
+import com.flab.jbly.infrastructure.user.exception.UserPasswordNotMatchedException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +20,12 @@ public class LoginService {
 
 		Logger logger = LoggerFactory.getLogger(this.getClass());
 
-		public void login(LoginCommand command) {
+		public LoginResult login(LoginCommand command) {
 				User user = repository.findByUserId(command.userId());
-				logger.info("Using Jpa and check userId. UserId is =" + user.getUserId());
+
+				if (!encryption.decode(command.password(), user.getPassword())) {
+						throw new UserPasswordNotMatchedException("입력한 비밀번호가 일치하지 않습니다.");
+				}
+				return new LoginResult(user.getUserId());
 		}
 }
