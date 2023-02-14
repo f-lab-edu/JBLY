@@ -33,6 +33,7 @@ public class LoginService {
             throw new UserPasswordNotMatchedException("입력한 비밀번호가 일치하지 않습니다.");
         }
 
+        // TODO: 2023/02/14 Session SetAttribute 시 key-value refactoring 필요 
         httpSession.setAttribute("user",user);
         sessionRepository.save(Session.of(user.getId(), httpSession.getId()));
         return new LoginResult(user.getUserId());
