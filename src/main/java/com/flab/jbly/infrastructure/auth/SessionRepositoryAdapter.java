@@ -1,4 +1,4 @@
-package com.flab.jbly.infrastructure.user.session;
+package com.flab.jbly.infrastructure.auth;
 
 import com.flab.jbly.domain.user.Session;
 import com.flab.jbly.domain.user.SessionRepository;
