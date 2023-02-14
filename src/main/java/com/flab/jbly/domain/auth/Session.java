@@ -8,15 +8,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
+import java.io.Serializable;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "token")
+@Table(name = "session")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Session {
+public class Session implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,15 +28,15 @@ public class Session {
     @NotNull
     private Long userId;
 
-    @Column(name = "session_info")
-    private String sessionInfo;
+    @Column(name = "session_token")
+    private String sessionToken;
 
-    private Session(Long userId, String sessionInfo) {
+    private Session(Long userId, String sessionToken) {
         this.userId = userId;
-        this.sessionInfo = sessionInfo;
+        this.sessionToken = sessionToken;
     }
 
-    public static Session of(Long userId, String sessionInfo) {
-        return new Session(userId, sessionInfo);
+    public static Session of(Long userId, String sessionToken) {
+        return new Session(userId, sessionToken);
     }
 }

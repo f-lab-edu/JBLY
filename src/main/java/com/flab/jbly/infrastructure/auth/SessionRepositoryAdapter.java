@@ -18,8 +18,8 @@ public class SessionRepositoryAdapter implements SessionRepository {
     }
 
     @Override
-    public Session findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new SessionDoesNotExistException("일치하는 Session 값이 없습니다."));
+    public Session findBySession(String session) {
+        return repository.findBySessionToken(session).orElseThrow(() -> new SessionDoesNotExistException("일치하는 Session 값이 없습니다."));
     }
 
 }
