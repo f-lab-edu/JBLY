@@ -16,7 +16,7 @@ public class AuthorizationService {
 
     public AuthorizationResult getCurrentUser(HttpServletRequest request) {
         // TODO: 2023/02/14 Casting Exception 발생
-        var session = (Session) request.getSession().getAttribute("user");
+        var session = (Session) request.getSession().getAttribute("session");
         if (session == null) {
             throw new EmptySessionException();
         }
