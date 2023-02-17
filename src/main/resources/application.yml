@@ -14,7 +14,8 @@ server:
     database-platform: org.hibernate.dialect.MySQLDialect
     defer-datasource-initialization: true
     show-sql: true
-    sql:
+
+  sql:
       init:
         mode: always
         classpath: data.sql
