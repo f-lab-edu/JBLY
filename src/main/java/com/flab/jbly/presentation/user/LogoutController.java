@@ -15,7 +15,7 @@ public class LogoutController {
 
     private final LogoutService logoutService;
 
-    @PostMapping("")
+    @PostMapping
     public void logout(HttpServletResponse response) throws IOException {
         // TODO: 2023/02/15 Need redirect main page
         logoutService.logout();

@@ -11,10 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 public class LogoutService {
-
     private final SessionRepository sessionRepository;
     private final HttpSession httpSession;
-
 
     @Transactional
     public void logout() {

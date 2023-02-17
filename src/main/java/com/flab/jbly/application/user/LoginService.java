@@ -9,8 +9,6 @@ import com.flab.jbly.domain.user.UserRepository;
 import com.flab.jbly.infrastructure.exception.UserPasswordNotMatchedException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,8 +21,6 @@ public class LoginService {
     private final HttpSession httpSession;
     private final SessionRepository sessionRepository;
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
-
     @Transactional
     public LoginResult login(LoginCommand command) {
         var user = repository.findByUserId(command.userId());
@@ -36,7 +32,7 @@ public class LoginService {
         // TODO: 2023/02/14 Session SetAttribute 시 key-value refactoring 필요
         var session = Session.of(user.getId(), httpSession.getId());
         sessionRepository.save(session);
-        httpSession.setAttribute("session",session);
+        httpSession.setAttribute("session", session);
         return new LoginResult(user.getUserId());
     }
 }
