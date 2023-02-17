@@ -1,6 +1,7 @@
 server:
   port: 8080
 
+spring:
   jpa:
     database: mysql
     open-in-view: false # OSIV 설정
@@ -18,7 +19,4 @@ server:
   sql:
     init:
       mode: always
-      classpath: data.sql
-spring:
-  profiles:
-    include: local
+      classpath: schema.sql

@@ -1,7 +1,6 @@
 HELP.md
 .gradle
 .properties
-.yml
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
@@ -18,6 +17,7 @@ build/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
+application-local.yml
 
 ### IntelliJ IDEA ###
 .idea

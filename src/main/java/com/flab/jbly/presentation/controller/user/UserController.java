@@ -27,23 +27,20 @@ public class UserController {
 
     @PostMapping
     public void signUp(@RequestBody @Valid UserSignUpRequest request) {
-       userService.saveUser(UserSignUpCommand
-           .builder()
-           .userId(request.getUserId())
-           .password(request.getPassword())
-           .name(request.getName())
-           .phone(request.getPhone())
-           .email(request.getEmail())
-           .address(request.getAddress())
-           .build());
+        userService.saveUser(UserSignUpCommand
+            .builder()
+            .userId(request.getUserId())
+            .password(request.getPassword())
+            .name(request.getName())
+            .phone(request.getPhone())
+            .email(request.getEmail())
+            .address(request.getAddress())
+            .build());
     }
 
     @GetMapping("/{userId}/duplicate")
     public ResponseEntity<Void> isIdDuplicated(@PathVariable String userId) {
-        boolean isIdDuplicated = userService.isUserExist(userId);
-        if (isIdDuplicated) {
-            return CONFLICT;
-        }
+        userService.isUserExist(userId);
         return OK;
     }
 }

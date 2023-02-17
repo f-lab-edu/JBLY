@@ -36,6 +36,10 @@ public class UserServiceImpl implements UserService {
 
     @Transactional(readOnly = true)
     public boolean isUserExist(String userId) {
-        return repository.existsByUserId(userId);
+        if (repository.existsByUserId(userId)) {
+            throw new DuplicatedUserException("DuplicatedUserException",
+                ErrorCode.USER_DUPLICATION);
+        }
+        return false;
     }
 }
