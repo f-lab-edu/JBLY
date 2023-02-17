@@ -18,7 +18,7 @@ public class AuthorizationService {
         // TODO: 2023/02/14 Casting Exception 발생
         var session = (Session) request.getSession().getAttribute("session");
         if (session == null) {
-            throw new EmptySessionException();
+            throw new EmptySessionException("세션이 존재하지 않습니다.");
         }
         var currentUserSession = repository.findBySession(session.getSessionToken());
         return AuthorizationResult.fromSessionEntity(currentUserSession);
