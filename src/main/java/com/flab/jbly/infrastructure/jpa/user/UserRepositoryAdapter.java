@@ -1,4 +1,4 @@
-package com.flab.jbly.infrastructure.user.jpa;
+package com.flab.jbly.infrastructure.jpa.user;
 
 import com.flab.jbly.domain.user.User;
 import com.flab.jbly.domain.user.UserRepository;
