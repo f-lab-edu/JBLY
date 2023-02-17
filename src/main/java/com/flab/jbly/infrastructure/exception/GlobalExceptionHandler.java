@@ -2,6 +2,7 @@ package com.flab.jbly.infrastructure.exception;
 
 import com.flab.jbly.infrastructure.exception.user.DuplicatedUserException;
 import com.flab.jbly.infrastructure.exception.user.EncoderNoSuchAlgorithmException;
+import com.flab.jbly.infrastructure.exception.user.NotAllowedUserException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,14 @@ public class GlobalExceptionHandler {
     public final ResponseEntity<ErrorResponse> handleDuplicatedUserException(
         DuplicatedUserException e) {
         log.debug("이미 존재하는 user 입니다.", e);
+        ErrorResponse response = new ErrorResponse(e.getErrorCode());
+        return new ResponseEntity<>(response, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(NotAllowedUserException.class)
+    public final ResponseEntity<ErrorResponse> handleNotAllowedUserException(
+        NotAllowedUserException e) {
+        log.debug("권한이 존재하지 않는 사용자입니다. ", e);
         ErrorResponse response = new ErrorResponse(e.getErrorCode());
         return new ResponseEntity<>(response, HttpStatus.valueOf(e.getErrorCode().getStatus()));
     }
