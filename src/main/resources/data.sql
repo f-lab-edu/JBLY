@@ -1,4 +1,4 @@
-INSERT INTO user(user_id, userId, password, name, phone, email, address, created_at, updated_at)
+INSERT INTO user(id, userId, password, name, phone, email, address, createdAt, updatedAt)
 VALUES (1, 'Steve', '$2a$10$9ppHhId4lC1nu6XKLECU2uVZz.idsMNMJq9XVod0zJScvs6SJrd.y', '연수', '01000000000', 'lee@naver.com', 'Seoul', now(), null),
        (2, 'lime', '456', '소정', '01000000001', 'kim@naver.com', 'Busan', now(), null),
        (3, 'cookie', '789', '소유', '01000000002', 'choi@naver.com', 'Ulsan', now(), null),
