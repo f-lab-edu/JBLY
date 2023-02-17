@@ -1,7 +1,11 @@
-package com.flab.jbly.infrastructure.impl;
+package com.flab.jbly.infrastructure.encryption;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+<<<<<<< HEAD
+=======
+import com.flab.jbly.infrastructure.user.encryption.Encryption;
+>>>>>>> 3c9437a475cb0b6cbd63a9ee3e952777c5231705
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;

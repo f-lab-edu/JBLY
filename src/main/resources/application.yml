@@ -1,13 +1,6 @@
 server:
   port: 8080
 
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/jbly?characterEncoding=UTF-8&serverTimezone=Asia/Seoul
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 1234
-
   jpa:
     database: mysql
     open-in-view: false # OSIV 설정
@@ -21,9 +14,11 @@ spring:
     database-platform: org.hibernate.dialect.MySQLDialect
     defer-datasource-initialization: true
     show-sql: true
-
-  sql:
-    init:
-      mode: always
-      classpath: data.sql
+    sql:
+      init:
+        mode: always
+        classpath: data.sql
+spring:
+  profiles:
+    include: local
 # todo : ddl 형상관리 툴인 flyway에 관한 설정은 개발이 어느정도 진행된 후 적용
