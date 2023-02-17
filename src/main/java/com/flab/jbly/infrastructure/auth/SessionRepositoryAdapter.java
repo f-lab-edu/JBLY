@@ -25,10 +25,9 @@ public class SessionRepositoryAdapter implements SessionRepository {
 
     @Override
     public void deleteById(Long id) {
-        try {
-            repository.deleteById(id);
-        } catch (Exception e) {
-            throw new DoesNotAllowLogoutException("로그아웃 대상이 아닙니다.");
+        if (id == null) {
+            throw new DoesNotAllowLogoutException("삭제할 데이터를 찾을 수 없습니다.");
         }
+        repository.deleteById(id);
     }
 }
