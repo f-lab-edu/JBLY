@@ -1,4 +1,4 @@
-package com.flab.jbly.infrastructure.user.exception;
+package com.flab.jbly.infrastructure.exception;
 
 public class UserPasswordNotMatchedException extends IllegalArgumentException {
 
