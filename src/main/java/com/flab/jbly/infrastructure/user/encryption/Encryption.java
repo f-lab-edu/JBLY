@@ -1,4 +1,4 @@
-package com.flab.jbly.infrastructure.user.impl;
+package com.flab.jbly.infrastructure.user.encryption;
 
 import com.flab.jbly.domain.user.PasswordEncryption;
 import org.mindrot.jbcrypt.BCrypt;
