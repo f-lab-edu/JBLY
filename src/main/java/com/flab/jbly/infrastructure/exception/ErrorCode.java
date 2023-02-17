@@ -1,4 +1,4 @@
-package com.flab.jbly.infra.exception;
+package com.flab.jbly.infrastructure.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

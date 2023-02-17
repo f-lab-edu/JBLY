@@ -1,7 +1,7 @@
-package com.flab.jbly.infra.exception;
+package com.flab.jbly.infrastructure.exception;
 
-import com.flab.jbly.infra.exception.user.DuplicatedUserException;
-import com.flab.jbly.infra.exception.user.EncoderNoSuchAlgorithmException;
+import com.flab.jbly.infrastructure.exception.user.DuplicatedUserException;
+import com.flab.jbly.infrastructure.exception.user.EncoderNoSuchAlgorithmException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

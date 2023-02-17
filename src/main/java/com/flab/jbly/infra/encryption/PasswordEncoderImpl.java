@@ -1,8 +1,8 @@
 package com.flab.jbly.infra.encryption;
 
 import com.flab.jbly.domain.user.PasswordEncoder;
-import com.flab.jbly.infra.exception.ErrorCode;
-import com.flab.jbly.infra.exception.user.EncoderNoSuchAlgorithmException;
+import com.flab.jbly.infrastructure.exception.ErrorCode;
+import com.flab.jbly.infrastructure.exception.user.EncoderNoSuchAlgorithmException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import org.springframework.stereotype.Component;

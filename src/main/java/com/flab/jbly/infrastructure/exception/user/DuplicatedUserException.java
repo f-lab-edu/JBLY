@@ -1,6 +1,6 @@
-package com.flab.jbly.infra.exception.user;
+package com.flab.jbly.infrastructure.exception.user;
 
-import com.flab.jbly.infra.exception.ErrorCode;
+import com.flab.jbly.infrastructure.exception.ErrorCode;
 import lombok.Getter;
 
 @Getter
