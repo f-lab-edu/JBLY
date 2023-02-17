@@ -1,4 +1,4 @@
-package com.flab.jbly.infra.common;
+package com.flab.jbly.infrastructure.common;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

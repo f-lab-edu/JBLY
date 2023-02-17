@@ -1,7 +1,6 @@
 package com.flab.jbly.presentation.controller.user;
 
-import static com.flab.jbly.infra.common.ResponseEntityConstants.CONFLICT;
-import static com.flab.jbly.infra.common.ResponseEntityConstants.OK;
+import static com.flab.jbly.infrastructure.common.ResponseEntityConstants.OK;
 
 import com.flab.jbly.application.command.UserSignUpCommand;
 import com.flab.jbly.application.service.UserService;
