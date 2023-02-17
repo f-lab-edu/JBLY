@@ -21,14 +21,14 @@ public class Session implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "session_id")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "user_id")
+    @Column(name = "userId")
     @NotNull
     private Long userId;
 
-    @Column(name = "session_token")
+    @Column(name = "sessionToken")
     private String sessionToken;
 
     private Session(Long userId, String sessionToken) {
