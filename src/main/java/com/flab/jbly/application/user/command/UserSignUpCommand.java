@@ -1,4 +1,4 @@
-package com.flab.jbly.application.command;
+package com.flab.jbly.application.user.command;
 
 import java.time.LocalDateTime;
 import lombok.AccessLevel;

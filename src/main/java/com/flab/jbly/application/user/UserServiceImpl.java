@@ -1,9 +1,9 @@
-package com.flab.jbly.application.service;
+package com.flab.jbly.application.user;
 
 import com.flab.jbly.domain.user.PasswordEncryption;
 import com.flab.jbly.domain.user.User;
 import com.flab.jbly.domain.user.UserRepository;
-import com.flab.jbly.application.command.UserSignUpCommand;
+import com.flab.jbly.application.user.command.UserSignUpCommand;
 import com.flab.jbly.infrastructure.exception.ErrorCode;
 import com.flab.jbly.infrastructure.exception.user.DuplicatedUserException;
 import lombok.RequiredArgsConstructor;

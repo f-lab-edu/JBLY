@@ -2,8 +2,8 @@ package com.flab.jbly.presentation.controller.user;
 
 import static com.flab.jbly.infrastructure.common.ResponseEntityConstants.OK;
 
-import com.flab.jbly.application.command.UserSignUpCommand;
-import com.flab.jbly.application.service.UserService;
+import com.flab.jbly.application.user.command.UserSignUpCommand;
+import com.flab.jbly.application.user.UserService;
 import com.flab.jbly.presentation.request.UserSignUpRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
