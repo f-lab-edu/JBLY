@@ -6,47 +6,51 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import java.time.Instant;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
+@AllArgsConstructor
+@Builder
+@Getter
 @Table(name = "user")
 public class User {
 
-		@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		@Column(name = "id")
-		private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-		@NotNull
-		@Column(name = "userId")
-		private String userId;
+    @Column(name = "userId", nullable = false, length = 100)
+    private String userId;
 
-		@NotNull
-		private String password;
+    @Column(name = "password", nullable = false, length = 500)
+    private String password;
 
-		private String name;
+    @Column(name = "name", nullable = false, length = 100)
+    private String name;
 
-		private String phone;
+    @Column(name = "phone", nullable = false)
+    private String phone;
 
-		private String email;
+    @Column(name = "email", nullable = false)
+    private String email;
 
-		private String address;
+    @Column(name = "address", nullable = false)
+    private String address;
 
-		@CreationTimestamp
-		@Column(name = "created_at")
-		@NotNull
-		private Instant createdAt;
+    @CreationTimestamp
+    @Column(name = "createdAt")
+    private Instant createdAt;
 
-		@UpdateTimestamp
-		@Column(name = "updated_at")
-		private Instant updatedAt;
+    @UpdateTimestamp
+    @Column(name = "updatedAt")
+    private Instant updatedAt;
+
 }
-

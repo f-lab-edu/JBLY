@@ -1,6 +1,7 @@
 server:
   port: 8080
 
+spring:
   jpa:
     database: mysql
     open-in-view: false # OSIV 설정
@@ -16,10 +17,6 @@ server:
     show-sql: true
 
   sql:
-      init:
-        mode: always
-        classpath: data.sql
-spring:
-  profiles:
-    include: local
-# todo : ddl 형상관리 툴인 flyway에 관한 설정은 개발이 어느정도 진행된 후 적용
+    init:
+      mode: always
+      classpath: schema.sql
