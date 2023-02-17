@@ -12,10 +12,10 @@ public enum ErrorCode {
 
     // 500 INTERNAL_SERVER_ERROR
     ENCODER_FAILED_ERROR(500, "암호화 실패했습니다. "),
-    INTERNAL_SERVER_ERROR(500, "서버 에러입니다.");
+    INTERNAL_SERVER_ERROR(500, "서버 에러입니다."),
 
     // Auth Exception
-
+    PASSWORD_MISMATCH_ERROR(500, "입력한 비밀번호가 일치하지 않습니다.");
 
     private final int status;
     private final String message;
