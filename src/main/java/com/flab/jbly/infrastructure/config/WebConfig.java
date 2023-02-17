@@ -9,13 +9,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @RequiredArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
 
+    /*
+    * - logout Page에 접근하기 위해선 session을 가져야 접근할 수 있습니다.
+    * - 회원 가입 url, main page url을 excludePath에 추가해야합니다.
+    * */
+
     private final CustomInterceptor interceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(interceptor)
             .addPathPatterns("/**")
-            .excludePathPatterns("/test/hello", "/login");
-        // TODO: 2023/02/14 회원 가입 url, main page url을 excludePath에 추가해야함
+            .excludePathPatterns("/main/page", "/login");
     }
 }
