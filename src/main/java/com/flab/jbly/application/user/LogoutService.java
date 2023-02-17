@@ -2,7 +2,7 @@ package com.flab.jbly.application.user;
 
 import com.flab.jbly.domain.auth.Session;
 import com.flab.jbly.domain.auth.SessionRepository;
-import com.flab.jbly.infrastructure.exception.EmptySessionException;
+import com.flab.jbly.infrastructure.exception.auth.EmptySessionException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

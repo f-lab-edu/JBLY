@@ -2,7 +2,7 @@ package com.flab.jbly.infrastructure.config;
 
 
 import com.flab.jbly.application.user.AuthorizationService;
-import com.flab.jbly.infrastructure.exception.NotAllowedUserException;
+import com.flab.jbly.infrastructure.exception.user.NotAllowedUserException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

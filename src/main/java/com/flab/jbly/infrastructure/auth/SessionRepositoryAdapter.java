@@ -2,8 +2,8 @@ package com.flab.jbly.infrastructure.auth;
 
 import com.flab.jbly.domain.auth.Session;
 import com.flab.jbly.domain.auth.SessionRepository;
-import com.flab.jbly.infrastructure.exception.DoesNotAllowLogoutException;
-import com.flab.jbly.infrastructure.exception.SessionDoesNotExistException;
+import com.flab.jbly.infrastructure.exception.user.DoesNotAllowLogoutException;
+import com.flab.jbly.infrastructure.exception.auth.SessionDoesNotExistException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

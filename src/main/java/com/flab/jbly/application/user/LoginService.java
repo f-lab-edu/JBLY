@@ -6,7 +6,7 @@ import com.flab.jbly.domain.auth.Session;
 import com.flab.jbly.domain.auth.SessionRepository;
 import com.flab.jbly.domain.user.PasswordEncryption;
 import com.flab.jbly.domain.user.UserRepository;
-import com.flab.jbly.infrastructure.exception.UserPasswordNotMatchedException;
+import com.flab.jbly.infrastructure.exception.encryption.UserPasswordNotMatchedException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;

@@ -14,6 +14,9 @@ public enum ErrorCode {
     ENCODER_FAILED_ERROR(500, "암호화 실패했습니다. "),
     INTERNAL_SERVER_ERROR(500, "서버 에러입니다.");
 
+    // Auth Exception
+
+
     private final int status;
     private final String message;
 

@@ -1,4 +1,4 @@
-package com.flab.jbly.infrastructure.exception;
+package com.flab.jbly.infrastructure.exception.auth;
 
 public class EmptySessionException extends IllegalArgumentException {
 
