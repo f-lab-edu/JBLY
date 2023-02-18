@@ -1,11 +1,11 @@
-package com.flab.jbly.application.service;
+package com.flab.jbly.application.user;
 
+import com.flab.jbly.domain.user.PasswordEncryption;
 import com.flab.jbly.domain.user.User;
 import com.flab.jbly.domain.user.UserRepository;
-import com.flab.jbly.domain.user.PasswordEncoder;
-import com.flab.jbly.application.command.UserSignUpCommand;
-import com.flab.jbly.infra.exception.ErrorCode;
-import com.flab.jbly.infra.exception.user.DuplicatedUserException;
+import com.flab.jbly.application.user.command.UserSignUpCommand;
+import com.flab.jbly.infrastructure.exception.ErrorCode;
+import com.flab.jbly.infrastructure.exception.user.DuplicatedUserException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
-    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncryption passwordEncoder;
 
     @Transactional
     public void saveUser(UserSignUpCommand command) {
@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
             .phone(command.getPhone())
             .email(command.getEmail())
             .address(command.getAddress())
-            .password(passwordEncoder.encrypt(command.getPassword()))
+            .password(passwordEncoder.encode(command.getPassword()))
             .build();
         repository.save(newUser);
     }

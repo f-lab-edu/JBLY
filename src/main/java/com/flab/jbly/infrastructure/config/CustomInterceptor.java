@@ -2,7 +2,8 @@ package com.flab.jbly.infrastructure.config;
 
 
 import com.flab.jbly.application.user.AuthorizationService;
-import com.flab.jbly.infrastructure.exception.NotAllowedUserException;
+import com.flab.jbly.infrastructure.exception.ErrorCode;
+import com.flab.jbly.infrastructure.exception.user.NotAllowedUserException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ public class CustomInterceptor implements HandlerInterceptor {
         var currentUser = service.getCurrentUser(request);
 
         if (currentUser == null) {
-            throw new NotAllowedUserException("로그인이 필요합니다.");
+            throw new NotAllowedUserException("NotAllowedUserException", ErrorCode.NOT_FOUND_USER_IN_LOGIN_ERROR);
         }
         return true;
     }

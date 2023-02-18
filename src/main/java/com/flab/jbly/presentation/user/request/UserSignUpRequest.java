@@ -1,4 +1,4 @@
-package com.flab.jbly.presentation.request;
+package com.flab.jbly.presentation.user.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

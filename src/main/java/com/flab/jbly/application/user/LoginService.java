@@ -6,7 +6,8 @@ import com.flab.jbly.domain.auth.Session;
 import com.flab.jbly.domain.auth.SessionRepository;
 import com.flab.jbly.domain.user.PasswordEncryption;
 import com.flab.jbly.domain.user.UserRepository;
-import com.flab.jbly.infrastructure.exception.UserPasswordNotMatchedException;
+import com.flab.jbly.infrastructure.exception.ErrorCode;
+import com.flab.jbly.infrastructure.exception.user.EncoderNoSuchAlgorithmException;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -30,7 +31,7 @@ public class LoginService {
         var user = repository.findByUserId(command.userId());
 
         if (!encryption.decode(command.password(), user.getPassword())) {
-            throw new UserPasswordNotMatchedException("입력한 비밀번호가 일치하지 않습니다.");
+            throw new EncoderNoSuchAlgorithmException("EncoderNoSuchAlgorithmException", ErrorCode.PASSWORD_MISMATCH_ERROR);
         }
 
         // TODO: 2023/02/14 Session SetAttribute 시 key-value refactoring 필요

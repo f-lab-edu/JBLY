@@ -1,4 +1,4 @@
-package com.flab.jbly.infrastructure.impl;
+package com.flab.jbly.infrastructure.encryption;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

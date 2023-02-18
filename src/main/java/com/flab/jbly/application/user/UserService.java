@@ -1,6 +1,6 @@
-package com.flab.jbly.application.service;
+package com.flab.jbly.application.user;
 
-import com.flab.jbly.application.command.UserSignUpCommand;
+import com.flab.jbly.application.user.command.UserSignUpCommand;
 import org.springframework.stereotype.Service;
 
 @Service

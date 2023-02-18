@@ -2,8 +2,9 @@ package com.flab.jbly.infrastructure.auth;
 
 import com.flab.jbly.domain.auth.Session;
 import com.flab.jbly.domain.auth.SessionRepository;
-import com.flab.jbly.infrastructure.exception.DoesNotAllowLogoutException;
-import com.flab.jbly.infrastructure.exception.SessionDoesNotExistException;
+import com.flab.jbly.infrastructure.exception.ErrorCode;
+import com.flab.jbly.infrastructure.exception.auth.SessionDoesNotExistException;
+import com.flab.jbly.infrastructure.exception.user.NotAllowedUserException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -20,7 +21,8 @@ public class SessionRepositoryAdapter implements SessionRepository {
 
     @Override
     public Session findBySession(String session) {
-        return repository.findBySessionToken(session).orElseThrow(() -> new SessionDoesNotExistException("일치하는 Session 값이 없습니다."));
+        return repository.findBySessionToken(session)
+            .orElseThrow(() -> new SessionDoesNotExistException("일치하는 Session 값이 없습니다."));
     }
 
     @Override
@@ -28,7 +30,8 @@ public class SessionRepositoryAdapter implements SessionRepository {
         try {
             repository.deleteById(id);
         } catch (Exception e) {
-            throw new DoesNotAllowLogoutException("로그아웃 대상이 아닙니다.");
+            throw new NotAllowedUserException("NotAllowedUserException",
+                ErrorCode.NOT_FOUND_USER_DELETE_PK_ERROR);
         }
     }
 }
