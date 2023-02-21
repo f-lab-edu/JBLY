@@ -1,0 +1,31 @@
+name: React build
+
+on:
+  pull_request:
+    branches: ['*']
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    env:
+      CI: false
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    defaults:
+      run:
+        working-directory: "./src/main"
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Yarn
+        run: npm install -g yarn
+
+      - name: Install dependencies     # yarn install 추가
+        run: yarn install
+
+      - name: Build                   # React Build
+        run: yarn build
