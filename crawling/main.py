@@ -1,4 +1,5 @@
 from dbConnection import MysqlConnect
-from parsing import WebCrawling
+from parsing import YTNNewPageCrawling
 if __name__ == '__main__':
-    WebCrawling.getTitle()
+    MysqlConnect.connect()
+    YTNNewPageCrawling.parsingData()
