@@ -2,30 +2,26 @@ name: React build
 
 on:
   pull_request:
-    branches: ['*']
+    branches: [ '*' ]
 
 jobs:
   build:
     runs-on: ubuntu-20.04
 
-    env:
-      CI: false
     strategy:
       matrix:
-        node-version: [18.x]
-
-    defaults:
-      run:
-        working-directory: "./src/main"
+        node-version: [ 18.x ]
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install Yarn
-        run: npm install -g yarn
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-      - name: Install dependencies     # yarn install 추가
-        run: yarn install
+      - name: Npm install
+        run: npm install
 
-      - name: Build                   # React Build
-        run: yarn build
+      - name: Build
+        run: npm run build
