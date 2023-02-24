@@ -1,5 +1,3 @@
-from dbConnection import MysqlConnect
-from parsing import YTNNewPageCrawling
+from parsing import MoreCherrySiteCrawling
 if __name__ == '__main__':
-    MysqlConnect.connect()
-    YTNNewPageCrawling.parsingData()
+    MoreCherrySiteCrawling.getDatas()
