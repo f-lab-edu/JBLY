@@ -1,8 +1,6 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import time
 import ssl
 
@@ -16,48 +14,41 @@ def getTotalProducts():
     storeName = "porterna"
     result = [] # storeName, itemName, getUrl, getPrice, itemType
     urls = []
+    urls.append(("https://porterna.com/product/list.html?cate_no=541", "outwear")) # outwear
+    urls.append(("https://porterna.com/product/list.html?cate_no=789", "top")) # top
+    urls.append(("https://porterna.com/product/list.html?cate_no=28", "pants")) # pants
+    urls.append(("https://porterna.com/product/list.html?cate_no=44", "accessory")) # acc
+    urls.append(("https://porterna.com/product/list.html?cate_no=79", "shoes")) # shoes
 
-    # outwear
-    urls.append("https://porterna.com/product/list.html?cate_no=541")
+    for url in urls:
+        eachUrl, itemType = url
+        driver.get(eachUrl)
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        datas = soup.find("ul", "thumbnail").find_all("li", recursive=False)
+        datas = list(map(str, datas))
 
-    # top
-    urls.append("https://porterna.com/product/list.html?cate_no=789")
+        for data in datas:
+            itemInfoGather = []
+            eachData = BeautifulSoup(data, 'html.parser')
+            getImageUrl = eachData.find('img')['src']
+            imageUrl = 'https:' + getImageUrl
 
-    # pants
-    urls.append("https://porterna.com/product/list.html?cate_no=28")
+            getItemName = eachData.find('p', {'class': 'name'})
+            itemName = getItemName.text
 
-    # acc
-    urls.append("https://porterna.com/product/list.html?cate_no=44")
+            getPrice = eachData.find('div', {'class': 'price1'})
+            price = getPrice.text
 
-    # shoes
-    urls.append("https://porterna.com/product/list.html?cate_no=79")
+            itemInfoGather.append(storeName)
+            itemInfoGather.append(itemName)
+            itemInfoGather.append(imageUrl)
+            itemInfoGather.append(price)
+            itemInfoGather.append(itemType)
+            copyItemInfo = itemInfoGather.copy()
+            result.append(copyItemInfo)
+            itemInfoGather.clear()
 
-    url = urls[0]
-
-    itemType = "outwear"
-
-    driver.get(url)
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
-    datas = soup.find("ul", "thumbnail").find_all("li", recursive=False)
-    datas = list(map(str, datas))
-    print(datas[0])
-    print("datas = ", len(datas))
-    eachData = BeautifulSoup(datas[0], 'html.parser')
-    # find = eachData.find('img', {'class': 'thumb-img'})
-
-    find = eachData.find('img')
-    getImageUrl = find['src']
-    imageUrl = 'https:' + getImageUrl
-
-    getItemName = eachData.find('p', {'class': 'name'})
-    itemName = getItemName.text
-
-    getPrice = eachData.find('div', {'class': 'price1'})
-    price = getPrice.text
-
-    print(storeName, itemName, imageUrl, price, itemType)
-
-    while True:
+        # page 이동
         element = driver.find_element(by=By.XPATH, value='//*[@id="contents"]/div[2]/div[4]/a[2]')
         time.sleep(5)
 
@@ -67,7 +58,7 @@ def getTotalProducts():
             except:
                 pass
         if driver.current_url.endswith("#none"):
-            break
+            continue
 
     driver.close()
-    return None
+    return result
