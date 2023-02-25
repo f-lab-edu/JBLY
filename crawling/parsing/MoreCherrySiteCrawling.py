@@ -40,7 +40,7 @@ def getTotalItemList():
 
         loopingTime = int(totalPage.text) - int(currentPage.text)
 
-        for i in range(1):
+        for i in range(loopingTime):
             driver.execute_script("arguments[0].click();", element)
             time.sleep(5)
 
