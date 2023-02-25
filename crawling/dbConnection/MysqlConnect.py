@@ -6,7 +6,7 @@ def connect(products):
     connect = pymysql.connect(host='localhost', user='root', password='1234', db='test', charset='utf8')
     cursor = connect.cursor()
 
-    sql = "INSERT INTO professor (storeName, itemName, imageUrl, price, itemType, shopId) VALUES (%s, %s, %s, %s, %s, %s)"
+    sql = "INSERT INTO product (storeName, productName, image, price, itemType, shopId) VALUES (%s, %s, %s, %s, %s, %s)"
 
     for product in products:
         storeName, itemName, imageUrl, price, itemType, shopId = product
