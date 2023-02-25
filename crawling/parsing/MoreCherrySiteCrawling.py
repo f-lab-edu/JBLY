@@ -1,14 +1,12 @@
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 import ssl
-import re # regex
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
 def getDatas():
     urls = []
     result = []
-    sequence = 0
     storeName = "morecherry" # 5개의 필드
     urls.append("https://m.more-cherry.com/category/outwear/24") # outwear
     urls.append("https://m.more-cherry.com/category/top/25/") # top
