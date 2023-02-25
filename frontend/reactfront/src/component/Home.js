@@ -1,13 +1,19 @@
 import React from "react";
-import SignUpForm from "./SignUpForm";
+import { useNavigate } from "react-router";
+import LoginFrom from "./LoginForm";
 
 const Home = () => {
+    const navigate = useNavigate();
+    const navigateToSignUp = () => {
+        navigate("/signUp");
+    };
+
     return (
         <div>
             <h1>JBLY</h1>
             <p>BY. SJ, YS</p>
-            <SignUpForm></SignUpForm>
-            <button id="button1" >SignUp</button>
+            <LoginFrom />
+            <button id="button1" onClick={navigateToSignUp}>회원가입</button>
         </div>
     );
 };
