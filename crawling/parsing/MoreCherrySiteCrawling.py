@@ -9,7 +9,7 @@ import ssl
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-def getTotalItemList():
+def getTotalProducts():
     # WebDriver를 초기화합니다.
     driver = webdriver.Chrome()
 
