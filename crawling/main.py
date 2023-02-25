@@ -1,4 +1,5 @@
-from dbConnection import MysqlConnect
-from parsing import WebCrawling
+# from parsing import MoreCherrySiteCrawling
+from parsing import GetDynamicPage
 if __name__ == '__main__':
-    WebCrawling.getTitle()
+    # MoreCherrySiteCrawling.getDatas()
+    GetDynamicPage.getTotalItemList()
