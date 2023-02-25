@@ -14,8 +14,9 @@ def getTotalProducts():
     driver = webdriver.Chrome()
 
     # Var Setting
+    shopId = 2
     storeName = "morecherry"
-    result = []
+    result = [] # storeName, itemName, imageUrl, price, itemType, shopId
     urls = []
     urls.append("https://m.more-cherry.com/category/outwear/24")  # outwear
     urls.append("https://m.more-cherry.com/category/top/25")  # top
@@ -40,7 +41,7 @@ def getTotalProducts():
 
         loopingTime = int(totalPage.text) - int(currentPage.text)
 
-        for i in range(loopingTime):
+        for i in range(1):
             driver.execute_script("arguments[0].click();", element)
             time.sleep(5)
 
@@ -48,7 +49,6 @@ def getTotalProducts():
         datas = soup.find("ul", "prdList grid2").find_all("li", recursive=False)
         datas = list(map(str, datas))  # 문자열로 변경 후
         datas = datas[1:]
-        print("datas = ", len(datas))
 
         for data in datas:
             itemInfoGather = []
@@ -66,16 +66,16 @@ def getTotalProducts():
             # get Price
             priceTag = targetData.find('li', {'class': 'price'})
             getPrice = priceTag.text.replace(',', '')
-            getPrice = getPrice.replace('원','')
+            getPrice = getPrice.replace('원\n','')
 
             itemInfoGather.append(storeName)
             itemInfoGather.append(itemName)
             itemInfoGather.append(getUrl)
-            itemInfoGather.append(getPrice)
+            itemInfoGather.append(int(getPrice))
             itemInfoGather.append(itemType)
+            itemInfoGather.append(shopId)
             copyItemInfo = itemInfoGather.copy()
             result.append(copyItemInfo)
             itemInfoGather.clear()
-
     driver.close()
     return result

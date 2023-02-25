@@ -11,8 +11,9 @@ ssl._create_default_https_context = ssl._create_unverified_context
 def getTotalProducts():
     driver = webdriver.Chrome()
 
+    shopId = 1
     storeName = "porterna"
-    result = [] # storeName, itemName, getUrl, getPrice, itemType
+    result = [] # storeName, itemName, getUrl, getPrice, itemType, shopId
     urls = []
     urls.append(("https://porterna.com/product/list.html?cate_no=541", "outwear")) # outwear
     urls.append(("https://porterna.com/product/list.html?cate_no=789", "top")) # top
@@ -42,8 +43,9 @@ def getTotalProducts():
             itemInfoGather.append(storeName)
             itemInfoGather.append(itemName)
             itemInfoGather.append(imageUrl)
-            itemInfoGather.append(price)
+            itemInfoGather.append(int(price))
             itemInfoGather.append(itemType)
+            itemInfoGather.append(shopId)
             copyItemInfo = itemInfoGather.copy()
             result.append(copyItemInfo)
             itemInfoGather.clear()
