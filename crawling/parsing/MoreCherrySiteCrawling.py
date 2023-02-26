@@ -31,6 +31,7 @@ def getTotalProducts():
             itemType = splitedUrl[-2]
         else:
             itemType = "shoes"
+
         # 웹 페이지를 로드합니다.
         driver.get(url)
         element = driver.find_element(by=By.XPATH, value='//*[@id="contents"]/div[4]/a')
@@ -41,7 +42,7 @@ def getTotalProducts():
 
         loopingTime = int(totalPage.text) - int(currentPage.text)
 
-        for i in range(1):
+        for i in range(loopingTime):
             driver.execute_script("arguments[0].click();", element)
             time.sleep(5)
 
@@ -68,10 +69,11 @@ def getTotalProducts():
             getPrice = priceTag.text.replace(',', '')
             getPrice = getPrice.replace('원\n','')
 
+            # (shopName, productName, image, price, itemType, shopId)
             itemInfoGather.append(storeName)
             itemInfoGather.append(itemName)
             itemInfoGather.append(getUrl)
-            itemInfoGather.append(int(getPrice))
+            itemInfoGather.append(getPrice)
             itemInfoGather.append(itemType)
             itemInfoGather.append(shopId)
             copyItemInfo = itemInfoGather.copy()

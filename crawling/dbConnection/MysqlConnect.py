@@ -3,15 +3,17 @@ import pymysql
 
 def connect(products):
     # productsData order = storeName, itemName, imageUrl, price, itemType
-    connect = pymysql.connect(host='localhost', user='root', password='1234', db='test', charset='utf8')
+    connect = pymysql.connect(host='localhost', user='root', password='1234', db='jbly', charset='utf8')
     cursor = connect.cursor()
 
-    sql = "INSERT INTO product (storeName, productName, image, price, itemType, shopId) VALUES (%s, %s, %s, %s, %s, %s)"
+    sql = "INSERT INTO product (shopName, productName, image, price, productType, shopId) VALUES (%s, %s, %s, %s, %s, %s)"
 
     for product in products:
-        storeName, itemName, imageUrl, price, itemType, shopId = product
-        cursor.execute(sql, (storeName, itemName, imageUrl, price, itemType, shopId))
-
+        storeName, itemName, imageUrl, price, type, shopId = product
+        try:
+            cursor.execute(sql, (storeName, itemName, imageUrl, price, type, shopId))
+        except:
+            print(storeName, itemName, imageUrl, price, type, shopId)
     connect.commit()
     cursor.close()
     connect.close()
