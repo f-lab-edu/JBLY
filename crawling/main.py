@@ -1,4 +1,19 @@
+from parsing import MoreCherrySiteCrawling
+from parsing import PorternaSiteCrawling
 from dbConnection import MysqlConnect
-from parsing import WebCrawling
 if __name__ == '__main__':
-    WebCrawling.getTitle()
+    # dataTypes = storeName, itemName, imageUrl, price, itemType shopId
+    results = []
+
+    # shopId == 1
+    porternaProducts = PorternaSiteCrawling.getTotalProducts()
+    MysqlConnect.connect(porternaProducts)
+
+    # shopId == 2
+    moreCherryProducts = MoreCherrySiteCrawling.getTotalProducts()
+    MysqlConnect.connect(moreCherryProducts)
+
+    # shopId == 3
+    # theverlinProducts = TheVerlinSiteCrawling.getTotalProducts()
+    # MysqlConnect.connect(theverlinProducts)
+
