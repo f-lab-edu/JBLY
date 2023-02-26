@@ -47,7 +47,7 @@ def getTotalProducts():
                 itemInfoGather.append(storeName)
                 itemInfoGather.append(itemName)
                 itemInfoGather.append(imageUrl)
-                itemInfoGather.append(int(price))
+                itemInfoGather.append(price)
                 itemInfoGather.append(itemType)
                 itemInfoGather.append(shopId)
                 copyItemInfo = itemInfoGather.copy()

@@ -7,15 +7,13 @@ if __name__ == '__main__':
 
     # shopId == 1
     porternaProducts = PorternaSiteCrawling.getTotalProducts()
+    MysqlConnect.connect(porternaProducts)
 
     # shopId == 2
     moreCherryProducts = MoreCherrySiteCrawling.getTotalProducts()
+    MysqlConnect.connect(moreCherryProducts)
 
     # shopId == 3
     # theverlinProducts = TheVerlinSiteCrawling.getTotalProducts()
+    # MysqlConnect.connect(theverlinProducts)
 
-    results.extend(porternaProducts)
-    results.extend(moreCherryProducts)
-    # results.extend(theverlinProducts)
-
-    MysqlConnect.connect(results)
