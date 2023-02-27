@@ -5,6 +5,7 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+crawling/dbConnection/MysqlConnectionInfo.py.py
 
 ### STS ###
 .apt_generated

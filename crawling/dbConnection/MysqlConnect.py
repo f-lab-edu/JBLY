@@ -1,9 +1,9 @@
 import pymysql
-
+import MysqlConnectionInfo
 
 def connect(products):
     # productsData order = storeName, itemName, imageUrl, price, itemType, shopId
-    connect = pymysql.connect(host='localhost', user='root', password='thwjd123', db='jbly', charset='utf8')
+    connect = MysqlConnectionInfo.mysqlconnect()
     cursor = connect.cursor()
 
     sql = "INSERT INTO product (shopName, productName, image, price, productType, shopId) VALUES (%s, %s, %s, %s, %s, %s)"
