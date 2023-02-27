@@ -10,7 +10,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 
 def getTotalItemList():
-    browser = webdriver.Chrome('C:/chromedriver.exe')
+    browser = webdriver.Chrome(executable_path='C:\chromedriver.exe')
     shopId = 3
     storeName = "theverlin"
 
@@ -44,14 +44,18 @@ def getTotalItemList():
                 itemName = itemName.split(': ')[1]
 
                 # get Price
-                item = eachData.find("ul", "xans-element- xans-product xans-product-listitem").find_all("span")
-                item = list(map(str, item))
+                try:
+                    item = eachData.find("ul", "xans-element- xans-product xans-product-listitem").find_all("span")
+                    item = list(map(str, item))
 
-                temp = ""
-                for i in item:
-                    if '￦' in i:
-                        temp = i
-                        break
+                    temp = ""
+                    for i in item:
+                        if '￦' in i:
+                            temp = i
+                            break
+                except:
+                    print(temp)
+
 
                 soup = BeautifulSoup(temp, "html.parser")
                 getPrice = soup.text
