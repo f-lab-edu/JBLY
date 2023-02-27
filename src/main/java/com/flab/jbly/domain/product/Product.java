@@ -48,7 +48,7 @@ public class Product {
 
     public enum Category{
         TOP,
-        PANTS,
+        BOTTOM,
         OUTWEAR,
         SHOES,
         ACCESSORY

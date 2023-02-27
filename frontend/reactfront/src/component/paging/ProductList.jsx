@@ -68,7 +68,7 @@ const ProductList = () => {
                 <tbody>
                 {products.map(product => (
                     <tr key={product.id}>
-                        <td>{product.id}</td>
+                        <td >{product.id}</td>
                         <td>{product.shopName}</td>
                         <td>{product.productName}</td>
                         <td>{product.price}</td>

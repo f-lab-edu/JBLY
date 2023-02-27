@@ -18,22 +18,17 @@ def getTotalProducts():
     storeName = "morecherry"
     result = [] # storeName, itemName, imageUrl, price, itemType, shopId
     urls = []
-    urls.append("https://m.more-cherry.com/category/outwear/24")  # outwear
-    urls.append("https://m.more-cherry.com/category/top/25")  # top
-    urls.append("https://m.more-cherry.com/category/pants/26")  # pants
-    urls.append("https://m.more-cherry.com/category/accessory/28")  # acc
-    urls.append("https://m.more-cherry.com/product/list_thumb.html?cate_no=42")  # shoes
+    urls.append(("https://m.more-cherry.com/category/outwear/24","OUTWEAR"))  # outwear
+    urls.append(("https://m.more-cherry.com/category/top/25", "TOP"))  # top
+    urls.append(("https://m.more-cherry.com/category/pants/26","BOTTOM"))  # bottom
+    urls.append(("https://m.more-cherry.com/category/accessory/28","ACCESSORY"))  # acc
+    urls.append(("https://m.more-cherry.com/product/list_thumb.html?cate_no=42","SHOES"))  # shoes
 
     for url in urls:
-        itemType = ""
-        if "category" in url:
-            splitedUrl = url.split("/")
-            itemType = splitedUrl[-2]
-        else:
-            itemType = "shoes"
+        eachUrl, itemType = url
 
         # 웹 페이지를 로드합니다.
-        driver.get(url)
+        driver.get(eachUrl)
         element = driver.find_element(by=By.XPATH, value='//*[@id="contents"]/div[4]/a')
 
         # Get Total Page
