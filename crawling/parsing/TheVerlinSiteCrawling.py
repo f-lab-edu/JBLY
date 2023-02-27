@@ -6,11 +6,13 @@ import ssl
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
+from crawling.parsing import WebExecutor
+
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
 def getTotalItemList():
-    browser = webdriver.Chrome(executable_path='C:\chromedriver.exe')
+    browser = WebExecutor.executor()
     shopId = 3
     storeName = "theverlin"
 
