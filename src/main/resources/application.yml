@@ -6,7 +6,7 @@ spring:
     database: mysql
     open-in-view: false # OSIV 설정
     hibernate: # application 실행 시 table create and drop
-      ddl-auto: create-drop
+      ddl-auto: update
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties: # 실행 시 어떤 쿼리가 발생하는지 확인하기 위한 설정

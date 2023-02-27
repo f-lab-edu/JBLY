@@ -1,9 +1,11 @@
 import React from "react";
+import ProductList from "../component/paging/ProductList";
 
 const ProductListPage = () => {
     return (
         <div>
-            Crawling Page입니다.
+            <h1>Product List</h1>
+            <ProductList />
         </div>
     );
 }

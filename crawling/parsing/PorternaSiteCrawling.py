@@ -16,11 +16,11 @@ def getTotalProducts():
     storeName = "porterna"
     result = [] # storeName, itemName, getUrl, getPrice, itemType, shopId
     urls = []
-    urls.append(("https://porterna.com/product/list.html?cate_no=541", "outwear")) # outwear
-    urls.append(("https://porterna.com/product/list.html?cate_no=789", "top")) # top
-    urls.append(("https://porterna.com/product/list.html?cate_no=28", "pants")) # pants
-    urls.append(("https://porterna.com/product/list.html?cate_no=44", "accessory")) # acc
-    urls.append(("https://porterna.com/product/list.html?cate_no=79", "shoes")) # shoes
+    urls.append(("https://porterna.com/product/list.html?cate_no=541", "OUTWEAR")) # outwear
+    urls.append(("https://porterna.com/product/list.html?cate_no=789", "TOP")) # top
+    urls.append(("https://porterna.com/product/list.html?cate_no=28", "BOTTOM")) # pants
+    urls.append(("https://porterna.com/product/list.html?cate_no=44", "ACCESSORY")) # acc
+    urls.append(("https://porterna.com/product/list.html?cate_no=79", "SHOES")) # shoes
 
     for url in urls: # itemType에 따른 url init
         eachUrl, itemType = url
