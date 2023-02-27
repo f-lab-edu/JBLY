@@ -1,10 +1,10 @@
-import pymysql
-import MysqlConnectionInfo
+from crawling.dbConnection import MysqlConnectionInfo
+
 
 def connect(products):
     # productsData order = storeName, itemName, imageUrl, price, itemType, shopId
-    connect = MysqlConnectionInfo.mysqlconnect()
-    cursor = connect.cursor()
+    connector = MysqlConnectionInfo.connector()
+    cursor = connector.cursor()
 
     sql = "INSERT INTO product (shopName, productName, image, price, productType, shopId) VALUES (%s, %s, %s, %s, %s, %s)"
 
@@ -14,7 +14,7 @@ def connect(products):
             cursor.execute(sql, (storeName, itemName, imageUrl, price, type, shopId))
         except:
             print(storeName, itemName, imageUrl, price, type, shopId)
-    connect.commit()
+    connector.commit()
     cursor.close()
-    connect.close()
+    connector.close()
     return None
