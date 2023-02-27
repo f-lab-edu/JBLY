@@ -16,11 +16,11 @@ def getTotalItemList():
 
     result = []
     urls = []
-    urls.append(("https://theverlin.com/product/list.html?cate_no=42", "outwear"))  # outwear
-    urls.append(("https://theverlin.com/product/list.html?cate_no=43", "top"))  # top
-    urls.append(("https://theverlin.com/product/list.html?cate_no=44", "bottom"))  # bottom
-    urls.append(("https://theverlin.com/product/list.html?cate_no=48", "accessory"))  # acc
-    urls.append(("https://theverlin.com/category/shoes/193/", "shoes"))  # shoes
+    urls.append(("https://theverlin.com/product/list.html?cate_no=42", "OUTWEAR"))  # outwear
+    urls.append(("https://theverlin.com/product/list.html?cate_no=43", "TOP"))  # top
+    urls.append(("https://theverlin.com/product/list.html?cate_no=44", "BOTTOM"))  # bottom
+    urls.append(("https://theverlin.com/product/list.html?cate_no=48", "ACCESSORY"))  # acc
+    urls.append(("https://theverlin.com/category/shoes/193/", "SHOES"))  # shoes
 
     for url in urls:
         eachUrl, itemType = url
