@@ -2,6 +2,8 @@ package com.flab.jbly.domain.product;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,6 +39,7 @@ public class Product {
     @Column(name = "price", nullable = false)
     private BigDecimal price;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "productType", nullable = false)
     private Category productType;
 
@@ -44,11 +47,10 @@ public class Product {
     private String productImage;
 
     public enum Category{
-        TOPS,
-        BOTTOMS,
-        DRESSES,
-        OUTERWEAR,
+        TOP,
+        PANTS,
+        OUTWEAR,
         SHOES,
-        ACC
+        ACCESSORY
     }
 }
