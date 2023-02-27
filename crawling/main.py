@@ -1,5 +1,5 @@
-from parsing import MoreCherrySiteCrawling
-from parsing import PorternaSiteCrawling
+from crawling.parsing import MoreCherrySiteCrawling, PorternaSiteCrawling
+from parsing import TheVerlinSiteCrawling
 from dbConnection import MysqlConnect
 if __name__ == '__main__':
     # dataTypes = storeName, itemName, imageUrl, price, itemType shopId
@@ -14,6 +14,8 @@ if __name__ == '__main__':
     MysqlConnect.connect(moreCherryProducts)
 
     # shopId == 3
-    # theverlinProducts = TheVerlinSiteCrawling.getTotalProducts()
-    # MysqlConnect.connect(theverlinProducts)
+    theverlinProducts = TheVerlinSiteCrawling.getTotalItemList()
+    MysqlConnect.connect(theverlinProducts)
+
+
 
