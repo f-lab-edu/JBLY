@@ -1,8 +1,9 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 function Pagination({currentPage, totalPages, handleClickPrevious, handleClickNext, getPageNumbers, setCurrentPage}) {
 
     // const [currentPgae, setCurrentPage] = useState(1);
+    console.log(getPageNumbers())
 
     return (
         <div>
