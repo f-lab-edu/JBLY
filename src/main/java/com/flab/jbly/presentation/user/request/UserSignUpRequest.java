@@ -2,7 +2,6 @@ package com.flab.jbly.presentation.user.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,11 +32,6 @@ public class UserSignUpRequest {
 
     @NotBlank(message = "주소는 필수 입력 값입니다.")
     private String address;
-
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
-
 }
 
 
