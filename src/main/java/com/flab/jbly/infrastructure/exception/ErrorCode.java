@@ -9,6 +9,7 @@ public enum ErrorCode {
 
     // 409 CONFLICT 중복된 리소스
     USER_DUPLICATION(409, "중복된 User 입니다."),
+    USER_DOES_NOT_EXIST(500, "존재하는 User가 아닙니다."),
 
     // 500 INTERNAL_SERVER_ERROR
     ENCODER_FAILED_ERROR(500, "암호화 실패했습니다. "),

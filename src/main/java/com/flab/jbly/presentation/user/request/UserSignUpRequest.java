@@ -1,5 +1,6 @@
 package com.flab.jbly.presentation.user.request;
 
+import com.flab.jbly.application.user.command.UserSignUpCommand;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.AccessLevel;
@@ -32,6 +33,18 @@ public class UserSignUpRequest {
 
     @NotBlank(message = "주소는 필수 입력 값입니다.")
     private String address;
+
+    public UserSignUpCommand toCommand() {
+        return new UserSignUpCommand(
+            this.userId,
+            this.password,
+            this.name,
+            this.phone,
+            this.email,
+            this.email
+        );
+    }
+
 }
 
 

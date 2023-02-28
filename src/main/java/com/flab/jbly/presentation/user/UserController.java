@@ -2,12 +2,12 @@ package com.flab.jbly.presentation.user;
 
 import static com.flab.jbly.infrastructure.common.ResponseEntityConstants.OK;
 
-import com.flab.jbly.application.user.command.UserSignUpCommand;
 import com.flab.jbly.application.user.UserService;
 import com.flab.jbly.presentation.user.request.UserSignUpRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,16 +25,9 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public void signUp(@RequestBody @Valid UserSignUpRequest request) {
-        userService.saveUser(UserSignUpCommand
-            .builder()
-            .userId(request.getUserId())
-            .password(request.getPassword())
-            .name(request.getName())
-            .phone(request.getPhone())
-            .email(request.getEmail())
-            .address(request.getAddress())
-            .build());
+    public ResponseEntity<Void> signUp(@RequestBody @Valid UserSignUpRequest request) {
+        userService.saveUser(request.toCommand());
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/{userId}/duplicate")
