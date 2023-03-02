@@ -34,6 +34,7 @@ jobs:
       with:
         arguments: build
 
+
     - name: Run tests with H2 database
       env:
         SPRING_DATASOURCE_URL: jdbc:h2:mem:jblyInMemory
