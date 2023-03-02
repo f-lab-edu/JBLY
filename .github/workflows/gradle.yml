@@ -35,4 +35,4 @@ jobs:
         arguments: build
 
     - name: Test with Gradle
-      run: SPRING_PROFILES_ACTIVE=[test] ./gradlew test
+      run: ./gradlew test
