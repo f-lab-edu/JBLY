@@ -26,12 +26,12 @@ dependencies {
     implementation group: 'org.mindrot', name: 'jbcrypt', version: '0.4'
     implementation 'io.rest-assured:rest-assured:5.3.0' // API Test 시 사용
     implementation 'com.google.guava:guava:31.1-jre' // Util Library
+    implementation 'com.h2database:h2'
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'com.h2database:h2'
 }
 
 tasks.named('test') {
