@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/jblyInMemory;MODE=MYSQL;NON_KEYWORDS=USER
+    url: jdbc:h2:mem:jblyInMemory;MODE=MYSQL;NON_KEYWORDS=USER
     username: lee
     password:
     driver-class-name: org.h2.Driver
