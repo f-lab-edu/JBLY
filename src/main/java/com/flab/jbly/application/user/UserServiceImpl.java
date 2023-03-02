@@ -42,4 +42,8 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+
+    public User getUserById(Long id) {
+        return repository.getUserById(id);
+    }
 }

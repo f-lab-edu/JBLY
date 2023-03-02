@@ -26,8 +26,18 @@ jobs:
       with:
         java-version: '18'
         distribution: 'temurin'
+    - name: Grant execute permission for gradlew # gradle build 시 사용할 명령어에 대한 권한 부여
+      run: chmod +x gradlew
+
     - name: Build with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
         arguments: build
 
+
+    - name: Run tests with H2 database
+      env:
+        SPRING_DATASOURCE_URL: jdbc:h2:mem:jblyInMemory
+        SPRING_DATASOURCE_USERNAME: lee
+        SPRING_DATASOURCE_PASSWORD:
+      run: ./gradlew test

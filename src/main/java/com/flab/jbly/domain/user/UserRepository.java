@@ -7,4 +7,6 @@ public interface UserRepository {
     boolean existsByUserId(String userId);
 
     User findByUserId(String userId);
+
+    User getUserById(Long id);
 }
