@@ -34,5 +34,9 @@ jobs:
       with:
         arguments: build
 
-    - name: Test with Gradle
-      run: ./gradlew test
+    - name: Test with H2 Database
+      env:
+        DB_URL: jdbc:h2:mem:jblyInMemory
+        DB_USERNAME: lee
+        DB_PASSWORD:
+      run: ./gradle test --info
