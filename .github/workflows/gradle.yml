@@ -34,9 +34,9 @@ jobs:
       with:
         arguments: build
 
-    - name: Test with H2 Database
+    - name: Run tests with H2 database
       env:
-        DB_URL: jdbc:h2:mem:jblyInMemory
-        DB_USERNAME: lee
-        DB_PASSWORD:
-      run: ./gradle test --info
+        SPRING_DATASOURCE_URL: jdbc:h2:mem:jblyInMemory
+        SPRING_DATASOURCE_USERNAME: lee
+        SPRING_DATASOURCE_PASSWORD:
+      run: ./gradlew test
