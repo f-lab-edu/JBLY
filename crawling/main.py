@@ -1,7 +1,7 @@
 from parsing import MoreCherrySiteCrawling, PorternaSiteCrawling, TheVerlinSiteCrawling
 from dbConnection import MysqlConnect
 if __name__ == '__main__':
-    # dataTypes = storeName, itemName, imageUrl, price, itemType shopId
+    # dataTypes = storeName, itemName, imageUrl, price, itemType, detailInfo shopId
     results = []
 
     # shopId == 1
