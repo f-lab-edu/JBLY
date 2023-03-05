@@ -1,10 +1,11 @@
 import re
 
+import requests
 from bs4 import BeautifulSoup
 import time
 import ssl
-from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 
 from crawling.parsing import WebExecutor
 
@@ -30,7 +31,7 @@ def getTotalItemList():
 
         while True:
             soup = BeautifulSoup(browser.page_source, 'html.parser')
-            datas = soup.find("ul", "prdList column4").find_all("li", recursive=False)
+            datas = soup.find("ul", "prdList column4").find_all("li", recursive=False)  # 최상위 태그만 찾게 하기위해서 False로 지정
             datas = list(map(str, datas))
 
             for data in datas:
@@ -56,18 +57,23 @@ def getTotalItemList():
                             temp = i
                             break
                 except:
-                    print(temp)
-
+                    pass
 
                 soup = BeautifulSoup(temp, "html.parser")
                 getPrice = soup.text
                 price = re.sub(r'\D', '', getPrice)
+
+
+                # get detail info
+                detail = eachData.find('a')['href']
+                detailInfo = "https://theverlin.com/" + detail
 
                 itemInfoGather.append(storeName)
                 itemInfoGather.append(itemName)
                 itemInfoGather.append(imageUrl)
                 itemInfoGather.append(price)
                 itemInfoGather.append(itemType)
+                itemInfoGather.append(detailInfo)
                 itemInfoGather.append(shopId)
                 copyItemInfo = itemInfoGather.copy()
                 result.append(copyItemInfo)
@@ -84,6 +90,7 @@ def getTotalItemList():
                     pass
             if browser.current_url.endswith("#none"):
                 break
+
 
     browser.close()
     return result
