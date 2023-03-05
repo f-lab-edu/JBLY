@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from ProductTypes import productTypes
+from parsing.ProductTypes import productTypes
 from parsing import WebExecutor
 from bs4 import BeautifulSoup
 import time
@@ -18,10 +18,10 @@ def getTotalProducts():
     result = [] # storeName, itemName, getUrl, getPrice, itemType, shopId
     urls = []
     urls.append(("https://porterna.com/product/list.html?cate_no=541", productTypes.OUTWEAR.name)) # outwear
-    urls.append(("https://porterna.com/product/list.html?cate_no=789", productTypes.TOP.name)) # top
-    urls.append(("https://porterna.com/product/list.html?cate_no=28", productTypes.BOTTOM.name)) # bottom
-    urls.append(("https://porterna.com/product/list.html?cate_no=44", productTypes.ACCESSORY.name)) # acc
-    urls.append(("https://porterna.com/product/list.html?cate_no=79", productTypes.SHOES.name)) # shoes
+    # urls.append(("https://porterna.com/product/list.html?cate_no=789", productTypes.TOP.name)) # top
+    # urls.append(("https://porterna.com/product/list.html?cate_no=28", productTypes.BOTTOM.name)) # bottom
+    # urls.append(("https://porterna.com/product/list.html?cate_no=44", productTypes.ACCESSORY.name)) # acc
+    # urls.append(("https://porterna.com/product/list.html?cate_no=79", productTypes.SHOES.name)) # shoes
 
     for url in urls: # itemType에 따른 url init
         eachUrl, itemType = url

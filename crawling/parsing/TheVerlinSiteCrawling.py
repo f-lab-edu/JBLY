@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from ProductTypes import productTypes
+from parsing.ProductTypes import productTypes
 from parsing import WebExecutor
 from bs4 import BeautifulSoup
 import re
