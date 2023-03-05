@@ -58,9 +58,8 @@ def getTotalProducts():
             getUrl = 'https:' + url
 
             # get Detail Page
-            detailPageTag = targetData.find('a')
-            detailUrl = detailPageTag['href']
-            detailPageUrl = "https://m.more-cherry.com" + detailUrl
+            getDetailInfo = targetData.find('a')['href']
+            detailInfo = "https://m.more-cherry.com" + getDetailInfo
 
 
             # get Price
@@ -68,14 +67,14 @@ def getTotalProducts():
             getPrice = priceTag.text.replace(',', '')
             getPrice = getPrice.replace('원\n','')
 
-            # (shopName, productName, image, price, itemType, shopId, detailPage)
+            # (shopName, productName, image, price, itemType, shopId, detailInfo)
             itemInfoGather.append(storeName)
             itemInfoGather.append(itemName)
             itemInfoGather.append(getUrl)
             itemInfoGather.append(getPrice)
             itemInfoGather.append(itemType)
             itemInfoGather.append(shopId)
-            itemInfoGather.append(detailPageUrl)
+            itemInfoGather.append(detailInfo)
             copyItemInfo = itemInfoGather.copy()
             result.append(copyItemInfo)
             itemInfoGather.clear()
