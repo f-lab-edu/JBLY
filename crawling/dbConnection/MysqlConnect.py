@@ -1,5 +1,4 @@
-from crawling.dbConnection import MysqlConnectionInfo
-
+from dbConnection import MysqlConnectionInfo
 
 def connect(products):
     # productsData order = storeName, itemName, imageUrl, price, itemType, detailInfo, shopId
