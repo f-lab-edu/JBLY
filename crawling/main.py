@@ -8,7 +8,7 @@ if __name__ == '__main__':
     porternaProducts = PorternaSiteCrawling.getTotalProducts()
     MysqlConnect.connect(porternaProducts)
 
-    # # shopId == 2
+    # shopId == 2
     moreCherryProducts = MoreCherrySiteCrawling.getTotalProducts()
     MysqlConnect.connect(moreCherryProducts)
 
