@@ -1,28 +1,27 @@
+from selenium.webdriver.common.by import By
+from parsing.ProductTypes import productTypes
+from parsing import WebExecutor
 from bs4 import BeautifulSoup
 import time
-
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-
-
 import ssl
+
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
 def getTotalProducts():
     # WebDriver를 초기화합니다.
-    driver = webdriver.Chrome()
+    driver = WebExecutor.executor()
 
     # Var Setting
     shopId = 2
     storeName = "morecherry"
     result = [] # storeName, itemName, imageUrl, price, itemType, shopId
     urls = []
-    urls.append(("https://m.more-cherry.com/category/outwear/24","OUTWEAR"))  # outwear
-    urls.append(("https://m.more-cherry.com/category/top/25", "TOP"))  # top
-    urls.append(("https://m.more-cherry.com/category/pants/26","BOTTOM"))  # bottom
-    urls.append(("https://m.more-cherry.com/category/accessory/28","ACCESSORY"))  # acc
-    urls.append(("https://m.more-cherry.com/product/list_thumb.html?cate_no=42","SHOES"))  # shoes
+    urls.append(("https://m.more-cherry.com/category/outwear/24",productTypes.OUTWEAR.name))  # outwear
+    urls.append(("https://m.more-cherry.com/category/top/25", productTypes.TOP.name))  # top
+    urls.append(("https://m.more-cherry.com/category/pants/26",productTypes.BOTTOM.name))  # bottom
+    urls.append(("https://m.more-cherry.com/category/accessory/28",productTypes.ACCESSORY.name))  # acc
+    urls.append(("https://m.more-cherry.com/product/list_thumb.html?cate_no=42",productTypes.SHOES.name))  # shoes
 
     for url in urls:
         eachUrl, itemType = url
@@ -58,19 +57,24 @@ def getTotalProducts():
             url = imageTag['src']
             getUrl = 'https:' + url
 
+            # get Detail Page
+            getDetailInfo = targetData.find('a')['href']
+            detailInfo = "https://m.more-cherry.com" + getDetailInfo
+
 
             # get Price
             priceTag = targetData.find('li', {'class': 'price'})
             getPrice = priceTag.text.replace(',', '')
             getPrice = getPrice.replace('원\n','')
 
-            # (shopName, productName, image, price, itemType, shopId)
+            # (shopName, productName, image, price, itemType, shopId, detailInfo)
             itemInfoGather.append(storeName)
             itemInfoGather.append(itemName)
             itemInfoGather.append(getUrl)
             itemInfoGather.append(getPrice)
             itemInfoGather.append(itemType)
             itemInfoGather.append(shopId)
+            itemInfoGather.append(detailInfo)
             copyItemInfo = itemInfoGather.copy()
             result.append(copyItemInfo)
             itemInfoGather.clear()

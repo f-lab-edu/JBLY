@@ -1,6 +1,5 @@
 package com.flab.jbly.application.user.command;
 
-import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,10 +23,6 @@ public class UserSignUpCommand {
     private String email;
 
     private String address;
-
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
 
 }
 

@@ -1,6 +1,7 @@
-from bs4 import BeautifulSoup
-from selenium import webdriver
 from selenium.webdriver.common.by import By
+from parsing.ProductTypes import productTypes
+from parsing import WebExecutor
+from bs4 import BeautifulSoup
 import time
 import ssl
 import re
@@ -10,17 +11,17 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 
 def getTotalProducts():
-    driver = webdriver.Chrome()
+    driver = WebExecutor.executor()
 
     shopId = 1
     storeName = "porterna"
     result = [] # storeName, itemName, getUrl, getPrice, itemType, shopId
     urls = []
-    urls.append(("https://porterna.com/product/list.html?cate_no=541", "OUTWEAR")) # outwear
-    urls.append(("https://porterna.com/product/list.html?cate_no=789", "TOP")) # top
-    urls.append(("https://porterna.com/product/list.html?cate_no=28", "BOTTOM")) # pants
-    urls.append(("https://porterna.com/product/list.html?cate_no=44", "ACCESSORY")) # acc
-    urls.append(("https://porterna.com/product/list.html?cate_no=79", "SHOES")) # shoes
+    urls.append(("https://porterna.com/product/list.html?cate_no=541", productTypes.OUTWEAR.name)) # outwear
+    urls.append(("https://porterna.com/product/list.html?cate_no=789", productTypes.TOP.name)) # top
+    urls.append(("https://porterna.com/product/list.html?cate_no=28", productTypes.BOTTOM.name)) # bottom
+    urls.append(("https://porterna.com/product/list.html?cate_no=44", productTypes.ACCESSORY.name)) # acc
+    urls.append(("https://porterna.com/product/list.html?cate_no=79", productTypes.SHOES.name)) # shoes
 
     for url in urls: # itemType에 따른 url init
         eachUrl, itemType = url
@@ -34,12 +35,20 @@ def getTotalProducts():
             for data in datas:
                 itemInfoGather = []
                 eachData = BeautifulSoup(data, 'html.parser')
+
+                # get Image
                 getImageUrl = eachData.find('img')['src']
                 imageUrl = 'https:' + getImageUrl
 
+                # get detail info
+                getDetailInfo = eachData.find('a')['href']
+                detailInfo = "https://porterna.com" + getDetailInfo
+
+                # get ItemName
                 getItemName = eachData.find('p', {'class': 'name'})
                 itemName = getItemName.text
 
+                # get Price
                 getPrice = eachData.find('div', {'class': 'price1'})
                 price = getPrice.text
                 price = re.sub(r'\D', '', price)
@@ -50,6 +59,7 @@ def getTotalProducts():
                 itemInfoGather.append(price)
                 itemInfoGather.append(itemType)
                 itemInfoGather.append(shopId)
+                itemInfoGather.append(detailInfo)
                 copyItemInfo = itemInfoGather.copy()
                 result.append(copyItemInfo)
                 itemInfoGather.clear()

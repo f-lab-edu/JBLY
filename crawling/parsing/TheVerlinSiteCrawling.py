@@ -1,12 +1,14 @@
 import re
 
+import requests
+from selenium.webdriver.common.by import By
+from parsing.ProductTypes import productTypes
+from parsing import WebExecutor
 from bs4 import BeautifulSoup
+import re
 import time
 import ssl
-from selenium import webdriver
-from selenium.webdriver.common.by import By
 
-from crawling.parsing import WebExecutor
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -18,11 +20,11 @@ def getTotalItemList():
 
     result = []
     urls = []
-    urls.append(("https://theverlin.com/product/list.html?cate_no=42", "OUTWEAR"))  # outwear
-    urls.append(("https://theverlin.com/product/list.html?cate_no=43", "TOP"))  # top
-    urls.append(("https://theverlin.com/product/list.html?cate_no=44", "BOTTOM"))  # bottom
-    urls.append(("https://theverlin.com/product/list.html?cate_no=48", "ACCESSORY"))  # acc
-    urls.append(("https://theverlin.com/category/shoes/193/", "SHOES"))  # shoes
+    urls.append(("https://theverlin.com/product/list.html?cate_no=42", productTypes.OUTWEAR.name))  # outwear
+    urls.append(("https://theverlin.com/product/list.html?cate_no=43", productTypes.TOP.name))  # top
+    urls.append(("https://theverlin.com/product/list.html?cate_no=44", productTypes.BOTTOM.name))  # bottom
+    urls.append(("https://theverlin.com/product/list.html?cate_no=48", productTypes.ACCESSORY.name))  # acc
+    urls.append(("https://theverlin.com/category/shoes/193/", productTypes.SHOES.name))  # shoes
 
     for url in urls:
         eachUrl, itemType = url
@@ -30,7 +32,7 @@ def getTotalItemList():
 
         while True:
             soup = BeautifulSoup(browser.page_source, 'html.parser')
-            datas = soup.find("ul", "prdList column4").find_all("li", recursive=False)
+            datas = soup.find("ul", "prdList column4").find_all("li", recursive=False)  # 최상위 태그만 찾게 하기위해서 False로 지정
             datas = list(map(str, datas))
 
             for data in datas:
@@ -56,18 +58,23 @@ def getTotalItemList():
                             temp = i
                             break
                 except:
-                    print(temp)
-
+                    pass
 
                 soup = BeautifulSoup(temp, "html.parser")
                 getPrice = soup.text
                 price = re.sub(r'\D', '', getPrice)
+
+
+                # get detail info
+                detail = eachData.find('a')['href']
+                detailInfo = "https://theverlin.com/" + detail
 
                 itemInfoGather.append(storeName)
                 itemInfoGather.append(itemName)
                 itemInfoGather.append(imageUrl)
                 itemInfoGather.append(price)
                 itemInfoGather.append(itemType)
+                itemInfoGather.append(detailInfo)
                 itemInfoGather.append(shopId)
                 copyItemInfo = itemInfoGather.copy()
                 result.append(copyItemInfo)
@@ -84,6 +91,7 @@ def getTotalItemList():
                     pass
             if browser.current_url.endswith("#none"):
                 break
+
 
     browser.close()
     return result
