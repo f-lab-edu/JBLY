@@ -3,8 +3,8 @@ from parsing.ProductTypes import productTypes
 from parsing import WebExecutor
 from bs4 import BeautifulSoup
 import time
-
 import ssl
+
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -57,19 +57,25 @@ def getTotalProducts():
             url = imageTag['src']
             getUrl = 'https:' + url
 
+            # get Detail Page
+            detailPageTag = targetData.find('a')
+            detailUrl = detailPageTag['href']
+            detailPageUrl = "https://m.more-cherry.com" + detailUrl
+
 
             # get Price
             priceTag = targetData.find('li', {'class': 'price'})
             getPrice = priceTag.text.replace(',', '')
             getPrice = getPrice.replace('원\n','')
 
-            # (shopName, productName, image, price, itemType, shopId)
+            # (shopName, productName, image, price, itemType, shopId, detailPage)
             itemInfoGather.append(storeName)
             itemInfoGather.append(itemName)
             itemInfoGather.append(getUrl)
             itemInfoGather.append(getPrice)
             itemInfoGather.append(itemType)
             itemInfoGather.append(shopId)
+            itemInfoGather.append(detailPageUrl)
             copyItemInfo = itemInfoGather.copy()
             result.append(copyItemInfo)
             itemInfoGather.clear()
