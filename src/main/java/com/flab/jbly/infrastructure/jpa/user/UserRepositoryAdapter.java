@@ -2,6 +2,8 @@ package com.flab.jbly.infrastructure.jpa.user;
 
 import com.flab.jbly.domain.user.User;
 import com.flab.jbly.domain.user.UserRepository;
+import com.flab.jbly.infrastructure.exception.ErrorCode;
+import com.flab.jbly.infrastructure.exception.user.DoesNotExistUserException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -24,5 +26,12 @@ public class UserRepositoryAdapter implements UserRepository {
     @Override
     public boolean existsByUserId(String userId) {
         return repository.existsByUserId(userId);
+    }
+
+    @Override
+    public User getUserById(Long id) {
+        return repository.findById(id).orElseThrow(
+            () -> new DoesNotExistUserException("DoesNotExistUserException",
+                ErrorCode.USER_DOES_NOT_EXIST));
     }
 }
