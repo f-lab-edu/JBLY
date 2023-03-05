@@ -6,14 +6,14 @@ def connect(products):
     connector = MysqlConnectionInfo.connector()
     cursor = connector.cursor()
 
-    sql = "INSERT INTO product (shopName, productName, image, price, productType, shopId) VALUES (%s, %s, %s, %s, %s, %s)"
+    sql = "INSERT INTO product (shopName, productName, image, price, productType, shopId) VALUES (%s, %s, %s, %s, %s, %s, %s)"
 
     for product in products:
-        storeName, itemName, imageUrl, price, type, shopId = product
+        storeName, itemName, imageUrl, price, type, shopId, detailInfo = product
         try:
-            cursor.execute(sql, (storeName, itemName, imageUrl, price, type, shopId))
+            cursor.execute(sql, (storeName, itemName, imageUrl, price, type, shopId, detailInfo))
         except:
-            print(storeName, itemName, imageUrl, price, type, shopId)
+            print(storeName, itemName, imageUrl, price, type, shopId, detailInfo)
     connector.commit()
     cursor.close()
     connector.close()
