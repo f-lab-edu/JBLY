@@ -17,11 +17,11 @@ def getTotalProducts():
     storeName = "morecherry"
     result = [] # storeName, itemName, imageUrl, price, itemType, shopId
     urls = []
-    urls.append(("https://m.more-cherry.com/category/outwear/24",productTypes.outwear))  # outwear
-    urls.append(("https://m.more-cherry.com/category/top/25", productTypes.top))  # top
-    urls.append(("https://m.more-cherry.com/category/pants/26",productTypes.bottom))  # bottom
-    urls.append(("https://m.more-cherry.com/category/accessory/28",productTypes.acc))  # acc
-    urls.append(("https://m.more-cherry.com/product/list_thumb.html?cate_no=42",productTypes.shoes))  # shoes
+    urls.append(("https://m.more-cherry.com/category/outwear/24",productTypes.OUTWEAR.name))  # outwear
+    urls.append(("https://m.more-cherry.com/category/top/25", productTypes.TOP.name))  # top
+    urls.append(("https://m.more-cherry.com/category/pants/26",productTypes.BOTTOM.name))  # bottom
+    urls.append(("https://m.more-cherry.com/category/accessory/28",productTypes.ACCESSORY.name))  # acc
+    urls.append(("https://m.more-cherry.com/product/list_thumb.html?cate_no=42",productTypes.SHOES.name))  # shoes
 
     for url in urls:
         eachUrl, itemType = url

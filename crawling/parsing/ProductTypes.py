@@ -1,7 +1,8 @@
+from enum import Enum, auto
 
-class productTypes():
-    outwear = "OUTWEAR"
-    top = "TOP"
-    bottom = "BOTTOM"
-    acc = "ACCESSORY"
-    shoes = "SHOES"
+class productTypes(Enum):
+    OUTWEAR = auto()
+    TOP = auto()
+    BOTTOM = auto()
+    ACCESSORY = auto()
+    SHOES = auto()
