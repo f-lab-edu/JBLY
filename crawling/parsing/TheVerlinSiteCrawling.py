@@ -1,12 +1,10 @@
-import re
-
+from selenium.webdriver.common.by import By
+from parsing.ProductTypes import productTypes
+from parsing import WebExecutor
 from bs4 import BeautifulSoup
+import re
 import time
 import ssl
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-
-from crawling.parsing import WebExecutor
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -18,11 +16,11 @@ def getTotalItemList():
 
     result = []
     urls = []
-    urls.append(("https://theverlin.com/product/list.html?cate_no=42", "OUTWEAR"))  # outwear
-    urls.append(("https://theverlin.com/product/list.html?cate_no=43", "TOP"))  # top
-    urls.append(("https://theverlin.com/product/list.html?cate_no=44", "BOTTOM"))  # bottom
-    urls.append(("https://theverlin.com/product/list.html?cate_no=48", "ACCESSORY"))  # acc
-    urls.append(("https://theverlin.com/category/shoes/193/", "SHOES"))  # shoes
+    urls.append(("https://theverlin.com/product/list.html?cate_no=42", productTypes.OUTWEAR.name))  # outwear
+    urls.append(("https://theverlin.com/product/list.html?cate_no=43", productTypes.TOP.name))  # top
+    urls.append(("https://theverlin.com/product/list.html?cate_no=44", productTypes.BOTTOM.name))  # bottom
+    urls.append(("https://theverlin.com/product/list.html?cate_no=48", productTypes.ACCESSORY.name))  # acc
+    urls.append(("https://theverlin.com/category/shoes/193/", productTypes.SHOES.name))  # shoes
 
     for url in urls:
         eachUrl, itemType = url
