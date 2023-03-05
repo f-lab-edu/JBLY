@@ -1,6 +1,7 @@
-from bs4 import BeautifulSoup
-from selenium import webdriver
 from selenium.webdriver.common.by import By
+from ProductTypes import productTypes
+from parsing import WebExecutor
+from bs4 import BeautifulSoup
 import time
 import ssl
 import re
@@ -10,17 +11,17 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 
 def getTotalProducts():
-    driver = webdriver.Chrome()
+    driver = WebExecutor.executor()
 
     shopId = 1
     storeName = "porterna"
     result = [] # storeName, itemName, getUrl, getPrice, itemType, shopId
     urls = []
-    urls.append(("https://porterna.com/product/list.html?cate_no=541", "OUTWEAR")) # outwear
-    urls.append(("https://porterna.com/product/list.html?cate_no=789", "TOP")) # top
-    urls.append(("https://porterna.com/product/list.html?cate_no=28", "BOTTOM")) # pants
-    urls.append(("https://porterna.com/product/list.html?cate_no=44", "ACCESSORY")) # acc
-    urls.append(("https://porterna.com/product/list.html?cate_no=79", "SHOES")) # shoes
+    urls.append(("https://porterna.com/product/list.html?cate_no=541", productTypes.outwear)) # outwear
+    urls.append(("https://porterna.com/product/list.html?cate_no=789", productTypes.top)) # top
+    urls.append(("https://porterna.com/product/list.html?cate_no=28", productTypes.bottom)) # bottom
+    urls.append(("https://porterna.com/product/list.html?cate_no=44", productTypes.acc)) # acc
+    urls.append(("https://porterna.com/product/list.html?cate_no=79", productTypes.shoes)) # shoes
 
     for url in urls: # itemType에 따른 url init
         eachUrl, itemType = url

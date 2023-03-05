@@ -1,9 +1,8 @@
+from selenium.webdriver.common.by import By
+from ProductTypes import productTypes
+from parsing import WebExecutor
 from bs4 import BeautifulSoup
 import time
-
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-
 
 import ssl
 
@@ -11,18 +10,18 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 def getTotalProducts():
     # WebDriver를 초기화합니다.
-    driver = webdriver.Chrome()
+    driver = WebExecutor.executor()
 
     # Var Setting
     shopId = 2
     storeName = "morecherry"
     result = [] # storeName, itemName, imageUrl, price, itemType, shopId
     urls = []
-    urls.append(("https://m.more-cherry.com/category/outwear/24","OUTWEAR"))  # outwear
-    urls.append(("https://m.more-cherry.com/category/top/25", "TOP"))  # top
-    urls.append(("https://m.more-cherry.com/category/pants/26","BOTTOM"))  # bottom
-    urls.append(("https://m.more-cherry.com/category/accessory/28","ACCESSORY"))  # acc
-    urls.append(("https://m.more-cherry.com/product/list_thumb.html?cate_no=42","SHOES"))  # shoes
+    urls.append(("https://m.more-cherry.com/category/outwear/24",productTypes.outwear))  # outwear
+    urls.append(("https://m.more-cherry.com/category/top/25", productTypes.top))  # top
+    urls.append(("https://m.more-cherry.com/category/pants/26",productTypes.bottom))  # bottom
+    urls.append(("https://m.more-cherry.com/category/accessory/28",productTypes.acc))  # acc
+    urls.append(("https://m.more-cherry.com/product/list_thumb.html?cate_no=42",productTypes.shoes))  # shoes
 
     for url in urls:
         eachUrl, itemType = url
