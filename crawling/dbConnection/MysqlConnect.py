@@ -25,3 +25,7 @@ def connect(products):
     cursor.close()
     connector.close()
     return None
+
+def disconnect(connector):
+    connector.close()
+    return None
