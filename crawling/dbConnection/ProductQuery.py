@@ -1,12 +1,12 @@
 
 def insertProducts(connectedDb, products):
-    insertSql = "INSERT INTO product (shopName, productName, image, price, productType, detailInfo shopId) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+    insertSql = "INSERT INTO product (shopName, productName, image, price, productType, detailInfo, shopId, detailHtml) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
     cursor = connectedDb.cursor()
 
     for product in products:
-        storeName, itemName, imageUrl, price, type, detailInfo, shopId = product
+        storeName, itemName, imageUrl, price, type, detailInfo, shopId, detailHtml = product
         try:
-            cursor.execute(insertSql, (storeName, itemName, imageUrl, price, type, detailInfo, shopId))
+            cursor.execute(insertSql, (storeName, itemName, imageUrl, price, type, detailInfo, shopId, detailHtml))
         except:
             continue
     connectedDb.commit()
@@ -20,7 +20,7 @@ def checkDuplicatedProducts(connectedDb, products):
     cursor = connectedDb.cursor()
 
     for product in products:
-        storeName, itemName, imageUrl, price, type, detailInfo, shopId = product
+        storeName, itemName, imageUrl, price, type, detailInfo, shopId, detailHtml = product
         cursor.execute(selectSql, (shopId, itemName))
         getProduct = cursor.fetchone()
 
