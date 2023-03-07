@@ -67,6 +67,12 @@ def getTotalProducts():
             getPrice = priceTag.text.replace(',', '')
             getPrice = getPrice.replace('원\n','')
 
+            # get detail information html
+            detail_browser = WebExecutor.executor()
+            detail_browser.get(detailInfo)
+            bSoup = BeautifulSoup(detail_browser.page_source, 'html.parser')
+            detailHtml = bSoup.find("div", "cont")
+
             # (shopName, productName, image, price, itemType, shopId, detailInfo)
             itemInfoGather.append(storeName)
             itemInfoGather.append(itemName)
@@ -75,6 +81,7 @@ def getTotalProducts():
             itemInfoGather.append(itemType)
             itemInfoGather.append(detailInfo)
             itemInfoGather.append(shopId)
+            itemInfoGather.append(detailHtml)
             copyItemInfo = itemInfoGather.copy()
             result.append(copyItemInfo)
             itemInfoGather.clear()
