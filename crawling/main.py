@@ -13,15 +13,15 @@ if __name__ == '__main__':
     porternaInsertData = ProductQuery.checkDuplicatedProducts(connectDB, porternaProducts)
     ProductQuery.insertProducts(connectDB, porternaInsertData)
 
-    # # shopId == 2
-    # moreCherryProducts = MoreCherrySiteCrawling.getTotalProducts()
-    # moreCherryInsertData = ProductQuery.checkDuplicatedProducts(connectDB, moreCherryProducts)
-    # ProductQuery.insertProducts(connectDB, moreCherryInsertData)
+    # shopId == 2
+    moreCherryProducts = MoreCherrySiteCrawling.getTotalProducts()
+    moreCherryInsertData = ProductQuery.checkDuplicatedProducts(connectDB, moreCherryProducts)
+    ProductQuery.insertProducts(connectDB, moreCherryInsertData)
 
-    # # shopId == 3
-    # theverlinProducts = TheVerlinSiteCrawling.getTotalItemList()
-    # theverlinInsertData = ProductQuery.checkDuplicatedProducts(connectDB, theverlinProducts)
-    # ProductQuery.insertProducts(connectDB, theverlinInsertData)
+    # shopId == 3
+    theverlinProducts = TheVerlinSiteCrawling.getTotalItemList()
+    theverlinInsertData = ProductQuery.checkDuplicatedProducts(connectDB, theverlinProducts)
+    ProductQuery.insertProducts(connectDB, theverlinInsertData)
 
     now = datetime.datetime.now()
     newTime = now.strftime("%Y-%m-%d %H:%M:%S")
