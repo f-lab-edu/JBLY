@@ -1,11 +1,19 @@
 from dbConnection import MysqlConnectionInfo
 
-# todo 책임 분리
-def connect():
-    # productsData order = storeName, itemName, imageUrl, price, itemType, detailInfo, shopId
+def connect(products):
+    # productsData order = storeName, itemName, imageUrl, price, itemType, detailInfo, shopId, detailHtml
     connector = MysqlConnectionInfo.connector()
-    return connector
+    cursor = connector.cursor()
 
-def disconnect(connector):
+    sql = "INSERT INTO product (shopName, productName, image, price, productType, detailInfo, shopId, detailHtml) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+
+    for product in products:
+        storeName, itemName, imageUrl, price, type, detailInfo, shopId, detailHtml = product
+        try:
+            cursor.execute(sql, (storeName, itemName, imageUrl, price, type, detailInfo, shopId, detailHtml))
+        except:
+            print(storeName, itemName, imageUrl, price, type, detailInfo, shopId, detailHtml)
+    connector.commit()
+    cursor.close()
     connector.close()
     return None
