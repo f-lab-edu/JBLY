@@ -1,7 +1,7 @@
 name: Daily job
 on:
   schedule:
-    - cron: '0 */5 * * *'
+    - cron: '* * * * *' # 매 분마다 진행
 jobs:
   job1:
     runs-on: ubuntu-latest
