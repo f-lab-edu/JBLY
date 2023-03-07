@@ -64,10 +64,15 @@ def getTotalItemList():
                 getPrice = soup.text
                 price = re.sub(r'\D', '', getPrice)
 
-
                 # get detail info
                 detail = eachData.find('a')['href']
                 detailInfo = "https://theverlin.com/" + detail
+
+                # get detail information html
+                detail_browser = WebExecutor.executor()
+                detail_browser.get(detailInfo)
+                bSoup = BeautifulSoup(detail_browser.page_source, 'html.parser')
+                detailHtml = bSoup.find("div", "cont")
 
                 itemInfoGather.append(storeName)
                 itemInfoGather.append(itemName)
@@ -76,6 +81,7 @@ def getTotalItemList():
                 itemInfoGather.append(itemType)
                 itemInfoGather.append(detailInfo)
                 itemInfoGather.append(shopId)
+                itemInfoGather.append(detailHtml)
                 copyItemInfo = itemInfoGather.copy()
                 result.append(copyItemInfo)
                 itemInfoGather.clear()

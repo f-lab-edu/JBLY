@@ -42,6 +42,14 @@ const ProductList = () => {
         return pageNumbers;
     };
 
+    const getDetailInfo = () => {
+        axios.get('detailInfo')
+        .then(response => {
+
+        })
+        .catch(error => console.log(error));
+    }
+
     return (
 
         <div>
@@ -62,10 +70,10 @@ const ProductList = () => {
                     <tr key={product.id}>
                         <td >{product.id}</td>
                         <td>{product.shopName}</td>
-                        <td>{product.productName}</td>
+                        <button type="submit">{product.productName}</button>
                         <td>{product.price}</td>
                         <td>{product.productType}</td>
-                        <td><img src={product.productImage} style={{ width: '100px', height: '100px' }}/></td>
+                        <button type="submit"> img src={product.productImage} style={{ width: '100px', height: '100px' }}/</button>
                         <td>{product.shopId}</td>
                     </tr>
                 ))}
