@@ -53,6 +53,12 @@ def getTotalProducts():
                 price = getPrice.text
                 price = re.sub(r'\D', '', price)
 
+                # get detail information html
+                detail_browser = WebExecutor.executor()
+                detail_browser.get(detailInfo)
+                bSoup = BeautifulSoup(detail_browser.page_source, 'html.parser')
+                detailHtml = bSoup.find("div", "pr-header ")
+
                 itemInfoGather.append(storeName)
                 itemInfoGather.append(itemName)
                 itemInfoGather.append(imageUrl)
@@ -60,6 +66,7 @@ def getTotalProducts():
                 itemInfoGather.append(itemType)
                 itemInfoGather.append(detailInfo)
                 itemInfoGather.append(shopId)
+                itemInfoGather.append(detailHtml)
                 copyItemInfo = itemInfoGather.copy()
                 result.append(copyItemInfo)
                 itemInfoGather.clear()
@@ -74,6 +81,7 @@ def getTotalProducts():
                 except:
                     pass
             if driver.current_url.endswith("#none"):
+                detail_browser.close()
                 break
 
     driver.close()
