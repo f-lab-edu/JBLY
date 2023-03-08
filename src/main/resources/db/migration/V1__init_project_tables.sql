@@ -1,4 +1,4 @@
-CREATE TABLE if not exists `user`(
+CREATE TABLE IF NOT EXISTS `user`(
     `id`        bigint       NOT NULL AUTO_INCREMENT,
     `userId`    varchar(100) NOT NULL,
     `address`   varchar(255) NOT NULL,
@@ -11,14 +11,7 @@ CREATE TABLE if not exists `user`(
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-create table if not exists `session`(
-    `id` bigint NOT NULL AUTO_INCREMENT,
-    `sessionToken` varchar(255) DEFAULT NULL,
-    `userId` bigint NOT NULL,
-    PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-create table if not exists `session`
+CREATE TABLE IF NOT EXISTS `product`
 (
     `id` bigint NOT NULL AUTO_INCREMENT,
     `detailHtml` longtext  NOT NULL,
@@ -29,5 +22,13 @@ create table if not exists `session`
     `productType` varchar(255)  NOT NULL,
     `shopId` bigint NOT NULL,
     `shopName` varchar(255)  NOT NULL,
+    PRIMARY KEY (`id`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE IF NOT EXISTS `session`(
+    `id` bigint NOT NULL AUTO_INCREMENT,
+    `sessionToken` varchar(255) DEFAULT NULL,
+    `userId` bigint NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
