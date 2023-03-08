@@ -15,6 +15,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 def getTotalItemList():
     browser = WebExecutor.executor()
+    detailBrowser = WebExecutor.executor()
     shopId = 3
     storeName = "theverlin"
 
@@ -25,6 +26,7 @@ def getTotalItemList():
     urls.append(("https://theverlin.com/product/list.html?cate_no=44", productTypes.BOTTOM.name))  # bottom
     urls.append(("https://theverlin.com/product/list.html?cate_no=48", productTypes.ACCESSORY.name))  # acc
     urls.append(("https://theverlin.com/category/shoes/193/", productTypes.SHOES.name))  # shoes
+    baseUrl = "https://theverlin.com/"
 
     for url in urls:
         eachUrl, itemType = url
@@ -66,12 +68,12 @@ def getTotalItemList():
 
                 # get detail info
                 detail = eachData.find('a')['href']
-                detailInfo = "https://theverlin.com/" + detail
+                detailInfo = baseUrl + detail
 
                 # get detail information html
-                detail_browser = WebExecutor.executor()
-                detail_browser.get(detailInfo)
-                bSoup = BeautifulSoup(detail_browser.page_source, 'html.parser')
+
+                detailBrowser.get(detailInfo)
+                bSoup = BeautifulSoup(detailBrowser.page_source, 'html.parser')
                 detailHtml = bSoup.find("div", "cont")
 
                 itemInfoGather.append(storeName)
@@ -96,6 +98,7 @@ def getTotalItemList():
                 except:
                     pass
             if browser.current_url.endswith("#none"):
+                detailBrowser.close()
                 break
 
 
