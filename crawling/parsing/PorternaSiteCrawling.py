@@ -23,6 +23,7 @@ def getTotalProducts():
     urls.append(("https://porterna.com/product/list.html?cate_no=28", productTypes.BOTTOM.name)) # bottom
     urls.append(("https://porterna.com/product/list.html?cate_no=44", productTypes.ACCESSORY.name)) # acc
     urls.append(("https://porterna.com/product/list.html?cate_no=79", productTypes.SHOES.name)) # shoes
+    baseUrl = "https://porterna.com"
 
     for url in urls: # itemType에 따른 url init
         eachUrl, itemType = url
@@ -43,7 +44,7 @@ def getTotalProducts():
 
                 # get detail info
                 getDetailInfo = eachData.find('a')['href']
-                detailInfo = "https://porterna.com" + getDetailInfo
+                detailInfo = baseUrl + getDetailInfo
 
                 # get ItemName
                 getItemName = eachData.find('p', {'class': 'name'})

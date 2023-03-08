@@ -26,6 +26,7 @@ def getTotalItemList():
     urls.append(("https://theverlin.com/product/list.html?cate_no=44", productTypes.BOTTOM.name))  # bottom
     urls.append(("https://theverlin.com/product/list.html?cate_no=48", productTypes.ACCESSORY.name))  # acc
     urls.append(("https://theverlin.com/category/shoes/193/", productTypes.SHOES.name))  # shoes
+    baseUrl = "https://theverlin.com/"
 
     for url in urls:
         eachUrl, itemType = url
@@ -67,7 +68,7 @@ def getTotalItemList():
 
                 # get detail info
                 detail = eachData.find('a')['href']
-                detailInfo = "https://theverlin.com/" + detail
+                detailInfo = baseUrl + detail
 
                 # get detail information html
 

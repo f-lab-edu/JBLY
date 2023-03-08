@@ -22,6 +22,7 @@ def getTotalProducts():
     urls.append(("https://m.more-cherry.com/category/pants/26",productTypes.BOTTOM.name))  # bottom
     urls.append(("https://m.more-cherry.com/category/accessory/28",productTypes.ACCESSORY.name))  # acc
     urls.append(("https://m.more-cherry.com/product/list_thumb.html?cate_no=42",productTypes.SHOES.name))  # shoes
+    baseUrl = "https://m.more-cherry.com"
 
     for url in urls:
         eachUrl, itemType = url
@@ -65,7 +66,7 @@ def getTotalProducts():
 
             # get Detail Page
             getDetailInfo = targetData.find('a')['href']
-            detailInfo = "https://m.more-cherry.com" + getDetailInfo
+            detailInfo = baseUrl + getDetailInfo
 
             #get detail information html
             detailBrowser.get(detailInfo)
