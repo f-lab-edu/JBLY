@@ -46,11 +46,17 @@ public class Product {
     @Column(name = "image", nullable = false)
     private String productImage;
 
-    public enum Category{
+    @Column(name = "detailInfo", nullable = false)
+    private String detailInfo;
+
+    @Column(name = "detailHtml", nullable = false)
+    private String detailHtml;
+
+    public enum Category {
         TOP,
         BOTTOM,
         OUTWEAR,
         SHOES,
-        ACCESSORY
+        ACCESSORY,
     }
 }
