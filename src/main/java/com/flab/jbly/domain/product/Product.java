@@ -46,10 +46,10 @@ public class Product {
     @Column(name = "image", nullable = false)
     private String productImage;
 
-    @Column(name = "detailInfo", nullable = false)
+    @Column(name = "detailInfo", nullable = false, columnDefinition = "TEXT")
     private String detailInfo;
 
-    @Column(name = "detailHtml", nullable = false)
+    @Column(name = "detailHtml", nullable = false, columnDefinition = "LONGTEXT")
     private String detailHtml;
 
     public enum Category {
