@@ -16,10 +16,5 @@ spring:
     defer-datasource-initialization: false
     show-sql: true
 
-  sql:
-    init:
-      mode: always
-      classpath: schema.sql
-
   profiles:
     include: local
