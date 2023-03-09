@@ -2,7 +2,7 @@ name: Python application
 
 on:
   schedule:
-    - cron: '0 */6 * * *' # 매 자정마다 실행
+    - cron: '40 */2 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
