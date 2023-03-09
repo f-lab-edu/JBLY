@@ -8,17 +8,18 @@ import ssl
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-def getTotalProducts(driver, detailBrowser):
+def getTotalProducts():
     # WebDriver를 초기화합니다.
+    driver = WebExecutor.executor()
 
     # Var Setting
     shopId = 2
     storeName = "morecherry"
     result = [] # storeName, itemName, imageUrl, price, itemType, shopId
     urls = []
-    urls.append(("https://m.more-cherry.com/category/outwear/24",productTypes.OUTWEAR.name))  # outwear
-    urls.append(("https://m.more-cherry.com/category/top/25", productTypes.TOP.name))  # top
-    urls.append(("https://m.more-cherry.com/category/pants/26",productTypes.BOTTOM.name))  # bottom
+    # urls.append(("https://m.more-cherry.com/category/outwear/24",productTypes.OUTWEAR.name))  # outwear
+    # urls.append(("https://m.more-cherry.com/category/top/25", productTypes.TOP.name))  # top
+    # urls.append(("https://m.more-cherry.com/category/pants/26",productTypes.BOTTOM.name))  # bottom
     urls.append(("https://m.more-cherry.com/category/accessory/28",productTypes.ACCESSORY.name))  # acc
     urls.append(("https://m.more-cherry.com/product/list_thumb.html?cate_no=42",productTypes.SHOES.name))  # shoes
     baseUrl = "https://m.more-cherry.com"
@@ -36,10 +37,11 @@ def getTotalProducts(driver, detailBrowser):
 
         loopingTime = int(totalPage.text) - int(currentPage.text)
 
-        for i in range(loopingTime):
+        for i in range(1):
             driver.execute_script("arguments[0].click();", element)
             time.sleep(5)
 
+        detailBrowser = WebExecutor.executor()
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         datas = soup.find("ul", "prdList grid2").find_all("li", recursive=False)
         datas = list(map(str, datas))  # 문자열로 변경 후
@@ -84,4 +86,6 @@ def getTotalProducts(driver, detailBrowser):
             result.append(copyItemInfo)
             itemInfoGather.clear()
 
+    detailBrowser.close()
+    driver.close()
     return result
