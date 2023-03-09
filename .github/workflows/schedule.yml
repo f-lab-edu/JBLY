@@ -1,8 +1,6 @@
 name: Python application
 
-on:
-  schedule:
-    - cron: '0 0 * * *' # 매 자정마다 실행
+on: [push]
 
 jobs:
   build:
