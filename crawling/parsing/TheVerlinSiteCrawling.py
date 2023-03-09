@@ -13,9 +13,8 @@ import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
-def getTotalItemList():
-    browser = WebExecutor.executor()
-    detailBrowser = WebExecutor.executor()
+def getTotalItemList(browser, detailBrowser):
+
     shopId = 3
     storeName = "theverlin"
 
@@ -98,9 +97,6 @@ def getTotalItemList():
                 except:
                     pass
             if browser.current_url.endswith("#none"):
-                detailBrowser.close()
                 break
 
-
-    browser.close()
     return result
