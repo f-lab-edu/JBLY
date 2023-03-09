@@ -81,8 +81,6 @@ def getTotalProducts(driver, detailBrowser):
                 except:
                     pass
             if driver.current_url.endswith("#none"):
-                detailBrowser.close()
                 break
 
-    driver.close()
     return result
