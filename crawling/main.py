@@ -1,4 +1,4 @@
-from parsing import MoreCherrySiteCrawling, PorternaSiteCrawling, TheVerlinSiteCrawling, WebExecutor
+from parsing import MoreCherrySiteCrawling, PorternaSiteCrawling, TheVerlinSiteCrawling
 from dbConnection import MysqlConnect, ProductQuery
 import datetime
 
@@ -6,28 +6,28 @@ if __name__ == '__main__':
     # dataTypes = storeName, itemName, imageUrl, price, itemType, detailInfo shopId
 
     connectDB = MysqlConnect.connect()
-    driver = WebExecutor.executor()
-    detailDriver = WebExecutor.executor()
+
+    beforeCrawling = datetime.datetime.now()
+    beforeCrawlingTime = beforeCrawling.strftime("%Y-%m-%d %H:%M:%S")
+    print(beforeCrawlingTime)
 
     # shopId == 1
-    porternaProducts = PorternaSiteCrawling.getTotalProducts(driver, detailDriver)
+    porternaProducts = PorternaSiteCrawling.getTotalProducts()
     porternaInsertData = ProductQuery.checkDuplicatedProducts(connectDB, porternaProducts)
     ProductQuery.insertProducts(connectDB, porternaInsertData)
 
     # shopId == 2
-    moreCherryProducts = MoreCherrySiteCrawling.getTotalProducts(driver, detailDriver)
+    moreCherryProducts = MoreCherrySiteCrawling.getTotalProducts()
     moreCherryInsertData = ProductQuery.checkDuplicatedProducts(connectDB, moreCherryProducts)
     ProductQuery.insertProducts(connectDB, moreCherryInsertData)
 
     # shopId == 3
-    theverlinProducts = TheVerlinSiteCrawling.getTotalItemList(driver, detailDriver)
+    theverlinProducts = TheVerlinSiteCrawling.getTotalItemList()
     theverlinInsertData = ProductQuery.checkDuplicatedProducts(connectDB, theverlinProducts)
     ProductQuery.insertProducts(connectDB, theverlinInsertData)
 
-    now = datetime.datetime.now()
-    newTime = now.strftime("%Y-%m-%d %H:%M:%S")
-    print(newTime)
+    afterCrawling = datetime.datetime.now()
+    afterCrawlingTime = afterCrawling.strftime("%Y-%m-%d %H:%M:%S")
+    print(afterCrawlingTime)
 
-    driver.close()
-    detailDriver.close()
     MysqlConnect.disconnect(connectDB)  # DB disconnect

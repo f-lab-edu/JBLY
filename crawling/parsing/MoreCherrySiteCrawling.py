@@ -8,8 +8,9 @@ import ssl
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-def getTotalProducts(driver, detailBrowser):
+def getTotalProducts():
     # WebDriver를 초기화합니다.
+    driver = WebExecutor.executor()
 
     # Var Setting
     shopId = 2
@@ -40,6 +41,7 @@ def getTotalProducts(driver, detailBrowser):
             driver.execute_script("arguments[0].click();", element)
             time.sleep(5)
 
+        detailBrowser = WebExecutor.executor()
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         datas = soup.find("ul", "prdList grid2").find_all("li", recursive=False)
         datas = list(map(str, datas))  # 문자열로 변경 후
@@ -84,4 +86,6 @@ def getTotalProducts(driver, detailBrowser):
             result.append(copyItemInfo)
             itemInfoGather.clear()
 
+    detailBrowser.close()
+    driver.close()
     return result
