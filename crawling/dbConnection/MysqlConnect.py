@@ -1,9 +1,9 @@
-from dbConnection import MysqlConnectionInfo
+from dbConnection import CloudDBConnectionInfo
 
 # todo 책임 분리
 def connect():
     # productsData order = storeName, itemName, imageUrl, price, itemType, detailInfo, shopId, detailHtml
-    connector = MysqlConnectionInfo.connector()
+    connector = CloudDBConnectionInfo.connector()
     return connector
 
 def disconnect(connector):

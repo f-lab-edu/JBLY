@@ -2,11 +2,16 @@ name: Python application
 
 on:
   schedule:
-    - cron: '0 0 * * *' # 매 자정마다 실행
-
+    - cron: '40 */6 * * *' # 매 자정마다 실행
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      DB_HOST: ${{secrets.CRAWLING_APPLICATION_DB_HOST}}
+      DB_NAME: ${{secrets.CRAWLING_APPLICATION_DB_NAME}}
+      DB_USER: ${{secrets.CRAWLING_APPLICATION_DB_USER}}
+      DB_PWD: ${{secrets.CRAWLING_APPLICATION_DB_PWD}}
+      DB_PORT: ${{secrets.CRAWLING_APPLICATION_DB_PORT}}
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python
