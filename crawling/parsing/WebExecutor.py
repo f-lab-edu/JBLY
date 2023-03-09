@@ -1,9 +1,11 @@
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+
 def executor():
 
-  chromeOptions = Options()
-  chromeOptions.add_argument('--no-sandbox')
-  chromedriver = "crawling/parsing/chromedriver"
-  return webdriver.Chrome(executable_path=chromedriver, options=chromeOptions)
+  chrome_options = webdriver.ChromeOptions()
+  chrome_options.add_argument('--headless')
+  chrome_options.add_argument('--no-sandbox')
+  chrome_options.add_argument('--disable-dev-shm-usage')
+  chromedriver = "./chromedriver"
+  return webdriver.Chrome(executable_path=chromedriver, options=chrome_options)
 
