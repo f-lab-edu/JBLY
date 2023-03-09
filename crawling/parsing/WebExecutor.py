@@ -4,9 +4,9 @@ from selenium.webdriver.chrome.options import Options
 def executor():
 
 
-  options = Options()
-  options.add_argument('--no-sandbox')
-  options.add_argument('--disable-dev-shm-usage')
-  chromeDriverPath = "./chromedriver"
-  return webdriver.Chrome(executable_path=chromeDriverPath)
+  chromeOptions = Options()
+  chromeOptions.add_argument('--no-sandbox')
+  chromeOptions.add_argument('--disable-dev-shm-usage')
+  chromeOptions.binary_location = "./chromedriver"
+  return webdriver.Chrome(executable_path=chromeOptions)
 
