@@ -7,6 +7,10 @@ if __name__ == '__main__':
 
     connectDB = MysqlConnect.connect()
 
+    beforeCrawling = datetime.datetime.now()
+    beforeCrawlingTime = beforeCrawling.strftime("%Y-%m-%d %H:%M:%S")
+    print(beforeCrawlingTime)
+
     # shopId == 1
     porternaProducts = PorternaSiteCrawling.getTotalProducts()
     porternaInsertData = ProductQuery.checkDuplicatedProducts(connectDB, porternaProducts)
@@ -22,8 +26,8 @@ if __name__ == '__main__':
     theverlinInsertData = ProductQuery.checkDuplicatedProducts(connectDB, theverlinProducts)
     ProductQuery.insertProducts(connectDB, theverlinInsertData)
 
-    now = datetime.datetime.now()
-    newTime = now.strftime("%Y-%m-%d %H:%M:%S")
-    print(newTime)
+    afterCrawling = datetime.datetime.now()
+    afterCrawlingTime = afterCrawling.strftime("%Y-%m-%d %H:%M:%S")
+    print(afterCrawlingTime)
 
     MysqlConnect.disconnect(connectDB)  # DB disconnect
