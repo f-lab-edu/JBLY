@@ -7,6 +7,6 @@ def executor():
   chromeOptions = Options()
   chromeOptions.add_argument('--no-sandbox')
   chromeOptions.add_argument('--disable-dev-shm-usage')
-  chromedriver = "./chromedriver"
+  chromedriver = "./chromedriver.exe"
   return webdriver.Chrome(executable_path=chromedriver, options=chromeOptions)
 
