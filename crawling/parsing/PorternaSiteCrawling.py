@@ -42,10 +42,6 @@ def getTotalProducts():
                 getImageUrl = eachData.find('img')['src']
                 imageUrl = 'https:' + getImageUrl
 
-                # get detail info
-                getDetailInfo = eachData.find('a')['href']
-                detailInfo = baseUrl + getDetailInfo
-
                 # get ItemName
                 getItemName = eachData.find('p', {'class': 'name'})
                 itemName = getItemName.text
@@ -55,12 +51,14 @@ def getTotalProducts():
                 price = getPrice.text
                 price = re.sub(r'\D', '', price)
 
-                # get detail information html
+                # get detail info
+                getDetailInfo = eachData.find('a')['href']
+                detailInfo = baseUrl + getDetailInfo
 
+                # get detail information html
                 detailBrowser.get(detailInfo)
                 bSoup = BeautifulSoup(detailBrowser.page_source, 'html.parser')
                 detailHtml = bSoup.find("div", "pr-header-col pr-header-right")
-
 
                 itemInfoGather.append(storeName)
                 itemInfoGather.append(itemName)
@@ -84,8 +82,8 @@ def getTotalProducts():
                 except:
                     pass
             if driver.current_url.endswith("#none"):
-                detailBrowser.close()
                 break
 
+    detailBrowser.close()
     driver.close()
     return result

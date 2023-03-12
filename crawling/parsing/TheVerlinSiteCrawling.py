@@ -4,14 +4,13 @@ import requests
 from selenium.webdriver.common.by import By
 from parsing.ProductTypes import productTypes
 from parsing import WebExecutor
+from selenium import webdriver
 from bs4 import BeautifulSoup
 import re
 import time
 import ssl
 
-
 ssl._create_default_https_context = ssl._create_unverified_context
-
 
 def getTotalItemList():
     browser = WebExecutor.executor()
@@ -71,7 +70,6 @@ def getTotalItemList():
                 detailInfo = baseUrl + detail
 
                 # get detail information html
-
                 detailBrowser.get(detailInfo)
                 bSoup = BeautifulSoup(detailBrowser.page_source, 'html.parser')
                 detailHtml = bSoup.find("div", "cont")
@@ -98,9 +96,8 @@ def getTotalItemList():
                 except:
                     pass
             if browser.current_url.endswith("#none"):
-                detailBrowser.close()
                 break
 
-
+    detailBrowser.close()
     browser.close()
     return result
