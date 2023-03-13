@@ -2,7 +2,8 @@ from selenium.webdriver.common.by import By
 from parsing.ProductTypes import productTypes
 from parsing import WebExecutor
 from bs4 import BeautifulSoup
-import time
+import requests
+from urllib.parse import quote
 import ssl
 
 
@@ -23,6 +24,7 @@ def getTotalProducts():
     urls.append(("https://m.more-cherry.com/category/accessory/28",productTypes.ACCESSORY.name))  # acc
     urls.append(("https://m.more-cherry.com/product/list_thumb.html?cate_no=42",productTypes.SHOES.name))  # shoes
     baseUrl = "https://m.more-cherry.com"
+    userAgent ="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, likeGecko) Chrome/109.0.0.0 Safari/537.36"
 
     for url in urls:
         eachUrl, itemType = url
@@ -39,9 +41,8 @@ def getTotalProducts():
 
         for i in range(loopingTime):
             driver.execute_script("arguments[0].click();", element)
-            time.sleep(5)
+            driver.implicitly_wait(10)
 
-        detailBrowser = WebExecutor.executor()
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         datas = soup.find("ul", "prdList grid2").find_all("li", recursive=False)
         datas = list(map(str, datas))  # 문자열로 변경 후
@@ -66,12 +67,23 @@ def getTotalProducts():
 
             # get Detail Page
             getDetailInfo = targetData.find('a')['href']
-            detailInfo = baseUrl + getDetailInfo
+
+            # detailInfo korea lang encoding
+            temp = list(getDetailInfo.split("/"))
+            encodeBytes = quote(temp[2])
+            temp[2] = encodeBytes
+            encodedDetailInfo = "/".join(temp)
+            detailInfo = baseUrl + encodedDetailInfo
+            print(detailInfo)
+            header = {
+                'Referrer': detailInfo,
+                'user-agent': userAgent
+            } # setting referrer and userAgent
 
             #get detail information html
-            detailBrowser.get(detailInfo)
-            bSoup = BeautifulSoup(detailBrowser.page_source, 'html.parser')
-            detailHtml = bSoup.find(id="prdDetail")
+            response = requests.get(detailInfo, headers=header)
+            bSoup = BeautifulSoup(response.text, 'html.parser')
+            detailHtml = bSoup.find('div', {'id':'prdDetail'})
 
             # (shopName, productName, image, price, itemType, shopId, detailInfo)
             itemInfoGather.append(storeName)
@@ -86,6 +98,5 @@ def getTotalProducts():
             result.append(copyItemInfo)
             itemInfoGather.clear()
 
-    detailBrowser.close()
     driver.close()
     return result

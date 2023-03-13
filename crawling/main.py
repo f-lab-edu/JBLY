@@ -12,9 +12,9 @@ if __name__ == '__main__':
     print(beforeCrawlingTime)
 
     # shopId == 1
-    porternaProducts = PorternaSiteCrawling.getTotalProducts()
-    porternaInsertData = ProductQuery.checkDuplicatedProducts(connectDB, porternaProducts)
-    ProductQuery.insertProducts(connectDB, porternaInsertData)
+    # porternaProducts = PorternaSiteCrawling.getTotalProducts()
+    # porternaInsertData = ProductQuery.checkDuplicatedProducts(connectDB, porternaProducts)
+    # ProductQuery.insertProducts(connectDB, porternaInsertData)
 
     # shopId == 2
     moreCherryProducts = MoreCherrySiteCrawling.getTotalProducts()
@@ -22,9 +22,9 @@ if __name__ == '__main__':
     ProductQuery.insertProducts(connectDB, moreCherryInsertData)
 
     # shopId == 3
-    theverlinProducts = TheVerlinSiteCrawling.getTotalItemList()
-    theverlinInsertData = ProductQuery.checkDuplicatedProducts(connectDB, theverlinProducts)
-    ProductQuery.insertProducts(connectDB, theverlinInsertData)
+    # theverlinProducts = TheVerlinSiteCrawling.getTotalItemList()
+    # theverlinInsertData = ProductQuery.checkDuplicatedProducts(connectDB, theverlinProducts)
+    # ProductQuery.insertProducts(connectDB, theverlinInsertData)
 
     afterCrawling = datetime.datetime.now()
     afterCrawlingTime = afterCrawling.strftime("%Y-%m-%d %H:%M:%S")
