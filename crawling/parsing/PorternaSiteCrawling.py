@@ -1,8 +1,7 @@
 from selenium.webdriver.common.by import By
 from parsing.ProductTypes import productTypes
-from parsing import WebExecutor
 from bs4 import BeautifulSoup
-import time
+import requests
 import ssl
 import re
 
@@ -10,9 +9,7 @@ import re
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
-def getTotalProducts():
-    driver = WebExecutor.executor()
-    detailBrowser = WebExecutor.executor()
+def getTotalProducts(driver):
 
     shopId = 1
     storeName = "porterna"
@@ -24,6 +21,7 @@ def getTotalProducts():
     urls.append(("https://porterna.com/product/list.html?cate_no=44", productTypes.ACCESSORY.name)) # acc
     urls.append(("https://porterna.com/product/list.html?cate_no=79", productTypes.SHOES.name)) # shoes
     baseUrl = "https://porterna.com"
+    userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
 
     for url in urls: # itemType에 따른 url init
         eachUrl, itemType = url
@@ -56,11 +54,14 @@ def getTotalProducts():
                 price = re.sub(r'\D', '', price)
 
                 # get detail information html
+                header = {
+                    'Referrer': detailInfo,
+                    'user-agent': userAgent
+                }
 
-                detailBrowser.get(detailInfo)
-                bSoup = BeautifulSoup(detailBrowser.page_source, 'html.parser')
-                detailHtml = bSoup.find("div", "pr-header-col pr-header-right")
-
+                response = requests.get(detailInfo, headers= header)
+                bSoup = BeautifulSoup(response.text, 'html.parser')
+                detailHtml = bSoup.find("div", {'class': 'pr-header'})
 
                 itemInfoGather.append(storeName)
                 itemInfoGather.append(itemName)
@@ -76,7 +77,7 @@ def getTotalProducts():
 
             # page 이동
             element = driver.find_element(by=By.XPATH, value='//*[@id="contents"]/div[2]/div[4]/a[2]')
-            time.sleep(5)
+            driver.implicitly_wait(10)
 
             if element.is_displayed() and element.is_enabled():
                 try:
@@ -84,8 +85,6 @@ def getTotalProducts():
                 except:
                     pass
             if driver.current_url.endswith("#none"):
-                detailBrowser.close()
                 break
 
-    driver.close()
     return result

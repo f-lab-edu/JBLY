@@ -1,10 +1,7 @@
-import re
-
-import requests
 from selenium.webdriver.common.by import By
 from parsing.ProductTypes import productTypes
-from parsing import WebExecutor
 from bs4 import BeautifulSoup
+import requests
 import re
 import time
 import ssl
@@ -13,9 +10,8 @@ import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
-def getTotalItemList():
-    browser = WebExecutor.executor()
-    detailBrowser = WebExecutor.executor()
+def getTotalItemList(driver):
+
     shopId = 3
     storeName = "theverlin"
 
@@ -27,13 +23,14 @@ def getTotalItemList():
     urls.append(("https://theverlin.com/product/list.html?cate_no=48", productTypes.ACCESSORY.name))  # acc
     urls.append(("https://theverlin.com/category/shoes/193/", productTypes.SHOES.name))  # shoes
     baseUrl = "https://theverlin.com/"
+    userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
 
     for url in urls:
         eachUrl, itemType = url
-        browser.get(eachUrl)
+        driver.get(eachUrl)
 
         while True:
-            soup = BeautifulSoup(browser.page_source, 'html.parser')
+            soup = BeautifulSoup(driver.page_source, 'html.parser')
             datas = soup.find("ul", "prdList column4").find_all("li", recursive=False)  # 최상위 태그만 찾게 하기위해서 False로 지정
             datas = list(map(str, datas))
 
@@ -71,9 +68,12 @@ def getTotalItemList():
                 detailInfo = baseUrl + detail
 
                 # get detail information html
-
-                detailBrowser.get(detailInfo)
-                bSoup = BeautifulSoup(detailBrowser.page_source, 'html.parser')
+                header = {
+                    'Referrer': detailInfo,
+                    'user-agent': userAgent
+                }
+                response = requests.get(detailInfo, headers= header)
+                bSoup = BeautifulSoup(response.text, 'html.parser')
                 detailHtml = bSoup.find("div", "cont")
 
                 itemInfoGather.append(storeName)
@@ -89,18 +89,15 @@ def getTotalItemList():
                 itemInfoGather.clear()
 
             # page 이동
-            element = browser.find_element(by=By.XPATH, value='//*[@id="contents"]/div/div[4]/p[3]/a')
-            time.sleep(5)
+            element = driver.find_element(by=By.XPATH, value='//*[@id="contents"]/div/div[4]/p[3]/a')
+            driver.implicitly_wait(10)
 
             if element.is_displayed() and element.is_enabled():
                 try:
-                    browser.execute_script("arguments[0].click();", element)
+                    driver.execute_script("arguments[0].click();", element)
                 except:
                     pass
-            if browser.current_url.endswith("#none"):
-                detailBrowser.close()
+            if driver.current_url.endswith("#none"):
                 break
 
-
-    browser.close()
     return result

@@ -9,7 +9,6 @@ def connector():
     cloudPort = os.environ.get("DB_PORT")
 
     cloudPort = int(cloudPort)
-
     return pymysql.connect(host=cloudHost,
                            user=cloudUser,
                            password=cloudPwd,
