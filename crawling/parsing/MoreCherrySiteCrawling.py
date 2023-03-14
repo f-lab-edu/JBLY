@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
 from parsing.ProductTypes import productTypes
-from parsing import WebExecutor
 from bs4 import BeautifulSoup
 import requests
 from urllib.parse import quote
@@ -10,9 +9,7 @@ import re
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-def getTotalProducts():
-    # WebDriver를 초기화합니다.
-    driver = WebExecutor.executor()
+def getTotalProducts(driver):
 
     # Var Setting
     shopId = 2
@@ -99,5 +96,4 @@ def getTotalProducts():
             if driver.current_url.endswith("#none"):
                 break
 
-    driver.close()
     return result

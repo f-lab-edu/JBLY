@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
 from parsing.ProductTypes import productTypes
-from parsing import WebExecutor
 from bs4 import BeautifulSoup
 import requests
 import ssl
@@ -10,8 +9,7 @@ import re
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
-def getTotalProducts():
-    driver = WebExecutor.executor()
+def getTotalProducts(driver):
 
     shopId = 1
     storeName = "porterna"
@@ -64,7 +62,6 @@ def getTotalProducts():
                 response = requests.get(detailInfo, headers= header)
                 bSoup = BeautifulSoup(response.text, 'html.parser')
                 detailHtml = bSoup.find("div", {'class': 'pr-header'})
-                print(detailHtml)
 
                 itemInfoGather.append(storeName)
                 itemInfoGather.append(itemName)
@@ -90,5 +87,4 @@ def getTotalProducts():
             if driver.current_url.endswith("#none"):
                 break
 
-    driver.close()
     return result
