@@ -1,8 +1,7 @@
 from selenium.webdriver.common.by import By
 from parsing.ProductTypes import productTypes
-from parsing import WebExecutor
 from bs4 import BeautifulSoup
-import time
+import requests
 import ssl
 import re
 
@@ -10,9 +9,7 @@ import re
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
-def getTotalProducts():
-    driver = WebExecutor.executor()
-    detailBrowser = WebExecutor.executor()
+def getTotalProducts(driver):
 
     shopId = 1
     storeName = "porterna"
@@ -42,6 +39,10 @@ def getTotalProducts():
                 getImageUrl = eachData.find('img')['src']
                 imageUrl = 'https:' + getImageUrl
 
+                # get detail info
+                getDetailInfo = eachData.find('a')['href']
+                detailInfo = baseUrl + getDetailInfo
+
                 # get ItemName
                 getItemName = eachData.find('p', {'class': 'name'})
                 itemName = getItemName.text
@@ -51,14 +52,15 @@ def getTotalProducts():
                 price = getPrice.text
                 price = re.sub(r'\D', '', price)
 
-                # get detail info
-                getDetailInfo = eachData.find('a')['href']
-                detailInfo = baseUrl + getDetailInfo
-
                 # get detail information html
-                detailBrowser.get(detailInfo)
-                bSoup = BeautifulSoup(detailBrowser.page_source, 'html.parser')
-                detailHtml = bSoup.find("div", "pr-header-col pr-header-right")
+                header = {
+                    'Referrer': detailInfo,
+                    'user-agent': userAgent
+                }
+
+                response = requests.get(detailInfo, headers= header)
+                bSoup = BeautifulSoup(response.text, 'html.parser')
+                detailHtml = bSoup.find("div", {'class': 'pr-header'})
 
                 itemInfoGather.append(storeName)
                 itemInfoGather.append(itemName)
@@ -74,7 +76,7 @@ def getTotalProducts():
 
             # page 이동
             element = driver.find_element(by=By.XPATH, value='//*[@id="contents"]/div[2]/div[4]/a[2]')
-            time.sleep(5)
+            driver.implicitly_wait(10)
 
             if element.is_displayed() and element.is_enabled():
                 try:
@@ -84,6 +86,4 @@ def getTotalProducts():
             if driver.current_url.endswith("#none"):
                 break
 
-    detailBrowser.close()
-    driver.close()
     return result
