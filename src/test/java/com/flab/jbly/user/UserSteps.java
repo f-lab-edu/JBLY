@@ -1,5 +1,6 @@
 package com.flab.jbly.user;
 
+import com.flab.jbly.presentation.user.request.AccountDeleteRequest;
 import com.flab.jbly.presentation.user.request.UserSignUpRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
@@ -28,5 +29,11 @@ public class UserSteps {
             .post("/users")
             .then()
             .log().all().extract();
+    }
+
+    public static AccountDeleteRequest deleteRequest() {
+        Long id = 1L;
+        String userId = "yeun";
+        return new AccountDeleteRequest(id, userId);
     }
 }
