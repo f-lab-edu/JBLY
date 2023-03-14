@@ -61,11 +61,11 @@ def getTotalProducts(driver):
                 encodeBytes = quote(temp[2])
                 temp[2] = encodeBytes
                 encodedDetailInfo = "/".join(temp)
-                detailInfo = baseUrl + encodedDetailInfo
+                encodedDetailInfo = baseUrl + encodedDetailInfo
 
                 # setting referrer and userAgent
                 header = {
-                    'Referrer': detailInfo,
+                    'Referrer': encodedDetailInfo,
                     'user-agent': userAgent
                 }
 

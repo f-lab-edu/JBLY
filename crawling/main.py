@@ -14,18 +14,15 @@ if __name__ == '__main__':
 
     # shopId == 1
     porternaProducts = PorternaSiteCrawling.getTotalProducts(driver)
-    porternaInsertData = ProductQuery.checkDuplicatedProducts(connectDB, porternaProducts)
-    ProductQuery.insertProducts(connectDB, porternaInsertData)
+    ProductQuery.insertProductIsNotExist(connectDB, porternaProducts)
 
     # shopId == 2
     moreCherryProducts = MoreCherrySiteCrawling.getTotalProducts(driver)
-    moreCherryInsertData = ProductQuery.checkDuplicatedProducts(connectDB, moreCherryProducts)
-    ProductQuery.insertProducts(connectDB, moreCherryInsertData)
+    ProductQuery.insertProductIsNotExist(connectDB, moreCherryProducts)
 
     # shopId == 3
     theverlinProducts = TheVerlinSiteCrawling.getTotalItemList(driver)
-    theverlinInsertData = ProductQuery.checkDuplicatedProducts(connectDB, theverlinProducts)
-    ProductQuery.insertProducts(connectDB, theverlinInsertData)
+    ProductQuery.insertProductIsNotExist(connectDB, theverlinProducts)
 
     afterCrawling = datetime.datetime.now()
     afterCrawlingTime = afterCrawling.strftime("%Y-%m-%d %H:%M:%S")
