@@ -4,11 +4,13 @@ import static com.flab.jbly.infrastructure.common.ResponseEntityConstants.OK;
 
 import com.flab.jbly.application.user.UserService;
 import com.flab.jbly.infrastructure.common.ResponseEntityConstants;
+import com.flab.jbly.presentation.user.request.AccountDeleteRequest;
 import com.flab.jbly.presentation.user.request.UserSignUpRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,5 +36,10 @@ public class UserController {
     public ResponseEntity<Void> isIdDuplicated(@PathVariable String userId) {
         userService.isUserExist(userId);
         return OK;
+    }
+
+    @DeleteMapping("/delete")
+    public void delete(@RequestBody AccountDeleteRequest request) {
+        return;
     }
 }
