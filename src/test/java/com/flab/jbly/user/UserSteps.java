@@ -1,6 +1,7 @@
 package com.flab.jbly.user;
 
 import com.flab.jbly.presentation.user.request.AccountDeleteRequest;
+import com.flab.jbly.presentation.user.request.LoginRequest;
 import com.flab.jbly.presentation.user.request.UserSignUpRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
@@ -19,6 +20,12 @@ public class UserSteps {
 
         return new UserSignUpRequest(userId, password, name,
             phone, email, address);
+    }
+
+    public static LoginRequest logInUser() {
+        String userId = "yeun";
+        String password = "!1234abcd";
+        return new LoginRequest(userId, password);
     }
 
     public static ExtractableResponse<Response> signUpUserApi(UserSignUpRequest request) {
