@@ -28,19 +28,29 @@ public class UserSteps {
         return new LoginRequest(userId, password);
     }
 
-    public static ExtractableResponse<Response> signUpUserApi(UserSignUpRequest request) {
-        return RestAssured.given().log().all()
+    public static AccountDeleteRequest deleteRequest() {
+        Long id = 1L;
+        String userId = "yeun";
+        return new AccountDeleteRequest(id, userId);
+    }
+
+    public static ExtractableResponse<Response> signUpAccountApi(UserSignUpRequest request) {
+        return RestAssured.given().log().headers()
             .contentType(MediaType.APPLICATION_JSON_VALUE)
             .body(request)
             .when()
             .post("/users")
             .then()
-            .log().all().extract();
+            .log().headers().extract();
     }
 
-    public static AccountDeleteRequest deleteRequest() {
-        Long id = 1L;
-        String userId = "yeun";
-        return new AccountDeleteRequest(id, userId);
+    public static ExtractableResponse<Response> deleteAccountApi(AccountDeleteRequest request) {
+        return RestAssured.given().log().headers()
+            .contentType(MediaType.APPLICATION_JSON_VALUE)
+            .body(request)
+            .when()
+            .delete("/users/delete")
+            .then()
+            .log().headers().extract();
     }
 }

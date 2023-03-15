@@ -7,6 +7,7 @@ import com.flab.jbly.application.user.LoginService;
 import com.flab.jbly.application.user.UserServiceImpl;
 import com.flab.jbly.infrastructure.exception.user.DoesNotExistUserException;
 import com.flab.jbly.infrastructure.exception.user.EncoderNoSuchAlgorithmException;
+import com.flab.jbly.presentation.user.request.AccountDeleteRequest;
 import com.flab.jbly.presentation.user.request.LoginRequest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,10 +38,14 @@ class UserServiceTest {
     @DisplayName("사용자 회원 탈퇴 시 pk로 회원을 찾으면 Exception이 발생합니다.")
     @Test
     public void accountDeleteTest() throws Exception {
-        var signUp = UserSteps.AddUser();
+        var signUpRequest = UserSteps.AddUser();
         var id = 1L;
-        userService.saveUser(signUp.toCommand());
-        userService.deleteUserAccount(id);
+        userService.saveUser(signUpRequest.toCommand());
+
+        var request = new AccountDeleteRequest(id,
+            signUpRequest.getUserId());
+        userService.deleteUserAccount(request.toCommand());
+
         assertThatThrownBy(() -> userService.getUserById(id)).isInstanceOf(
             DoesNotExistUserException.class);
     }
@@ -50,7 +55,7 @@ class UserServiceTest {
     public void loginTest() throws Exception {
         // given
         var signUp = UserSteps.AddUser();
-        userService.saveUser(signUp.toCommand()); // db 적재
+        userService.saveUser(signUp.toCommand());
         var loginRequest = UserSteps.logInUser();
 
         // when

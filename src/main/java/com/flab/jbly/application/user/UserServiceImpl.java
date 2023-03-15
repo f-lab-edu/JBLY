@@ -1,10 +1,12 @@
 package com.flab.jbly.application.user;
 
+import com.flab.jbly.application.user.command.AccountDeleteCommand;
+import com.flab.jbly.application.user.command.UserSignUpCommand;
 import com.flab.jbly.domain.user.PasswordEncryption;
 import com.flab.jbly.domain.user.User;
 import com.flab.jbly.domain.user.UserRepository;
-import com.flab.jbly.application.user.command.UserSignUpCommand;
 import com.flab.jbly.infrastructure.exception.ErrorCode;
+import com.flab.jbly.infrastructure.exception.user.AccountMisMatchInfoException;
 import com.flab.jbly.infrastructure.exception.user.DuplicatedUserException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -43,12 +45,18 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    @Transactional(readOnly = true)
     public User getUserById(Long id) {
         return repository.getUserById(id);
     }
 
-    @Override
-    public void deleteUserAccount(Long id) {
-        repository.deleteUserById(id);
+    @Transactional
+    public void deleteUserAccount(AccountDeleteCommand command) {
+        User userById = repository.getUserById(command.Id());
+        if (!userById.getUserId().equals(command.userId())) {
+            throw new AccountMisMatchInfoException("AccountMisMatchInfoException",
+                ErrorCode.USER_INFO_MISMATCH);
+        }
+        repository.deleteUserById(userById.getId());
     }
 }
