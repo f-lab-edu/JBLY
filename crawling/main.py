@@ -1,5 +1,5 @@
 from parsing import MoreCherrySiteCrawling, PorternaSiteCrawling, TheVerlinSiteCrawling, WebExecutor
-from dbConnection import MysqlConnect, ProductQuery
+from dbConnection import ProductQuery
 import datetime
 
 if __name__ == '__main__':
