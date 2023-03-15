@@ -18,7 +18,7 @@ def insertProductIsNotExist(products):
             cursor.execute(insertSql, (
                 storeName, itemName, imageUrl, price, type, detailInfo, shopId, detailHtml, shopId, itemName))
         except:
-            print(storeName + "의 상품 " + itemName + "이 DB에 적재되지 않았습니다.")
+            logging.info(storeName + "의 상품 " + itemName + "이 DB에 적재되지 않았습니다.")
 
     connectedDb.commit()
     cursor.close()
