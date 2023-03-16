@@ -79,7 +79,7 @@ public class UserUnitTest {
         var signUpUser = repository.getUserById(1L);
         String signUpUserId = signUpUser.getUserId();
 
-        var updateRequest = UserSteps.updateRequest();
+        var updateRequest = UserSteps.updateRequest(1L);
         userService.update(updateRequest.toCommand());
         var updateUser = repository.getUserById(1L);
 
@@ -90,6 +90,13 @@ public class UserUnitTest {
     @DisplayName("회원 수정 실패 테스트")
     @Test
     public void updateFailTest() throws Exception {
+        var signUpRequest = UserSteps.AddUser();
+        userService.saveUser(signUpRequest.toCommand());
+
+        var updateRequest = UserSteps.updateRequest(2L);
+
+        assertThatThrownBy(() -> userService.update(updateRequest.toCommand())).isInstanceOf(
+            NullPointerException.class);
     }
 
 

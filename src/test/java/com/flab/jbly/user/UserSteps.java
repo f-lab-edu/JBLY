@@ -35,8 +35,7 @@ public class UserSteps {
         return new AccountDeleteRequest(id, userId);
     }
 
-    public static AccountUpdateRequest updateRequest() {
-        Long id = 1L;
+    public static AccountUpdateRequest updateRequest(Long id) {
         String userId = "susu";
         String password = "!abcd1234";
         String name = "연수";
