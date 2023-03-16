@@ -1,13 +1,10 @@
 package com.flab.jbly.presentation.user.request;
 
 import com.flab.jbly.application.user.command.LoginCommand;
-import jakarta.validation.constraints.NotEmpty;
 import org.springframework.util.Assert;
 
 public record LoginRequest(
-		@NotEmpty
 		String userId,
-		@NotEmpty
 		String password
 ) {
 

@@ -22,7 +22,7 @@ class UserServiceTest {
 
     @Autowired
     private LoginService loginService;
-    
+
 
     @DisplayName("사용자 로그인을 테스트합니다.")
     @Test

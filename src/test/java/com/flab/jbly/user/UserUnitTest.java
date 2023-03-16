@@ -28,21 +28,6 @@ public class UserUnitTest {
         userService = new UserServiceImpl(repository, new Encryption());
     }
 
-    @DisplayName("로그인 시 데이터의 타입이 안 맞을 경우")
-    @ParameterizedTest
-    @MethodSource("failLoginDataSet")
-    public void loginRequestExceptionTest(String userId, String pwd) throws Exception {
-        assertThatThrownBy(() -> new LoginRequest(userId, pwd)).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @DisplayName("계정 삭제 시 PK 값이 존재하지 않을 경우")
-    @ParameterizedTest
-    @MethodSource("failDeleteRequestSet")
-    public void accountDeleteRequestPKNotRequiredConditionTest() throws Exception {
-        Long pk = 0L;
-        assertThatThrownBy(() -> new AccountDeleteRequest(pk,"abc")).isInstanceOf(IllegalArgumentException.class);
-    }
-
     @DisplayName("회원 가입 성공하는 경우")
     @Test
     public void signUpSuccessTest() throws Exception {
@@ -59,7 +44,8 @@ public class UserUnitTest {
         var user1 = UserSteps.AddUser();
         var user2 = UserSteps.AddUser();
         userService.saveUser(user1.toCommand());
-        assertThatThrownBy(() -> userService.saveUser(user2.toCommand())).isInstanceOf(DuplicatedUserException.class);
+        assertThatThrownBy(() -> userService.saveUser(user2.toCommand())).isInstanceOf(
+            DuplicatedUserException.class);
     }
 
     @DisplayName("회원 계정 삭제 성공하는 경우")
@@ -69,9 +55,9 @@ public class UserUnitTest {
         userService.saveUser(user.toCommand());
 
         var request = UserSteps.deleteRequest();
-        userService.deleteUserAccount(request.toCommand());
+        userService.deleteAccount(request.toCommand());
 
-        assertThat(repository.getUserById(request.Id())).isNull();
+        assertThat(repository.getUserById(request.id())).isNull();
     }
 
     @DisplayName("아이디가 틀릴 경우 회원 계정 삭제 실패")
@@ -81,10 +67,45 @@ public class UserUnitTest {
         userService.saveUser(user.toCommand());
 
         var request = new AccountDeleteRequest(1L, "abc");
-        assertThatThrownBy(() -> userService.deleteUserAccount(request.toCommand())).isInstanceOf(AccountMisMatchInfoException.class);
+        assertThatThrownBy(() -> userService.deleteAccount(request.toCommand())).isInstanceOf(
+            AccountMisMatchInfoException.class);
     }
 
-    private static Stream<Arguments> failLoginDataSet() {
+    @DisplayName("회원 수정 성공 테스트")
+    @Test
+    public void updateSuccessTest() throws Exception {
+        var user = UserSteps.AddUser();
+        userService.saveUser(user.toCommand());
+    }
+
+    @DisplayName("회원 수정 실패 테스트")
+    @Test
+    public void updateFailTest() throws Exception {
+        // given
+
+        // when
+
+        // then
+    }
+
+
+    @DisplayName("로그인 시 데이터의 타입이 안 맞을 경우 예외 발생")
+    @ParameterizedTest
+    @MethodSource("failLoginRequestSet")
+    public void loginRequestExceptionTest(String userId, String pwd) throws Exception {
+        assertThatThrownBy(() -> new LoginRequest(userId, pwd)).isInstanceOf(
+            IllegalArgumentException.class);
+    }
+
+    @DisplayName("계정 삭제 요청 시 데이터의 타입이 안 맞을 경우 예외 발생")
+    @ParameterizedTest
+    @MethodSource("failDeleteRequestSet")
+    public void accountDeleteRequestPKNotRequiredConditionTest(Long pk, String userId) throws Exception {
+        assertThatThrownBy(() -> new AccountDeleteRequest(pk, userId)).isInstanceOf(
+            IllegalArgumentException.class);
+    }
+
+    private static Stream<Arguments> failLoginRequestSet() {
         return Stream.of(
             Arguments.of("", "!1234abcd"),
             Arguments.of("abcd", ""),

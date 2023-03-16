@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
-    public void deleteUserAccount(AccountDeleteCommand command) {
+    public void deleteAccount(AccountDeleteCommand command) {
         User userById = repository.getUserById(command.Id());
         if (!userById.getUserId().equals(command.userId())) {
             throw new AccountMisMatchInfoException("AccountMisMatchInfoException",

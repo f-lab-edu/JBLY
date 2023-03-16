@@ -40,7 +40,7 @@ public class UserController {
 
     @DeleteMapping("/delete")
     public ResponseEntity<Void> delete(@RequestBody AccountDeleteRequest request) {
-        userService.deleteUserAccount(request.toCommand());
+        userService.deleteAccount(request.toCommand());
         return OK;
     }
 }

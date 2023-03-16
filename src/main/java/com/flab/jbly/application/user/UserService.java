@@ -14,6 +14,6 @@ public interface UserService {
 
     User getUserById(Long id);
 
-    void deleteUserAccount(AccountDeleteCommand command);
+    void deleteAccount(AccountDeleteCommand command);
 
 }
