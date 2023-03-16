@@ -1,6 +1,7 @@
 package com.flab.jbly.application.user;
 
 import com.flab.jbly.application.user.command.AccountDeleteCommand;
+import com.flab.jbly.application.user.command.AccountUpdateCommand;
 import com.flab.jbly.application.user.command.UserSignUpCommand;
 import com.flab.jbly.domain.user.PasswordEncryption;
 import com.flab.jbly.domain.user.User;
@@ -52,11 +53,24 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public void deleteAccount(AccountDeleteCommand command) {
-        User userById = repository.getUserById(command.Id());
-        if (!userById.getUserId().equals(command.userId())) {
+        User user = repository.getUserById(command.Id());
+        if (!user.getUserId().equals(command.userId())) {
             throw new AccountMisMatchInfoException("AccountMisMatchInfoException",
                 ErrorCode.USER_INFO_MISMATCH);
         }
-        repository.deleteUserById(userById.getId());
+        repository.deleteUserById(user.getId());
+    }
+
+    @Transactional
+    public void update(AccountUpdateCommand command) {
+        User user = repository.getUserById(command.id());
+        repository.save(user.update(
+            command.userId(),
+            passwordEncoder.encode(command.password()),
+            command.name(),
+            command.phone(),
+            command.email(),
+            command.address()
+        ));
     }
 }

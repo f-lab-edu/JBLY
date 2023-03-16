@@ -39,4 +39,8 @@ public class UserRepositoryAdapter implements UserRepository {
     public void deleteUserById(Long id) {
         repository.deleteById(id);
     }
+
+    public void updateUser(User user) {
+        repository.save(user);
+    }
 }

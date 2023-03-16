@@ -2,7 +2,7 @@ package com.flab.jbly.user;
 
 import com.flab.jbly.presentation.user.request.AccountDeleteRequest;
 import com.flab.jbly.presentation.user.request.LoginRequest;
-import com.flab.jbly.presentation.user.request.UpdateRequest;
+import com.flab.jbly.presentation.user.request.AccountUpdateRequest;
 import com.flab.jbly.presentation.user.request.UserSignUpRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
@@ -35,15 +35,15 @@ public class UserSteps {
         return new AccountDeleteRequest(id, userId);
     }
 
-    public static UpdateRequest updateRequest() {
+    public static AccountUpdateRequest updateRequest() {
         Long id = 1L;
-        String userId = "yeun";
+        String userId = "susu";
         String password = "!abcd1234";
         String name = "연수";
         String phone = "010-1234-1234";
         String email = "lee@email.com";
         String address = "Seoul";
-        return new UpdateRequest(id, userId, password, name, phone, email, address);
+        return new AccountUpdateRequest(id, userId, password, name, phone, email, address);
     }
 
     public static ExtractableResponse<Response> signUpAccountApi(UserSignUpRequest request) {

@@ -63,8 +63,8 @@ public class UserUnitTest {
     @DisplayName("아이디가 틀릴 경우 회원 계정 삭제 실패")
     @Test
     public void deleteUserFailTest() throws Exception {
-        var user = UserSteps.AddUser();
-        userService.saveUser(user.toCommand());
+        var signUpRequest = UserSteps.AddUser();
+        userService.saveUser(signUpRequest.toCommand());
 
         var request = new AccountDeleteRequest(1L, "abc");
         assertThatThrownBy(() -> userService.deleteAccount(request.toCommand())).isInstanceOf(
@@ -74,18 +74,22 @@ public class UserUnitTest {
     @DisplayName("회원 수정 성공 테스트")
     @Test
     public void updateSuccessTest() throws Exception {
-        var user = UserSteps.AddUser();
-        userService.saveUser(user.toCommand());
+        var signUpRequest = UserSteps.AddUser();
+        userService.saveUser(signUpRequest.toCommand());
+        var signUpUser = repository.getUserById(1L);
+        String signUpUserId = signUpUser.getUserId();
+
+        var updateRequest = UserSteps.updateRequest();
+        userService.update(updateRequest.toCommand());
+        var updateUser = repository.getUserById(1L);
+
+        assertThat(updateUser.getId()).isEqualTo(signUpUser.getId());
+        assertThat(updateUser.getUserId()).isNotEqualTo(signUpUserId);
     }
 
     @DisplayName("회원 수정 실패 테스트")
     @Test
     public void updateFailTest() throws Exception {
-        // given
-
-        // when
-
-        // then
     }
 
 

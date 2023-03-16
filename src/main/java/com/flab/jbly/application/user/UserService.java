@@ -1,6 +1,7 @@
 package com.flab.jbly.application.user;
 
 import com.flab.jbly.application.user.command.AccountDeleteCommand;
+import com.flab.jbly.application.user.command.AccountUpdateCommand;
 import com.flab.jbly.application.user.command.UserSignUpCommand;
 import com.flab.jbly.domain.user.User;
 import org.springframework.stereotype.Service;
@@ -16,4 +17,5 @@ public interface UserService {
 
     void deleteAccount(AccountDeleteCommand command);
 
+    void update(AccountUpdateCommand command);
 }

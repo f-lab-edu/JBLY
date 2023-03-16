@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -56,5 +57,16 @@ public class User {
     // Test 시에만 사용됩니다.
     public void currentId(Long id) {
         this.id = id;
+    }
+
+    // Update User Info
+    public User update(String userId, String pw, String name, String phone, String email, String address) {
+        this.userId = userId;
+        this.password = pw;
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        return this;
     }
 }
