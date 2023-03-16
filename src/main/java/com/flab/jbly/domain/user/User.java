@@ -53,4 +53,8 @@ public class User {
     @Column(name = "updatedAt")
     private Instant updatedAt;
 
+    // Test 시에만 사용됩니다.
+    public void currentId(Long id) {
+        this.id = id;
+    }
 }
