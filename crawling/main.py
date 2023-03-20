@@ -9,16 +9,16 @@ if __name__ == '__main__':
     print(beforeCrawlingTime)
 
     # # shopId == 1
-    # porternaProducts = PorternaSiteCrawling.getTotalProducts()
-    # ProductQuery.insertProductIsNotExist(porternaProducts)
-    #
+    porternaProducts = PorternaSiteCrawling.getTotalProducts()
+    ProductQuery.insertProductIsNotExist(porternaProducts)
+
     # shopId == 2
-    # moreCherryProducts = MoreCherrySiteCrawling.getTotalProducts()
-    # ProductQuery.insertProductIsNotExist(moreCherryProducts)
-    #
+    moreCherryProducts = MoreCherrySiteCrawling.getTotalProducts()
+    ProductQuery.insertProductIsNotExist(moreCherryProducts)
+
     # # shopId == 3
     theverlinProducts = TheVerlinSiteCrawling.getTotalItemList()
-    # ProductQuery.insertProductIsNotExist(theverlinProducts)
+    ProductQuery.insertProductIsNotExist(theverlinProducts)
 
     afterCrawling = datetime.datetime.now()
     afterCrawlingTime = afterCrawling.strftime("%Y-%m-%d %H:%M:%S")

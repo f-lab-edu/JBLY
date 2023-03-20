@@ -41,52 +41,52 @@ def getTotalItemList():
             except:
                 break
 
-        for data in datas:
-            itemInfoGather = []
-            # get Image
-            getImageUrl = data.find('img')['src']
-            imageUrl = 'https:' + getImageUrl
+            for data in datas:
+                itemInfoGather = []
+                # get Image
+                getImageUrl = data.find('img')['src']
+                imageUrl = 'https:' + getImageUrl
 
-            # get Item
-            getItemName = data.find('p', {'class': 'name'})
-            itemName = getItemName.text.replace('\n', '')
-            itemName = itemName.split(': ')[1]
+                # get Item
+                getItemName = data.find('p', {'class': 'name'})
+                itemName = getItemName.text.replace('\n', '')
+                itemName = itemName.split(': ')[1]
 
-            # get Price
-            try:
-                item = data.find("ul", "xans-element- xans-product xans-product-listitem").find_all("span")
-                item = list(map(str, item))
-                temp = ""
-                for i in item:
-                    if '￦' in i:
-                        temp = i
-                        break
-            except:
-                pass
+                # get Price
+                try:
+                    item = data.find("ul", "xans-element- xans-product xans-product-listitem").find_all("span")
+                    item = list(map(str, item))
+                    temp = ""
+                    for i in item:
+                        if '￦' in i:
+                            temp = i
+                            break
+                except:
+                    pass
 
-            soup = BeautifulSoup(temp, "html.parser")
-            getPrice = soup.text
-            price = re.sub(r'\D', '', getPrice)
+                soup = BeautifulSoup(temp, "html.parser")
+                getPrice = soup.text
+                price = re.sub(r'\D', '', getPrice)
 
-            # get detail info
-            detail = data.find('a')['href']
-            detailInfo = baseUrl + detail
+                # get detail info
+                detail = data.find('a')['href']
+                detailInfo = baseUrl + detail
 
-            # get detail information html
-            getDetailHtmlResponse = requests.get(detailInfo, headers= header)
-            getDetailHtml = BeautifulSoup(getDetailHtmlResponse.text, 'html.parser')
-            detailHtml = getDetailHtml.find("div", "cont")
+                # get detail information html
+                getDetailHtmlResponse = requests.get(detailInfo, headers= header)
+                getDetailHtml = BeautifulSoup(getDetailHtmlResponse.text, 'html.parser')
+                detailHtml = getDetailHtml.find("div", "cont")
 
-            itemInfoGather.append(storeName)
-            itemInfoGather.append(itemName)
-            itemInfoGather.append(imageUrl)
-            itemInfoGather.append(price)
-            itemInfoGather.append(itemType)
-            itemInfoGather.append(detailInfo)
-            itemInfoGather.append(shopId)
-            itemInfoGather.append(detailHtml)
-            copyItemInfo = itemInfoGather.copy()
-            result.append(copyItemInfo)
-            itemInfoGather.clear()
+                itemInfoGather.append(storeName)
+                itemInfoGather.append(itemName)
+                itemInfoGather.append(imageUrl)
+                itemInfoGather.append(price)
+                itemInfoGather.append(itemType)
+                itemInfoGather.append(detailInfo)
+                itemInfoGather.append(shopId)
+                itemInfoGather.append(detailHtml)
+                copyItemInfo = itemInfoGather.copy()
+                result.append(copyItemInfo)
+                itemInfoGather.clear()
 
     return result
