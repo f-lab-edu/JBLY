@@ -9,7 +9,7 @@ if __name__ == '__main__':
     print(beforeCrawlingTime)
 
     # # shopId == 1
-    # porternaProducts = PorternaSiteCrawling.getTotalProducts(driver)
+    porternaProducts = PorternaSiteCrawling.getTotalProducts()
     # ProductQuery.insertProductIsNotExist(porternaProducts)
     #
     # shopId == 2
