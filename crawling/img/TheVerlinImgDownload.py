@@ -46,15 +46,15 @@ for url in urls:
             'user-agent': user_agent
         }
         page_num += 1
-        response = requests.get(each_url, headers=header)
+        response = requests.get(each_url + str(page_num), headers=header)
         soup = BeautifulSoup(response.text, 'html.parser')
 
-        # try:
-        datas = soup.find('ul', 'prdList column4').find_all("li", recursive=False)
-        # except:
-        #     break
+        try:
+            datas = soup.find('ul', 'prdList column4').find_all("li", recursive=False)
+            datas = list(map(str, datas))
+        except:
+            break
 
-        datas = list(map(str, datas))
         for data in datas:
             each_data = BeautifulSoup(data, 'html.parser')
             get_detail_info = each_data.find('a')['href']
@@ -77,51 +77,39 @@ for url in urls:
                         with urllib.request.urlopen(link) as response:
                             data = response.read()
                             md5hash = hashlib.md5(data).hexdigest()
-                            filename = path_folder_outer + md5hash + '.jpg'
-                            try:
-                                with open(filename, 'wb') as f:
-                                    f.write(data)
-                            except:
-                                pass
+                            md5hash = md5hash + ".jpg"
+                            with open(path_folder_outwear + md5hash, 'wb') as f:
+                                f.write(data)
+
                     elif itemType == productTypes.TOP.name:
                         with urllib.request.urlopen(link) as response:
                             data = response.read()
                             md5hash = hashlib.md5(data).hexdigest()
-                            filename = path_folder_top + md5hash + '.jpg'
-                            try:
-                                with open(filename, 'wb') as f:
-                                    f.write(data)
-                            except:
-                                pass
+                            md5hash = md5hash + ".jpg"
+                            with open(path_folder_top + md5hash, 'wb') as f:
+                                f.write(data)
+
                     elif itemType == productTypes.BOTTOM.name:
                         with urllib.request.urlopen(link) as response:
                             data = response.read()
                             md5hash = hashlib.md5(data).hexdigest()
-                            filename = path_folder_bottom + md5hash + '.jpg'
-                            try:
-                                with open(filename, 'wb') as f:
-                                    f.write(data)
-                            except:
-                                pass
+                            md5hash = md5hash + ".jpg"
+                            with open(path_folder_bottom + md5hash, 'wb') as f:
+                                f.write(data)
+
                     elif itemType == productTypes.ACCESSORY.name:
                         with urllib.request.urlopen(link) as response:
                             data = response.read()
                             md5hash = hashlib.md5(data).hexdigest()
-                            filename = path_folder_acc + md5hash + '.jpg'
-                            try:
-                                with open(filename, 'wb') as f:
-                                    f.write(data)
-                            except:
-                                pass
-                        page_num += 1
+                            md5hash = md5hash + ".jpg"
+                            with open(path_folder_acc + md5hash, 'wb') as f:
+                                f.write(data)
+
                     else:
                         with urllib.request.urlopen(link) as response:
                             data = response.read()
                             md5hash = hashlib.md5(data).hexdigest()
-                            filename = path_folder_shoes + md5hash + '.jpg'
-                            try:
-                                with open(filename, 'wb') as f:
-                                    f.write(data)
-                            except:
-                                pass
-                    break
+                            md5hash = md5hash + ".jpg"
+                            with open(path_folder_shoes + md5hash, 'wb') as f:
+                                f.write(data)
+            break
