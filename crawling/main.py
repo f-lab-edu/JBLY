@@ -1,30 +1,26 @@
-from parsing import MoreCherrySiteCrawling, PorternaSiteCrawling, TheVerlinSiteCrawling, WebExecutor
+from parsing import MoreCherrySiteCrawling, PorternaSiteCrawling, TheVerlinSiteCrawling
 from dbConnection import ProductQuery
 import datetime
 
 if __name__ == '__main__':
-    # dataTypes = storeName, itemName, imageUrl, price, itemType, detailInfo shopId
-
-    driver = WebExecutor.executor()
 
     beforeCrawling = datetime.datetime.now()
     beforeCrawlingTime = beforeCrawling.strftime("%Y-%m-%d %H:%M:%S")
     print(beforeCrawlingTime)
 
-    # shopId == 1
-    porternaProducts = PorternaSiteCrawling.getTotalProducts(driver)
+    # # shopId == 1
+    porternaProducts = PorternaSiteCrawling.getTotalProducts()
     ProductQuery.insertProductIsNotExist(porternaProducts)
 
     # shopId == 2
-    moreCherryProducts = MoreCherrySiteCrawling.getTotalProducts(driver)
+    moreCherryProducts = MoreCherrySiteCrawling.getTotalProducts()
     ProductQuery.insertProductIsNotExist(moreCherryProducts)
 
-    # shopId == 3
-    theverlinProducts = TheVerlinSiteCrawling.getTotalItemList(driver)
+    # # shopId == 3
+    theverlinProducts = TheVerlinSiteCrawling.getTotalItemList()
     ProductQuery.insertProductIsNotExist(theverlinProducts)
 
     afterCrawling = datetime.datetime.now()
     afterCrawlingTime = afterCrawling.strftime("%Y-%m-%d %H:%M:%S")
     print(afterCrawlingTime)
 
-    driver.close()
