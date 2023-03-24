@@ -1,5 +1,5 @@
 from selenium.webdriver.common.by import By
-from parsing.ProductTypes import productTypes
+from parsing.ProductTypes import product_types
 from bs4 import BeautifulSoup
 import requests
 import re
@@ -10,45 +10,44 @@ import ssl
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
-def getTotalItemList(driver):
+def get_total_item_list(driver):
 
-    shopId = 3
-    storeName = "theverlin"
+    shop_id = 3
+    store_name = "theverlin"
 
     result = []
     urls = []
-    urls.append(("https://theverlin.com/product/list.html?cate_no=42", productTypes.OUTWEAR.name))  # outwear
-    urls.append(("https://theverlin.com/product/list.html?cate_no=43", productTypes.TOP.name))  # top
-    urls.append(("https://theverlin.com/product/list.html?cate_no=44", productTypes.BOTTOM.name))  # bottom
-    urls.append(("https://theverlin.com/product/list.html?cate_no=48", productTypes.ACCESSORY.name))  # acc
-    urls.append(("https://theverlin.com/category/shoes/193/", productTypes.SHOES.name))  # shoes
-    baseUrl = "https://theverlin.com/"
-    userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+    urls.append(("https://theverlin.com/product/list.html?cate_no=42", product_types.OUTWEAR.name))  # outwear
+    urls.append(("https://theverlin.com/product/list.html?cate_no=43", product_types.TOP.name))  # top
+    urls.append(("https://theverlin.com/product/list.html?cate_no=44", product_types.BOTTOM.name))  # bottom
+    urls.append(("https://theverlin.com/product/list.html?cate_no=48", product_types.ACCESSORY.name))  # acc
+    urls.append(("https://theverlin.com/category/shoes/193/", product_types.SHOES.name))  # shoes
+    base_url = "https://theverlin.com/"
+    user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36"
 
     for url in urls:
-        eachUrl, itemType = url
+        each_url, item_type = url
         driver.get(eachUrl)
 
         while True:
             soup = BeautifulSoup(driver.page_source, 'html.parser')
-            datas = soup.find("ul", "prdList column4").find_all("li", recursive=False)  # 최상위 태그만 찾게 하기위해서 False로 지정
+            datas = soup.find("ul", "prdList column4").find_all("li", recursive=False)
             datas = list(map(str, datas))
 
             for data in datas:
-
-                itemInfoGather = []
-                eachData = BeautifulSoup(data, 'html.parser')
-                getImageUrl = eachData.find('img')['src']
-                imageUrl = 'https:' + getImageUrl
+                item_info_gather = []
+                each_data = BeautifulSoup(data, 'html.parser')
+                get_image_url = each_data.find('img')['src']
+                image_url = 'https:' + get_image_url
 
                 # get Item
-                getItemName = eachData.find('p', {'class': 'name'})
-                itemName = getItemName.text.replace('\n', '')
-                itemName = itemName.split(': ')[1]
+                get_item_name = each_data.find('p', {'class': 'name'})
+                item_name = get_item_name.text.replace('\n', '')
+                item_name = item_name.split(': ')[1]
 
                 # get Price
                 try:
-                    item = eachData.find("ul", "xans-element- xans-product xans-product-listitem").find_all("span")
+                    item = each_data.find("ul", "xans-element- xans-product xans-product-listitem").find_all("span")
                     item = list(map(str, item))
 
                     temp = ""
@@ -60,33 +59,33 @@ def getTotalItemList(driver):
                     pass
 
                 soup = BeautifulSoup(temp, "html.parser")
-                getPrice = soup.text
-                price = re.sub(r'\D', '', getPrice)
+                get_price = soup.text
+                price = re.sub(r'\D', '', get_price)
 
                 # get detail info
-                detail = eachData.find('a')['href']
-                detailInfo = baseUrl + detail
+                detail = each_data.find('a')['href']
+                detail_info = base_url + detail
 
                 # get detail information html
                 header = {
-                    'Referrer': detailInfo,
-                    'user-agent': userAgent
+                    'Referrer': detail_info,
+                    'user-agent': user_agent
                 }
-                response = requests.get(detailInfo, headers= header)
-                bSoup = BeautifulSoup(response.text, 'html.parser')
-                detailHtml = bSoup.find("div", "cont")
+                response = requests.get(detail_info, headers=header)
+                b_soup = BeautifulSoup(response.text, 'html.parser')
+                detail_html = b_soup.find("div", "cont")
 
-                itemInfoGather.append(storeName)
-                itemInfoGather.append(itemName)
-                itemInfoGather.append(imageUrl)
-                itemInfoGather.append(price)
-                itemInfoGather.append(itemType)
-                itemInfoGather.append(detailInfo)
-                itemInfoGather.append(shopId)
-                itemInfoGather.append(detailHtml)
-                copyItemInfo = itemInfoGather.copy()
-                result.append(copyItemInfo)
-                itemInfoGather.clear()
+                item_info_gather.append(store_name)
+                item_info_gather.append(item_name)
+                item_info_gather.append(image_url)
+                item_info_gather.append(price)
+                item_info_gather.append(item_type)
+                item_info_gather.append(detail_info)
+                item_info_gather.append(shop_id)
+                item_info_gather.append(detail_html)
+                copy_item_info = item_info_gather.copy()
+                result.append(copy_item_info)
+                item_info_gather.clear()
 
             # page 이동
             element = driver.find_element(by=By.XPATH, value='//*[@id="contents"]/div/div[4]/p[3]/a')
@@ -99,5 +98,4 @@ def getTotalItemList(driver):
                     pass
             if driver.current_url.endswith("#none"):
                 break
-
     return result

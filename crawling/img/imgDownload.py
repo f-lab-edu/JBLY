@@ -1,29 +1,31 @@
+import time
 from multiprocessing import Pool
 from img import TheVerlinImgDownload
-import multiprocessing
+from multiprocessing import Process
+from TheVerlinImgDownload import theverlin_img_downloader
+from parsing.ProductTypes import product_types
 
-
-# 이런식으로 한번에 할 수 있음
-# aa = [TheVerlinImgDownload, MoreCherry, ...]
-#
-# for i in aa:
-#     i.get_images_for_url()
 
 if __name__ == '__main__':
+    start_time = time.time()
 
-    path_folder_outwear = 'D:\\Jblyoutwear\\'
-    path_folder_top = 'D:\\Jblytop\\'
-    path_folder_bottom = "D:\\Jblybottom\\"
-    path_folder_acc = 'D:\\Jblyacc\\'
-    path_folder_shoes = 'D:\\Jblyshoes\\'
+    p_outwear = Process(target=theverlin_img_downloader, args=("https://theverlin.com/product/list.html?cate_no=42&page=", product_types.OUTWEAR.name))
+    p_top = Process(target=theverlin_img_downloader, args=("https://theverlin.com/product/list.html?cate_no=43&page=", product_types.TOP.name))
+    p_bottom = Process(target=theverlin_img_downloader, args=("https://theverlin.com/product/list.html?cate_no=44&page=", product_types.BOTTOM.name))
+    p_acc = Process(target=theverlin_img_downloader, args=("https://theverlin.com/product/list.html?cate_no=48&page=", product_types.ACCESSORY.name))
+    p_shoes = Process(target=theverlin_img_downloader, args=("https://theverlin.com/product/list.html?cate_no=193&page=", product_types.SHOES.name))
 
-    urls = [
-        ("https://theverlin.com/product/list.html?cate_no=42&page=", path_folder_outwear),
-        ("https://theverlin.com/product/list.html?cate_no=43&page=", path_folder_top),
-        ("https://theverlin.com/product/list.html?cate_no=44&page=", path_folder_bottom),
-        ("https://theverlin.com/product/list.html?cate_no=48&page=", path_folder_acc),
-        ("https://theverlin.com/product/list.html?cate_no=193&page=", path_folder_shoes)
-    ]
-    with multiprocessing.get_context('spawn').Pool(processes=len(urls)) as pool:
-        pool.map(TheVerlinImgDownload.get_images_for_url, urls)
+    p_outwear.start()
+    p_top.start()
+    p_bottom.start()
+    p_acc.start()
+    p_shoes.start()
+
+    p_outwear.join()
+    p_top.join()
+    p_bottom.join()
+    p_acc.join()
+    p_shoes.join()
+
+    print(time.time() - start_time)
 

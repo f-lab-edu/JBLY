@@ -5,7 +5,7 @@ from urllib.request import urlretrieve
 from bs4 import BeautifulSoup
 import requests
 import uuid
-from parsing.ProductTypes import productTypes
+from parsing.ProductTypes import product_types
 import urllib3
 import ssl
 import urllib.request as req
@@ -25,29 +25,21 @@ path_folder_bottom = 'D:\\Jblybottom\\'
 path_folder_acc = 'D:\\Jblyacc\\'
 path_folder_shoes = 'D:\\Jblyshoes\\'
 
-urls = []
-urls.append(("https://theverlin.com/product/list.html?cate_no=42&page=", productTypes.OUTWEAR.name))  # outwear
-urls.append(("https://theverlin.com/product/list.html?cate_no=43&page=", productTypes.TOP.name))  # top
-urls.append(("https://theverlin.com/product/list.html?cate_no=44&page=", productTypes.BOTTOM.name))  # bottom
-urls.append(("https://theverlin.com/product/list.html?cate_no=48&page=", productTypes.ACCESSORY.name))  # acc
-urls.append(("https://theverlin.com/product/list.html?cate_no=193&page=", productTypes.SHOES.name))  # shoes
-
 main_url = "https://theverlin.com/"
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36"
 detail_user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36"
 
-for url in urls:
-    page_num = 1
-    each_url, itemType = url
 
+def theverlin_img_downloader(target_url, item_type):
+    page_num = 1
     while True:
         header = {
-            'Referrer': each_url + str(page_num),
+            'Referrer': target_url + str(page_num),
             'user-agent': user_agent
         }
-        page_num += 1
-        response = requests.get(each_url + str(page_num), headers=header)
+        response = requests.get(target_url + str(page_num), headers=header)
         soup = BeautifulSoup(response.text, 'html.parser')
+        page_num += 1
 
         try:
             datas = soup.find('ul', 'prdList column4').find_all("li", recursive=False)
@@ -73,7 +65,7 @@ for url in urls:
             for img in detail_html:
                 link_img.append("https://theverlin.com/" + img['ec-data-src'])
                 for link in link_img:
-                    if itemType == productTypes.OUTWEAR.name:
+                    if item_type == product_types.OUTWEAR.name:
                         with urllib.request.urlopen(link) as response:
                             data = response.read()
                             md5hash = hashlib.md5(data).hexdigest()
@@ -81,7 +73,7 @@ for url in urls:
                             with open(path_folder_outwear + md5hash, 'wb') as f:
                                 f.write(data)
 
-                    elif itemType == productTypes.TOP.name:
+                    elif item_type == product_types.TOP.name:
                         with urllib.request.urlopen(link) as response:
                             data = response.read()
                             md5hash = hashlib.md5(data).hexdigest()
@@ -89,7 +81,7 @@ for url in urls:
                             with open(path_folder_top + md5hash, 'wb') as f:
                                 f.write(data)
 
-                    elif itemType == productTypes.BOTTOM.name:
+                    elif item_type == product_types.BOTTOM.name:
                         with urllib.request.urlopen(link) as response:
                             data = response.read()
                             md5hash = hashlib.md5(data).hexdigest()
@@ -97,7 +89,7 @@ for url in urls:
                             with open(path_folder_bottom + md5hash, 'wb') as f:
                                 f.write(data)
 
-                    elif itemType == productTypes.ACCESSORY.name:
+                    elif item_type == product_types.ACCESSORY.name:
                         with urllib.request.urlopen(link) as response:
                             data = response.read()
                             md5hash = hashlib.md5(data).hexdigest()
@@ -113,3 +105,4 @@ for url in urls:
                             with open(path_folder_shoes + md5hash, 'wb') as f:
                                 f.write(data)
             break
+
