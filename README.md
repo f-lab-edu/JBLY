@@ -22,7 +22,7 @@
   - 로그인한 사용자는 마이페이지 기능과 로그아웃 기능을 사용할 수 있다.
 
 ## ⚒️ Project Architecture
-- 추후 업로드 예정입니다.
+![Project_Architecture](image/ProjectArch.png)
 
 ## 📖 사용 기술 및 개발 환경
 Spring Boot, Java17, Gradle, Naver Cloud, H2, MySQL, HTML, CSS, JS, JPA, Python, BeautifulSoup, GithubAction Cron Scheduler, GithubAction CI
