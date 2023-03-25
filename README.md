@@ -37,7 +37,7 @@ Spring Boot, Java17, Gradle, Naver Cloud, H2, MySQL, HTML, CSS, JS, JPA, Python,
   - 2시간 28분이 걸린 스크래핑 작업을 5분 이내로 줄이는 것이 목표입니다.
 5. 커뮤니케이션 스킬 향상
   - 상대 팀원과 지속적으로 소통하며 빠르고 정확하게 기능을 구현 할 수 있도록 합니다.
-  - 구체적이고 꾸준한 상호 피드백으로 "앞으로도 협업 하고 싶은 팀원"이 될 수 있도록 노력합니다.
+  - 구체적이고 꾸준한 상호 피드백으로 "계속 협업 하고 싶은 팀원"이 될 수 있도록 노력합니다.
 
 ## ✍🏻 협업 제약조건
 - [Github-flow에 따라 프로젝트에 대해 공동 작업을 수행합니다.](https://docs.github.com/ko/get-started/quickstart/github-flow)
