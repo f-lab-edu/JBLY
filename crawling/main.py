@@ -21,7 +21,8 @@ if __name__ == '__main__':
     # theverlinProducts = TheVerlinSiteCrawling.getTotalItemList()
     # ProductQuery.insertProductIsNotExist(theverlinProducts)
 
-    UrlCollectionModule.run()
+    urls = UrlCollectionModule.run()
+    print(urls)
 
     afterCrawling = datetime.datetime.now()
     afterCrawlingTime = afterCrawling.strftime("%Y-%m-%d %H:%M:%S")

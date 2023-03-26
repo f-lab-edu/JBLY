@@ -1,6 +1,7 @@
 import requests
 import threading
 from collections import defaultdict
+from parsing.ProductTypes import productTypes
 
 more_cherry_total_url = defaultdict(list)
 threads = []
@@ -13,17 +14,17 @@ header = {
 }
 
 urls = [
-    "https://more-cherry.com/category/outwear/24/?page=",
-    "https://more-cherry.com/category/top/25/?page=",
-    "https://more-cherry.com/category/pants/26/?page=",
-    "https://more-cherry.com/category/accessory/28/?page=",
-    "https://more-cherry.com/category/shoes/42/?page=",
+    ("https://more-cherry.com/category/outwear/24/?page=", productTypes.OUTWEAR.name),
+    ("https://more-cherry.com/category/top/25/?page=", productTypes.TOP.name),
+    ("https://more-cherry.com/category/pants/26/?page=", productTypes.BOTTOM.name),
+    ("https://more-cherry.com/category/accessory/28/?page=", productTypes.ACCESSORY.name),
+    ("https://more-cherry.com/category/shoes/42/?page=", productTypes.SHOES.name),
 ]
 find_key = '<ul class="prdList grid4">'
-store_name = "more-cherry"
+store_name = "morecherry"
 
 
-def fetch_url(url, more_cherry_total_url):
+def fetch_url(url, item_type, more_cherry_total_url):
     startPoint = 1
 
     while True:
@@ -31,14 +32,15 @@ def fetch_url(url, more_cherry_total_url):
         response = requests.get(temp_url, headers=header)
         startPoint += 1
         if find_key in response.text:
-            more_cherry_total_url[store_name].append(temp_url)
+            more_cherry_total_url[store_name].append((temp_url, item_type))
         else:
             break
 
 
 def gatherUrls():
-    for url in urls:
-        thread = threading.Thread(target=fetch_url, args=(url, more_cherry_total_url))
+    for each_url in urls:
+        url, item_type = each_url
+        thread = threading.Thread(target=fetch_url, args=(url, item_type, more_cherry_total_url))
         threads.append(thread)
         thread.start()
 

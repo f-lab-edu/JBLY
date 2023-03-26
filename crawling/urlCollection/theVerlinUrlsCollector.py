@@ -1,6 +1,7 @@
 import requests
 import threading
 from collections import defaultdict
+from parsing.ProductTypes import productTypes
 
 the_verlin_total_url = defaultdict(list)
 threads = []
@@ -13,17 +14,17 @@ header = {
 }
 
 urls = [
-    "https://theverlin.com/product/list.html?cate_no=42&page=",
-    "https://theverlin.com/product/list.html?cate_no=43&page=",
-    "https://theverlin.com/product/list.html?cate_no=44&page=",
-    "https://theverlin.com/product/list.html?cate_no=48&page=",
-    "https://theverlin.com/category/shoes/193/?page=",
+    ("https://theverlin.com/product/list.html?cate_no=42&page=", productTypes.OUTWEAR.name),
+    ("https://theverlin.com/product/list.html?cate_no=43&page=", productTypes.TOP.name),
+    ("https://theverlin.com/product/list.html?cate_no=44&page=", productTypes.BOTTOM.name),
+    ("https://theverlin.com/product/list.html?cate_no=48&page=", productTypes.ACCESSORY.name),
+    ("https://theverlin.com/category/shoes/193/?page=", productTypes.SHOES.name),
 ]
 find_key = 'class="item xans-record-">'
 store_name = "theverlin"
 
 
-def fetch_url(url, the_verlin_total_url):
+def fetch_url(url, item_type, the_verlin_total_url):
     startPoint = 1
 
     while True:
@@ -31,14 +32,15 @@ def fetch_url(url, the_verlin_total_url):
         response = requests.get(temp_url, headers=header)
         startPoint += 1
         if find_key in response.text:
-            the_verlin_total_url[store_name].append(temp_url)
+            the_verlin_total_url[store_name].append((temp_url, item_type))
         else:
             break
 
 
 def gatherUrls():
-    for url in urls:
-        thread = threading.Thread(target=fetch_url, args=(url, the_verlin_total_url))
+    for each_url in urls:
+        url, item_type = each_url
+        thread = threading.Thread(target=fetch_url, args=(url, item_type, the_verlin_total_url))
         threads.append(thread)
         thread.start()
 

@@ -8,12 +8,14 @@ def run_job(module_name):
     module = importlib.import_module(module_name)
     return module.gatherUrls()
 
+'''
+apply_async() 메소드의 반환값으로 AsyncResult 객체를 반환하며,
+이 객체의 get() 메소드를 호출하면 해당 프로세스가 완료될 때까지 대기하게 됩니다.
+'''
 def run():
     module_names = ['moreCherryUrlsCollector', 'porternaUrlsCollector', 'theVerlinUrlsCollector']
 
-    # Create a multiprocessing pool with a maximum of 3 workers
     with multiprocessing.Pool(3) as pool:
-        # Map the run_job function to each module name in parallel
         results = [pool.apply_async(run_job, args=(module_name,)) for module_name in module_names]
         output = []
         for result in results:
