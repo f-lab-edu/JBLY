@@ -1,5 +1,6 @@
-from parsing import MoreCherrySiteCrawling, PorternaSiteCrawling, TheVerlinSiteCrawling
-from dbConnection import ProductQuery
+# from parsing import MoreCherrySiteCrawling, PorternaSiteCrawling, TheVerlinSiteCrawling
+# from dbConnection import ProductQuery
+from urlCollection import UrlCollectionModule
 import datetime
 
 if __name__ == '__main__':
@@ -9,16 +10,18 @@ if __name__ == '__main__':
     print(beforeCrawlingTime)
 
     # # shopId == 1
-    porternaProducts = PorternaSiteCrawling.getTotalProducts()
-    ProductQuery.insertProductIsNotExist(porternaProducts)
-
-    # shopId == 2
-    moreCherryProducts = MoreCherrySiteCrawling.getTotalProducts()
-    ProductQuery.insertProductIsNotExist(moreCherryProducts)
-
+    # porternaProducts = PorternaSiteCrawling.getTotalProducts()
+    # ProductQuery.insertProductIsNotExist(porternaProducts)
+    #
+    # # shopId == 2
+    # moreCherryProducts = MoreCherrySiteCrawling.getTotalProducts()
+    # ProductQuery.insertProductIsNotExist(moreCherryProducts)
+    #
     # # shopId == 3
-    theverlinProducts = TheVerlinSiteCrawling.getTotalItemList()
-    ProductQuery.insertProductIsNotExist(theverlinProducts)
+    # theverlinProducts = TheVerlinSiteCrawling.getTotalItemList()
+    # ProductQuery.insertProductIsNotExist(theverlinProducts)
+
+    UrlCollectionModule.run()
 
     afterCrawling = datetime.datetime.now()
     afterCrawlingTime = afterCrawling.strftime("%Y-%m-%d %H:%M:%S")
