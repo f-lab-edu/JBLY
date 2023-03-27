@@ -1,4 +1,3 @@
-from parsing.ProductTypes import productTypes
 from bs4 import BeautifulSoup
 import requests
 import ssl
