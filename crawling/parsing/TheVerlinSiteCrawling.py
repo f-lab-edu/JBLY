@@ -8,7 +8,7 @@ import re
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
-def getTotalItemList():
+def getTotalProducts():
 
     shopId = 3
     storeName = "theverlin"
