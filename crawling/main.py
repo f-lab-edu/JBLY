@@ -22,7 +22,9 @@ if __name__ == '__main__':
     # ProductQuery.insertProductIsNotExist(theverlinProducts)
 
     urls = UrlCollectionModule.urlCollecting()
-    print(urls)
+    for url in urls:
+        for key in url.keys():
+            print(url[key])
 
     afterCrawling = datetime.datetime.now()
     afterCrawlingTime = afterCrawling.strftime("%Y-%m-%d %H:%M:%S")
