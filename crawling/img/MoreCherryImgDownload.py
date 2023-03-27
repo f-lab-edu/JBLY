@@ -26,7 +26,7 @@ path_folder_bottom = 'D:\\Jblybottom\\'
 path_folder_acc = 'D:\\Jblyacc\\'
 path_folder_shoes = 'D:\\Jblyshoes\\'
 
-main_url = "https://theverlin.com"
+main_url = "http://www.more-cherry.com"
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36"
 detail_user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36"
 
@@ -50,31 +50,32 @@ def find_last_page(target_url):
     return number
 
 
-def theverlin_img_downloader(response):
+def morecherry_img_downloader(response):
     urls = []
-    urls.append(("https://theverlin.com/product/list.html?cate_no=42&page=", product_types.OUTWEAR.name))  # outwear
-    urls.append(("https://theverlin.com/product/list.html?cate_no=43&page=", product_types.TOP.name))  # top
-    urls.append(("https://theverlin.com/product/list.html?cate_no=44&page=", product_types.BOTTOM.name))  # bottom
-    urls.append(("https://theverlin.com/product/list.html?cate_no=48&page=", product_types.ACCESSORY.name))  # acc
-    urls.append(("https://theverlin.com/product/list.html?cate_no=193&page=", product_types.SHOES.name))  # shoes
+    urls.append(("https://more-cherry.com/category/outwear/24?page=", productTypes.OUTWEAR.name))  # outwear
+    urls.append(("https://more-cherry.com/category/top/25?page=", productTypes.TOP.name))  # top
+    urls.append(("https://more-cherry.com/category/pants/26?page=", productTypes.BOTTOM.name))  # bottom
+    urls.append(("https://more-cherry.com/category/accessory/28?page=", productTypes.ACCESSORY.name))  # acc
+    urls.append(("https://more-cherry.com/category/shoes/42?page=", productTypes.SHOES.name))  # shoes
 
-    for page_num in range(1, int(find_last_page(target_url)) + 1):
-        header = {
-            'Referrer': target_url + str(page_num),
-            'user-agent': user_agent
-        }
-        # print(target_url + str(page_num))
-        response = requests.get(target_url + str(page_num), headers=header)
-        soup = BeautifulSoup(response.text, 'html.parser')
-        soup = soup.find_all('ul', {'class': 'prdList column4'})
-        href_set = set()
-        for ul_tag in soup:
-            a_tags = ul_tag.find_all('a')
-            for a_tag in a_tags:
-                href = a_tag.get('href')
-                if href is not None:
-                    href_set.add(href)
-        href_list = list(href_set)
+    for url in urls:
+        for page_num in range(1, int(find_last_page(url)) + 1):
+            header = {
+                'Referrer': target_url + str(page_num),
+                'user-agent': user_agent
+            }
+            # print(target_url + str(page_num))
+            response = requests.get(target_url + str(page_num), headers=header)
+            soup = BeautifulSoup(response.text, 'html.parser')
+            soup = soup.find_all("ul", "prdList grid4")
+            href_set = set()
+            for ul_tag in soup:
+                a_tags = ul_tag.find_all('a')
+                for a_tag in a_tags:
+                    href = a_tag.get('href')
+                    if href is not None:
+                        href_set.add(href)
+            href_list = list(href_set)
         # print(href_list)
         for href in href_list:
             detail_url = main_url + str(href)
@@ -90,7 +91,7 @@ def theverlin_img_downloader(response):
 
             link_img = []
             for img in detail_html:
-                link_img.append("https://theverlin.com" + img['ec-data-src'])
+                link_img.append("http://www.more-cherry.com" + img['ec-data-src'])
                 for link in link_img:
                     if item_type == product_types.OUTWEAR.name:
                         with urllib.request.urlopen(link) as response:

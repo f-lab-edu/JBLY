@@ -1,10 +1,12 @@
+import threading
 import time
 from multiprocessing import Pool
 from img import TheVerlinImgDownload
+import multiprocessing as mp
 from multiprocessing import Process
 from TheVerlinImgDownload import theverlin_img_downloader
 from parsing.ProductTypes import product_types
-
+from downloader import outwear_downloader
 
 if __name__ == '__main__':
     start_time = time.time()
@@ -28,4 +30,3 @@ if __name__ == '__main__':
     p_shoes.join()
 
     print(time.time() - start_time)
-
