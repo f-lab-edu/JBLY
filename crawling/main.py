@@ -1,6 +1,7 @@
 # from parsing import MoreCherrySiteCrawling, PorternaSiteCrawling, TheVerlinSiteCrawling
 # from dbConnection import ProductQuery
 from urlCollection import UrlCollectionModule
+from util import Chunker
 import datetime
 
 if __name__ == '__main__':
@@ -22,9 +23,7 @@ if __name__ == '__main__':
     # ProductQuery.insertProductIsNotExist(theverlinProducts)
 
     urls = UrlCollectionModule.urlCollecting()
-    for url in urls:
-        for key in url.keys():
-            print(url[key])
+    chunked_url = Chunker.url_chunk(urls)
 
     afterCrawling = datetime.datetime.now()
     afterCrawlingTime = afterCrawling.strftime("%Y-%m-%d %H:%M:%S")
