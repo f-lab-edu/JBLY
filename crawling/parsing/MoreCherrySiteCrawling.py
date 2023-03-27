@@ -45,9 +45,9 @@ def getTotalProducts(responses):
             getDetailInfo = data.find('a')['href']
             detailInfo = baseUrl + getDetailInfo
 
-            getDetailHtmlResponse = requests.get(detailInfo, headers=header)
-            getDetailHtml = BeautifulSoup(getDetailHtmlResponse.text, 'html.parser')
-            detailHtml = getDetailHtml.find('div', {'id': 'prdDetail'})
+            # getDetailHtmlResponse = requests.get(detailInfo, headers=header)
+            # getDetailHtml = BeautifulSoup(getDetailHtmlResponse.text, 'html.parser')
+            # detailHtml = getDetailHtml.find('div', {'id': 'prdDetail'})
 
             itemInfoGather.append(storeName)
             itemInfoGather.append(itemName)
@@ -56,9 +56,9 @@ def getTotalProducts(responses):
             itemInfoGather.append(item_type)
             itemInfoGather.append(detailInfo)
             itemInfoGather.append(shopId)
-            itemInfoGather.append(detailHtml)
+            # itemInfoGather.append(detailHtml)
             copyItemInfo = itemInfoGather.copy()
             result.append(copyItemInfo)
             itemInfoGather.clear()
-    print(storeName, " current length of product is = ", len(result))
+
     return result

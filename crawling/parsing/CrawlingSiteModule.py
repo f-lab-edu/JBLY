@@ -9,7 +9,7 @@ def run_job(module_name, response):
     return module.getTotalProducts(response)
 
 def crawling_each_site(chunked_urls):
-    with multiprocessing.Pool(10) as pool:
+    with multiprocessing.Pool(12) as pool:
         results = [pool.apply_async(run_job, args=(module_name, response)) for module_name, responses in
                    chunked_urls.items() for response in responses]
         output = []
