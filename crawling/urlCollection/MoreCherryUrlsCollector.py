@@ -7,7 +7,7 @@ more_cherry_total_url = defaultdict(list)
 threads = []
 
 base_url = "https://more-cherry.com"
-store_name = "MoreCherrySiteCrawling"
+crawling_file_name = "MoreCherrySiteCrawling"
 find_key = '<ul class="prdList grid4">'
 user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, likeGecko) Chrome/109.0.0.0 Safari/537.36"
 header = {
@@ -33,7 +33,7 @@ def fetch_url(url, item_type, more_cherry_total_url):
         response = requests.get(temp_url, headers=header)
         startPoint += 1
         if find_key in response.text:
-            more_cherry_total_url[store_name].append((response, item_type))
+            more_cherry_total_url[crawling_file_name].append((response, item_type))
         else:
             break
 

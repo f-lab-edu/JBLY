@@ -4,7 +4,7 @@ from collections import defaultdict
 from parsing.ProductTypes import productTypes
 
 baseUrl = "https://theverlin.com/"
-store_name = "TheVerlinSiteCrawling"
+crawling_file_name = "TheVerlinSiteCrawling"
 find_key = 'class="item xans-record-">'
 user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
 header = {
@@ -29,7 +29,7 @@ def fetch_url(url, item_type, the_verlin_total_url):
         response = requests.get(temp_url, headers=header)
         startPoint += 1
         if find_key in response.text:
-            the_verlin_total_url[store_name].append((response, item_type))
+            the_verlin_total_url[crawling_file_name].append((response, item_type))
         else:
             break
 
