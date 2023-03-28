@@ -1,14 +1,11 @@
 # 👕  JBLY
-두 팀원 모두 의류 산업에 관심이 많아 평소 자주 사용하는 패션 플랫폼을 직접 한 번 만들어보고자 시작하게 되었습니다. 실제로 자주 이용하는 쇼핑몰에서 상품 데이터를 스크래핑한 후 화면에 사용자가 알아보기 쉽게 보여주는 서비스 입니다. 데이터 크롤링 시 발생할 수 있는 대용량 트래픽 이슈를 효율적으로 처리하는 것과, Data, Front-end, Back-end 세 분야를 다뤄보며 Web 전체에 대한 이해도를 높이고 이를 바탕으로 다른 분야 개발자와 협업 능력을 높이는 것이 목표입니다.
+두 팀원 모두 의류 산업에 관심이 많아 평소 자주 사용하는 패션 플랫폼을 직접 만들어보고자 시작하게 되었습니다. 사이트 구조와 특징이 각기 다른 세 개의 쇼핑몰에서 상품 데이터를 스크래핑한 후 화면에 사용자가 알아보기 쉽게 보여주는 서비스 입니다. 
+(추후 성과에 대한 내용을 추가 할 예정입니다)
 
 ## 💡 문제 상황과 해결 방법
 **1. 동적 크롤링을 하기 위해 Selenium을 사용한 결과 4078개의 데이터를 MySQL DB에 적재하는데 총 2시간 28분이 걸렸습니다.**
 
-➡️ sleep과 같이 병목이 되는 코드는 전부 제거하고 Selenium 라이브러리를 사용하지 않고 스크래핑 하는 방식으로 리팩토링합니다. 
-
-➡️ Python multiprocessing을 사용해 5개의 카테고리를 한 번에 스크래핑 하는 방식으로 리팩토링 합니다.
-
-➡️ MySQL에 1만 개 이상의 데이터를 insert하기 위해 쿼리 성능을 튜닝합니다.
+➡️ 동적 크롤링을 하기 위해 사용했던 Selenium 라이브러리를 사용하기 위해선 sleep과 같이 병목이 발생할 수 있는 코드를 추가해야 했고, 브라우저가 렌더링 되는 시간을 전부 기다려야 했기 때문에 속도가 느렸습니다. 또, 웹 스크래핑 전반적인 과정이 Single-Thread로 동기처리되어 성능 개선이 필요했습니다. MySQL에 스크래핑한 데이터를 적재하는 과정에서도 단일 insert를 반복문으로 처리했기 때문에 4078개의 데이터를 Python으로 스크래핑해 DB에 적재하는데 약 2시간 30분이 걸렸습니다.
 
 ## ☑️ 요구사항
 **1. 크롤링 기능**
@@ -48,7 +45,7 @@ Spring Boot, Java17, Gradle, Naver Cloud, H2, MySQL, HTML, CSS, JS, JPA, Python,
   - 구체적이고 꾸준한 상호 피드백으로 "계속 협업 하고 싶은 팀원"이 될 수 있도록 노력합니다.
 
 ## ✍🏻 협업 제약조건
-- [Github-flow에 따라 프로젝트에 대해 공동 작업을 수행합니다.](https://docs.github.com/ko/get-started/quickstart/github-flow)
+- [Github-flow]에 따라 프로젝트에 대해 공동 작업을 수행합니다.(https://docs.github.com/ko/get-started/quickstart/github-flow)
 - 이슈별로 브랜치를 관리하며 모든 작업은 코드리뷰를 받아야합니다.  
 - 코드리뷰가 끝난 작업은 반드시 상대 팀원의 APPROVE가 있어야 MERGE가 가능합니다.
 - 이슈는 최대한 작은 작업 단위로 생성하고 추후 진행할 기능에 대해서는 반드시 팀원과 협의합니다.
@@ -58,8 +55,8 @@ Spring Boot, Java17, Gradle, Naver Cloud, H2, MySQL, HTML, CSS, JS, JPA, Python,
 - 추후 업로드 예정입니다.
 
 ## 🏠 Blog
-- [EcoFriendlyAppleSu의 BLOG입니다.](https://ecofriendlyapplesu.tistory.com)
-- [Parksojeongjeong의 BLOG입니다.](https://creeraria.tistory.com/)
+- [이연수]의 BLOG입니다.(https://ecofriendlyapplesu.tistory.com)
+- [박소정]의 BLOG입니다.(https://creeraria.tistory.com/)
 
 ## 👀 Code Convention
 - [Google Java Code Convention 준수](https://google.github.io/styleguide/javaguide.html)
