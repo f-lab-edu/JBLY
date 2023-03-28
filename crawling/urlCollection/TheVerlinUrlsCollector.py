@@ -34,7 +34,7 @@ def fetch_url(url, item_type, the_verlin_total_url):
             break
 
 
-def gatherUrls():
+def gather_urls():
     for each_url in urls:
         url, item_type = each_url
         thread = threading.Thread(target=fetch_url, args=(url, item_type, the_verlin_total_url))

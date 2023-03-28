@@ -10,7 +10,7 @@ if __name__ == '__main__':
     beforeCrawlingTime = beforeCrawling.strftime("%Y-%m-%d %H:%M:%S")
     print(beforeCrawlingTime)
 
-    urls = UrlCollectionModule.urlCollecting()
+    urls = UrlCollectionModule.url_collecting()
     chunked_urls = Chunker.url_chunk(urls)
 
     results = CrawlingSiteModule.crawling_each_site(chunked_urls)
