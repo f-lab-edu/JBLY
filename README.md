@@ -22,7 +22,17 @@
 ![Project_Architecture](image/ProjectArch.png)
 
 ## 📖 사용 기술 및 개발 환경
-Spring Boot, Java17, Gradle, Naver Cloud, H2, MySQL, HTML, CSS, JS, JPA, Python, BeautifulSoup, GithubAction Cron Scheduler, GithubAction CI
+**Backend Side**
+- Spring Boot, Java17, Gradle, Naver Cloud, H2, MySQL, JPA
+
+**Frontend Side**
+- HTML, CSS, JS
+
+**Data Engineer Side**
+- Python, BeautifulSoup, Multiprocessing, MultiThread
+
+**Infra**
+- GithubAction Cron Scheduler, GithubAction CI
 
 ## ✅ Project Goal
 **1. 요구사항 충족**
