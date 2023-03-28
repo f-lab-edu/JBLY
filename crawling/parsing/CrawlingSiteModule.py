@@ -6,7 +6,7 @@ sub_directory_name = "parsing"
 def run_job(module_name, response):
     module_name = sub_directory_name + "." + module_name
     module = importlib.import_module(module_name)
-    return module.getTotalProducts(response)
+    return module.get_total_products(response)
 
 def crawling_each_site(chunked_urls):
     with multiprocessing.Pool(12) as pool:

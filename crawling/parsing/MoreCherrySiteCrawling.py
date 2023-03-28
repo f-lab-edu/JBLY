@@ -16,7 +16,7 @@ header = {
 }
 
 # 각 Process 당 7개의 페이지를 크롤링하는 책임을 갖고 있습니다.
-def getTotalProducts(responses):
+def get_total_products(responses):
     result = []  # storeName, itemName, imageUrl, price, itemType, shopId
 
     for each_response in responses:

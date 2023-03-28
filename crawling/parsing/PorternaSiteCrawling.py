@@ -15,7 +15,7 @@ header = {
     'user-agent': userAgent
 }
 
-def getTotalProducts(responses):
+def get_total_products(responses):
     result = [] # storeName, itemName, getUrl, getPrice, itemType, shopId
 
     for each_response in responses:

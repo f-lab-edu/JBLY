@@ -15,7 +15,7 @@ header = {
 }
 
 
-def getTotalProducts(responses):
+def get_total_products(responses):
     result = []
 
     for each_response in responses:
