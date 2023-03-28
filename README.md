@@ -26,10 +26,10 @@
 - Spring Boot, Java17, Gradle, Naver Cloud, H2, MySQL, JPA
 
 **Frontend Side**
-- HTML, CSS, JS
+- HTML, CSS, JS, React
 
-**Data Engineer Side**
-- Python, BeautifulSoup, Multiprocessing, MultiThread
+**Data Engineering**
+- Python, BeautifulSoup
 
 **Infra**
 - GithubAction Cron Scheduler, GithubAction CI
