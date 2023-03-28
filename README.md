@@ -55,8 +55,8 @@ Spring Boot, Java17, Gradle, Naver Cloud, H2, MySQL, HTML, CSS, JS, JPA, Python,
 - 추후 업로드 예정입니다.
 
 ## 🏠 Blog
-- [이연수]의 BLOG입니다.(https://ecofriendlyapplesu.tistory.com)
-- [박소정]의 BLOG입니다.(https://creeraria.tistory.com/)
+- 이연수의 BLOG입니다.(https://ecofriendlyapplesu.tistory.com)
+- 박소정의 BLOG입니다.(https://creeraria.tistory.com/)
 
 ## 👀 Code Convention
 - [Google Java Code Convention 준수](https://google.github.io/styleguide/javaguide.html)
