@@ -14,7 +14,7 @@ import os
 from datetime import datetime
 import hashlib
 from operator import length_hint
-from img import downloader
+from img import img_download
 
 urllib3.disable_warnings()
 
@@ -50,20 +50,12 @@ def find_last_page(target_url):
     return number
 
 
-def theverlin_img_downloader(response):
-    urls = []
-    urls.append(("https://theverlin.com/product/list.html?cate_no=42&page=", product_types.OUTWEAR.name))  # outwear
-    urls.append(("https://theverlin.com/product/list.html?cate_no=43&page=", product_types.TOP.name))  # top
-    urls.append(("https://theverlin.com/product/list.html?cate_no=44&page=", product_types.BOTTOM.name))  # bottom
-    urls.append(("https://theverlin.com/product/list.html?cate_no=48&page=", product_types.ACCESSORY.name))  # acc
-    urls.append(("https://theverlin.com/product/list.html?cate_no=193&page=", product_types.SHOES.name))  # shoes
-
+def theverlin_img_downloader(target_url, item_type):
     for page_num in range(1, int(find_last_page(target_url)) + 1):
         header = {
             'Referrer': target_url + str(page_num),
             'user-agent': user_agent
         }
-        # print(target_url + str(page_num))
         response = requests.get(target_url + str(page_num), headers=header)
         soup = BeautifulSoup(response.text, 'html.parser')
         soup = soup.find_all('ul', {'class': 'prdList column4'})
@@ -75,18 +67,16 @@ def theverlin_img_downloader(response):
                 if href is not None:
                     href_set.add(href)
         href_list = list(href_set)
-        # print(href_list)
         for href in href_list:
             detail_url = main_url + str(href)
             detail_header = {
                 'Referrer': detail_url,
                 'user-agent': detail_user_agent
             }
-            # print(detail_url)
             detail_response = requests.get(detail_url, headers=detail_header)
             b_soup = BeautifulSoup(detail_response.text, 'html.parser')
             detail_html = b_soup.find("div", "edibot-product-detail").find_all("img")
-            print(detail_html)
+
 
             link_img = []
             for img in detail_html:
@@ -131,5 +121,5 @@ def theverlin_img_downloader(response):
                             md5hash = md5hash + ".jpg"
                             with open(path_folder_shoes + md5hash, 'wb') as f:
                                 f.write(data)
-            break
+
     return None

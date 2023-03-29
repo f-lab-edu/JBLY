@@ -6,7 +6,6 @@ import multiprocessing as mp
 from multiprocessing import Process
 from TheVerlinImgDownload import theverlin_img_downloader
 from parsing.ProductTypes import product_types
-from downloader import outwear_downloader
 
 if __name__ == '__main__':
     start_time = time.time()
