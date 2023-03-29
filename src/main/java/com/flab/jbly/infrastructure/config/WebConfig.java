@@ -19,8 +19,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(interceptor)
-            .addPathPatterns("/**") // /**
-            .excludePathPatterns("/main/page","/login","/users");
+            .addPathPatterns() // /**
+            .excludePathPatterns("/main/page","/login","/users/**");
         // Product 개발을 위해 모든 url을 열어뒀습니다. 개발 후 다시 변경해야합니다.
     }
 }

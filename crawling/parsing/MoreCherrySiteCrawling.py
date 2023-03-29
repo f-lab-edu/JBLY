@@ -1,77 +1,68 @@
-from selenium.webdriver.common.by import By
 from parsing.ProductTypes import productTypes
 from bs4 import BeautifulSoup
 import requests
-from urllib.parse import quote
 import ssl
 import re
 
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-def getTotalProducts(driver):
+def getTotalProducts():
 
     # Var Setting
     shopId = 2
     storeName = "morecherry"
     result = [] # storeName, itemName, imageUrl, price, itemType, shopId
     urls = []
-    urls.append(("https://more-cherry.com/category/outwear/24",productTypes.OUTWEAR.name))  # outwear
-    urls.append(("https://more-cherry.com/category/top/25", productTypes.TOP.name))  # top
-    urls.append(("https://more-cherry.com/category/pants/26",productTypes.BOTTOM.name))  # bottom
-    urls.append(("https://more-cherry.com/category/accessory/28",productTypes.ACCESSORY.name))  # acc
-    urls.append(("https://more-cherry.com/category/shoes/42",productTypes.SHOES.name))  # shoes
+    urls.append(("https://more-cherry.com/category/outwear/24/?page=",productTypes.OUTWEAR.name))  # outwear
+    urls.append(("https://more-cherry.com/category/top/25/?page=", productTypes.TOP.name))  # top
+    urls.append(("https://more-cherry.com/category/pants/26/?page=",productTypes.BOTTOM.name))  # bottom
+    urls.append(("https://more-cherry.com/category/accessory/28/?page=",productTypes.ACCESSORY.name))  # acc
+    urls.append(("https://more-cherry.com/category/shoes/42/?page=",productTypes.SHOES.name))  # shoes
     baseUrl = "https://more-cherry.com"
     userAgent ="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, likeGecko) Chrome/109.0.0.0 Safari/537.36"
 
     for url in urls:
         eachUrl, itemType = url
-        driver.get(eachUrl)
+        urlSequence = 1
+        header = {
+            'Referrer': baseUrl,
+            'user-agent': userAgent
+        }
         while True:
+            currentPageUrl = eachUrl + str(urlSequence)
+            urlSequence += 1
+            response = requests.get(currentPageUrl, headers= header)
+            soup = BeautifulSoup(response.text, 'html.parser')
 
-            soup = BeautifulSoup(driver.page_source, 'html.parser')
-            datas = soup.find("ul", "prdList grid4").find_all("li", recursive=False)
-            datas = list(map(str, datas))
+            try:
+                datas = soup.find("ul", "prdList grid4").find_all("li", recursive=False) # return NoneType
+            except:
+                break
 
             for data in datas:
-
                 itemInfoGather = []
-                eachData = BeautifulSoup(data, 'html.parser')
-
-                #get Image
-                getImageUrl = eachData.find('img')['src']
+                # get Image
+                getImageUrl = data.find('img')['src']
                 imageUrl = 'https:' + getImageUrl
 
-                # get detail Info
-                getDetailInfo = eachData.find('a')['href']
-                detailInfo = baseUrl + getDetailInfo
-
                 # get ItemName
-                getItemName = eachData.find('span', {'class': 'name'})
+                getItemName = data.find('span', {'class': 'name'})
                 getItemName = getItemName.text
                 itemName = getItemName.split(' : ')[-1]
 
                 # get Price
-                getPrice = eachData.find('ul', {'class': 'xans-element- xans-product xans-product-listitem spec'})
+                getPrice = data.find('ul', {'class': 'xans-element- xans-product xans-product-listitem spec'})
                 price = getPrice.text
                 price = re.findall(r'\d{1,3}(?:,\d{3})*(?:\.\d+)?', price)[0].replace(",", "")
 
-                # get detail info HTML
-                temp = list(getDetailInfo.split("/"))
-                encodeBytes = quote(temp[2])
-                temp[2] = encodeBytes
-                encodedDetailInfo = "/".join(temp)
-                encodedDetailInfo = baseUrl + encodedDetailInfo
+                # get detail Info
+                getDetailInfo = data.find('a')['href']
+                detailInfo = baseUrl + getDetailInfo
 
-                # setting referrer and userAgent
-                header = {
-                    'Referrer': encodedDetailInfo,
-                    'user-agent': userAgent
-                }
-
-                response = requests.get(detailInfo, headers=header)
-                bSoup = BeautifulSoup(response.text, 'html.parser')
-                detailHtml = bSoup.find('div', {'id': 'prdDetail'})
+                getDetailHtmlResponse = requests.get(detailInfo, headers=header)
+                getDetailHtml = BeautifulSoup(getDetailHtmlResponse.text, 'html.parser')
+                detailHtml = getDetailHtml.find('div', {'id': 'prdDetail'})
 
                 itemInfoGather.append(storeName)
                 itemInfoGather.append(itemName)
@@ -84,16 +75,5 @@ def getTotalProducts(driver):
                 copyItemInfo = itemInfoGather.copy()
                 result.append(copyItemInfo)
                 itemInfoGather.clear()
-
-            element = driver.find_element(by=By.XPATH, value='//*[@id="contents2"]/div[3]/a[3]')
-            driver.implicitly_wait(10)
-
-            if element.is_displayed() and element.is_enabled():
-                try:
-                    driver.execute_script("arguments[0].click();", element)
-                except:
-                    pass
-            if driver.current_url.endswith("#none"):
-                break
 
     return result
