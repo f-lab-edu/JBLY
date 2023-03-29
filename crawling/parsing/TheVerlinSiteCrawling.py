@@ -5,13 +5,13 @@ import re
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-baseUrl = "https://theverlin.com/"
-userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
-shopId = 3
-storeName = "theverlin"
+base_url = "https://theverlin.com/"
+user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
+shop_id = 3
+store_name = "theverlin"
 header = {
-    'Referrer': baseUrl,
-    'user-agent': userAgent
+    'Referrer': base_url,
+    'user-agent': user_agent
 }
 
 
@@ -53,20 +53,20 @@ def get_total_products(responses):
 
             # get detail info
             detail = data.find('a')['href']
-            detailInfo = baseUrl + detail
+            detailInfo = base_url + detail
 
             # get detail information html
             # getDetailHtmlResponse = requests.get(detailInfo, headers=header)
             # getDetailHtml = BeautifulSoup(getDetailHtmlResponse.text, 'html.parser')
             # detailHtml = getDetailHtml.find("div", "cont")
 
-            itemInfoGather.append(storeName)
+            itemInfoGather.append(store_name)
             itemInfoGather.append(itemName)
             itemInfoGather.append(imageUrl)
             itemInfoGather.append(price)
             itemInfoGather.append(item_type)
             itemInfoGather.append(detailInfo)
-            itemInfoGather.append(shopId)
+            itemInfoGather.append(shop_id)
             # itemInfoGather.append(detailHtml)
             copyItemInfo = itemInfoGather.copy()
             result.append(copyItemInfo)
