@@ -1,16 +1,21 @@
+import threading
 import time
+from multiprocessing import Pool
+from img import porterna_detailimg_download
+import multiprocessing as mp
 from multiprocessing import Process
-from theverlin_img_download import theverlin_img_downloader
+from porterna_detailimg_download import porterna_img_downloader
 from common.ProductTypes import product_types
+
 
 if __name__ == '__main__':
     start_time = time.time()
 
-    p_outwear = Process(target=theverlin_img_downloader, args=("https://theverlin.com/product/list.html?cate_no=42&page=", product_types.OUTWEAR.name))
-    p_top = Process(target=theverlin_img_downloader, args=("https://theverlin.com/product/list.html?cate_no=43&page=", product_types.TOP.name))
-    p_bottom = Process(target=theverlin_img_downloader, args=("https://theverlin.com/product/list.html?cate_no=44&page=", product_types.BOTTOM.name))
-    p_acc = Process(target=theverlin_img_downloader, args=("https://theverlin.com/product/list.html?cate_no=48&page=", product_types.ACCESSORY.name))
-    p_shoes = Process(target=theverlin_img_downloader, args=("https://theverlin.com/product/list.html?cate_no=193&page=", product_types.SHOES.name))
+    p_outwear = Process(target=porterna_img_downloader, args=("https://porterna.com/product/list.html?cate_no=541&page=", product_types.OUTWEAR.name))
+    p_top = Process(target=porterna_img_downloader, args=("https://porterna.com/product/list.html?cate_no=789&page=", product_types.TOP.name))
+    p_bottom = Process(target=porterna_img_downloader, args=("https://porterna.com/product/list.html?cate_no=28&page=", product_types.BOTTOM.name))
+    p_acc = Process(target=porterna_img_downloader, args=("https://porterna.com/product/list.html?cate_no=44&page=", product_types.ACCESSORY.name))
+    p_shoes = Process(target=porterna_img_downloader, args=("https://porterna.com/product/list.html?cate_no=79&page=", product_types.SHOES.name))
 
     p_outwear.start()
     p_top.start()
