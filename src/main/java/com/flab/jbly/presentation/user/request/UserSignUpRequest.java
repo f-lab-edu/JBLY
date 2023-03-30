@@ -41,7 +41,7 @@ public class UserSignUpRequest {
             this.name,
             this.phone,
             this.email,
-            this.email
+            this.address
         );
     }
 

@@ -34,4 +34,13 @@ public class UserRepositoryAdapter implements UserRepository {
             () -> new DoesNotExistUserException("DoesNotExistUserException",
                 ErrorCode.USER_DOES_NOT_EXIST));
     }
+
+    @Override
+    public void deleteUserById(Long id) {
+        repository.deleteById(id);
+    }
+
+    public void updateUser(User user) {
+        repository.save(user);
+    }
 }
