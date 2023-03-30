@@ -5,7 +5,7 @@ from img import porterna_detailimg_download
 import multiprocessing as mp
 from multiprocessing import Process
 from porterna_detailimg_download import porterna_img_downloader
-from parsing.ProductTypes import product_types
+from common.ProductTypes import product_types
 
 
 if __name__ == '__main__':
