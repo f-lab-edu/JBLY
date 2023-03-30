@@ -20,7 +20,6 @@ def getTotalProducts():
     urls.append(("https://porterna.com/product/list.html?cate_no=44&page=", productTypes.ACCESSORY.name)) # acc
     urls.append(("https://porterna.com/product/list.html?cate_no=79&page=", productTypes.SHOES.name)) # shoes
     baseUrl = "https://porterna.com"
-    userAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36"
 
     for url in urls:
         eachUrl, itemType = url

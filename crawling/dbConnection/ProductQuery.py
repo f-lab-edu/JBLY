@@ -20,6 +20,9 @@ def insertProductIsNotExist(products):
         except:
             logging.info(storeName + "의 상품 " + itemName + "이 DB에 적재되지 않았습니다.")
 
+ # multi row insert, mysql쿼리는 반복문x, connectionpool만들거나 multirow, (상품 하나 돌고 확인하고 인서트 하나돌고 확인하고 인서트)
+    # 성능 모니터링
+
     connectedDb.commit()
     cursor.close()
     MysqlConnect.disconnect(connectedDb)

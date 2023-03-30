@@ -1,5 +1,7 @@
-from parsing import MoreCherrySiteCrawling, PorternaSiteCrawling, TheVerlinSiteCrawling
-from dbConnection import ProductQuery
+# from dbConnection import ProductQuery
+from urlCollection import UrlCollectionModule
+from util import Chunker
+from parsing import CrawlingSiteModule
 import datetime
 
 if __name__ == '__main__':
@@ -8,17 +10,13 @@ if __name__ == '__main__':
     beforeCrawlingTime = beforeCrawling.strftime("%Y-%m-%d %H:%M:%S")
     print(beforeCrawlingTime)
 
-    # # shopId == 1
-    porternaProducts = PorternaSiteCrawling.getTotalProducts()
-    ProductQuery.insertProductIsNotExist(porternaProducts)
+    urls = UrlCollectionModule.url_collecting()
+    chunked_urls = Chunker.url_chunk(urls)
 
-    # shopId == 2
-    moreCherryProducts = MoreCherrySiteCrawling.getTotalProducts()
-    ProductQuery.insertProductIsNotExist(moreCherryProducts)
+    results = CrawlingSiteModule.crawling_each_site(chunked_urls)
+    for result in results:
+        print(len(result))
 
-    # # shopId == 3
-    theverlinProducts = TheVerlinSiteCrawling.getTotalItemList()
-    ProductQuery.insertProductIsNotExist(theverlinProducts)
 
     afterCrawling = datetime.datetime.now()
     afterCrawlingTime = afterCrawling.strftime("%Y-%m-%d %H:%M:%S")
