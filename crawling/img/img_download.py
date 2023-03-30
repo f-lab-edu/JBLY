@@ -1,11 +1,7 @@
-import threading
 import time
-from multiprocessing import Pool
-from img import TheVerlinImgDownload
-import multiprocessing as mp
 from multiprocessing import Process
-from TheVerlinImgDownload import theverlin_img_downloader
-from parsing.ProductTypes import product_types
+from theverlin_img_download import theverlin_img_downloader
+from common.ProductTypes import product_types
 
 if __name__ == '__main__':
     start_time = time.time()
