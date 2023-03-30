@@ -15,11 +15,6 @@ from datetime import datetime
 import hashlib
 from operator import length_hint
 from img import img_download
-import ssl
-
-ctx = ssl.create_default_context()
-ctx.check_hostname = False
-ctx.verify_mode = ssl.CERT_NONE
 
 urllib3.disable_warnings()
 
@@ -92,7 +87,7 @@ def porterna_img_downloader(target_url, item_type):
             link_img.append(url + img['src'])
             for link in link_img:
                 if item_type == product_types.OUTWEAR.name:
-                    with urllib.request.urlopen(link, context=ctx) as response:
+                    with urllib.request.urlopen(link) as response:
                         data = response.read()
                         md5hash = hashlib.md5(data).hexdigest()
                         md5hash = md5hash + ".jpg"
@@ -100,14 +95,14 @@ def porterna_img_downloader(target_url, item_type):
                             f.write(data)
 
                 elif item_type == product_types.TOP.name:
-                    with urllib.request.urlopen(link, context=ctx) as response:
+                    with urllib.request.urlopen(link) as response:
                         data = response.read()
                         md5hash = hashlib.md5(data).hexdigest()
                         md5hash = md5hash + ".jpg"
                         with open(path_folder_top + md5hash, 'wb') as f:
                             f.write(data)
                 elif item_type == product_types.BOTTOM.name:
-                    with urllib.request.urlopen(link, context=ctx) as response:
+                    with urllib.request.urlopen(link) as response:
                         data = response.read()
                         md5hash = hashlib.md5(data).hexdigest()
                         md5hash = md5hash + ".jpg"
@@ -115,7 +110,7 @@ def porterna_img_downloader(target_url, item_type):
                             f.write(data)
 
                 elif item_type == product_types.ACCESSORY.name:
-                    with urllib.request.urlopen(link, context=ctx) as response:
+                    with urllib.request.urlopen(link) as response:
                         data = response.read()
                         md5hash = hashlib.md5(data).hexdigest()
                         md5hash = md5hash + ".jpg"
@@ -123,7 +118,7 @@ def porterna_img_downloader(target_url, item_type):
                             f.write(data)
 
                 else:
-                    with urllib.request.urlopen(link, context=ctx) as response:
+                    with urllib.request.urlopen(link) as response:
                         data = response.read()
                         md5hash = hashlib.md5(data).hexdigest()
                         md5hash = md5hash + ".jpg"
