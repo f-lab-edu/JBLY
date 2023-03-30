@@ -1,6 +1,6 @@
 from enum import Enum, auto
 
-class productTypes(Enum):
+class product_types(Enum):
     OUTWEAR = auto()
     TOP = auto()
     BOTTOM = auto()
