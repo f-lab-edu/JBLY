@@ -11,11 +11,13 @@ if __name__ == '__main__':
     print(beforeCrawlingTime)
 
     urls = UrlCollectionModule.url_collecting()
-    chunked_urls = Chunker.url_chunk(urls)
-
-    results = CrawlingSiteModule.crawling_each_site(chunked_urls)
-    for result in results:
-        print(len(result))
+    for url in urls:
+        print(url)
+    # chunked_urls = Chunker.url_chunk(urls)
+    #
+    # results = CrawlingSiteModule.crawling_each_site(chunked_urls)
+    # for result in results:
+    #     print(len(result))
 
 
     afterCrawling = datetime.datetime.now()
