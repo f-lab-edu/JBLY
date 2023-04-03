@@ -38,11 +38,15 @@ def get_total_products(response, item_type):
         except:
             pass
 
-        temp = list(temp.split("￦ "))
-        temp = temp[1].split("<")[0]
-        temp = temp.replace(',', '')
+        # theverlin의 경우 이름표 상품에 가격이 존재하지 않아 예외가 발생합니다.
+        try:
+            temp = list(temp.split("￦ "))
+            temp = temp[1].split("<")[0]
+            temp = temp.replace(',', '')
+        except:
+            continue
+
         price = temp
-        print(price)
 
         # get detail info
         detail = data.find('a')['href']
