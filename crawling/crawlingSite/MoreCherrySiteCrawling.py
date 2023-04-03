@@ -6,7 +6,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 
 base_url = "https://more-cherry.com"
 shop_id = 2
-store_name = "morecherry"
+shop_name = "morecherry"
 
 
 def get_total_products(response, item_type):
@@ -36,7 +36,7 @@ def get_total_products(response, item_type):
         get_detail_info = data.find('a')['href']
         detail_info = base_url + get_detail_info
 
-        item_info_gather.append(store_name)
+        item_info_gather.append(shop_name)
         item_info_gather.append(item_name)
         item_info_gather.append(image_url)
         item_info_gather.append(price)
