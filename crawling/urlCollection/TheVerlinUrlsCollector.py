@@ -13,10 +13,10 @@ header = {
 }
 the_verlin_total_url = []
 urls = [
-    ("https://theverlin.com/product/list.html?cate_no=42&page=", product_types.OUTWEAR.name),
-    ("https://theverlin.com/product/list.html?cate_no=43&page=", product_types.TOP.name),
-    ("https://theverlin.com/product/list.html?cate_no=44&page=", product_types.BOTTOM.name),
-    ("https://theverlin.com/product/list.html?cate_no=48&page=", product_types.ACCESSORY.name),
+    # ("https://theverlin.com/product/list.html?cate_no=42&page=", product_types.OUTWEAR.name),
+    # ("https://theverlin.com/product/list.html?cate_no=43&page=", product_types.TOP.name),
+    # ("https://theverlin.com/product/list.html?cate_no=44&page=", product_types.BOTTOM.name),
+    # ("https://theverlin.com/product/list.html?cate_no=48&page=", product_types.ACCESSORY.name),
     ("https://theverlin.com/category/shoes/193/?page=", product_types.SHOES.name),
 ]
 threads = []

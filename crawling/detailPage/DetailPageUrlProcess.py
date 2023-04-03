@@ -1,4 +1,4 @@
-import DetailPageUrlThread
+from detailPage import DetailPageUrlThread
 import multiprocessing
 
 def get_detail_info_response(chunked_detail_urls):

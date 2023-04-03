@@ -13,10 +13,10 @@ header = {
 }
 porterna_total_url = []
 urls = [
-    ("https://porterna.com/product/list.html?cate_no=541&page=", product_types.OUTWEAR.name),
-    ("https://porterna.com/product/list.html?cate_no=789&page=", product_types.TOP.name),
-    ("https://porterna.com/product/list.html?cate_no=28&page=", product_types.BOTTOM.name),
-    ("https://porterna.com/product/list.html?cate_no=44&page=", product_types.ACCESSORY.name),
+    # ("https://porterna.com/product/list.html?cate_no=541&page=", product_types.OUTWEAR.name),
+    # ("https://porterna.com/product/list.html?cate_no=789&page=", product_types.TOP.name),
+    # ("https://porterna.com/product/list.html?cate_no=28&page=", product_types.BOTTOM.name),
+    # ("https://porterna.com/product/list.html?cate_no=44&page=", product_types.ACCESSORY.name),
     ("https://porterna.com/product/list.html?cate_no=79&page=", product_types.SHOES.name),
 ]
 threads = []

@@ -1,11 +1,11 @@
 import multiprocessing
 import importlib
 
-sub_directory_name = "urlCollection"
+sub_directory_name = "detailPage"
 
 def run_job(crawling_site):
     shop_name, item_name, response = crawling_site
-    module_name = sub_directory_name + shop_name + "DetailPageCrawling"
+    module_name = sub_directory_name + "." + shop_name + "DetailPageCrawling"
     module = importlib.import_module(module_name)
     return module.get_detail_page(response, item_name)
 
