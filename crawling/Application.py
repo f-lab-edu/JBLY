@@ -50,4 +50,3 @@ def run():
                 crawling_total_item.extend(detail_html_source)
 
     print("크롤링한 아이템 수는 : ", len(crawling_total_items))
-    print("아이템 하나는 다음과 같이 구성되어 있습니다. : ", crawling_total_items[0])

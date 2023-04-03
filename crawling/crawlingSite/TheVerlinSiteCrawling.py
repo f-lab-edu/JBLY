@@ -38,9 +38,11 @@ def get_total_products(response, item_type):
         except:
             pass
 
-        soup = BeautifulSoup(temp, "html.parser")
-        getPrice = soup.text
-        price = re.sub(r'\D', '', getPrice)
+        temp = list(temp.split("￦ "))
+        temp = temp[1].split("<")[0]
+        temp = temp.replace(',', '')
+        price = temp
+        print(price)
 
         # get detail info
         detail = data.find('a')['href']

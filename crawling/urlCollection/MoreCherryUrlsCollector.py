@@ -13,10 +13,10 @@ header = {
 }
 more_cherry_total_url = []
 urls = [
-    # ("https://more-cherry.com/category/outwear/24/?page=", product_types.OUTWEAR.name),
-    # ("https://more-cherry.com/category/top/25/?page=", product_types.TOP.name),
-    # ("https://more-cherry.com/category/pants/26/?page=", product_types.BOTTOM.name),
-    # ("https://more-cherry.com/category/accessory/28/?page=", product_types.ACCESSORY.name),
+    ("https://more-cherry.com/category/outwear/24/?page=", product_types.OUTWEAR.name),
+    ("https://more-cherry.com/category/top/25/?page=", product_types.TOP.name),
+    ("https://more-cherry.com/category/pants/26/?page=", product_types.BOTTOM.name),
+    ("https://more-cherry.com/category/accessory/28/?page=", product_types.ACCESSORY.name),
     ("https://more-cherry.com/category/shoes/42/?page=", product_types.SHOES.name),
 ]
 threads = []
