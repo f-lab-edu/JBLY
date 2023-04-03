@@ -1,7 +1,7 @@
 import requests
 import threading
 from collections import defaultdict
-from parsing.ProductTypes import productTypes
+from crawlingSite.ProductTypes import productTypes
 
 base_url = "https://porterna.com"
 crawling_file_name = "PorternaSiteCrawling"

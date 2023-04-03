@@ -1,7 +1,7 @@
 # from dbConnection import ProductQuery
 from urlCollection import UrlCollectionModule
 from util import Chunker
-from parsing import CrawlingSiteModule
+from crawlingSite import CrawlingSiteModule
 import datetime
 
 if __name__ == '__main__':

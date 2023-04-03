@@ -1,7 +1,7 @@
 import requests
 import threading
 from collections import defaultdict
-from parsing.ProductTypes import productTypes
+from common.ProductTypes import product_types
 
 more_cherry_total_url = defaultdict(list)
 threads = []
