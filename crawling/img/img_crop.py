@@ -9,14 +9,13 @@ path_folder_bottom = 'D:\\morecherry_bottom\\'
 path_folder_acc = 'D:\\morecherry_acc\\'
 path_folder_shoes = 'D:\\morecherry_shoes\\'
 
+
 def img_cropper(img, item_type):
     # 이미지 파일을 불러옵니다.
     image = cv2.imdecode(img, cv2.IMREAD_COLOR)
 
     # 첫 번째 이미지를 800x1000으로 자릅니다.
     first_crop = image[:1000, :800].copy()
-    # first_crop = np.zeros((3, 3), dtype=np.float32)[::2, :]
-    # first_crop = np.ascontiguousarray(first_crop)
     md5hash = hashlib.md5(first_crop).hexdigest() + ".jpg"
     cv2.imwrite(path_folder_outwear + md5hash, first_crop)
 
@@ -28,7 +27,7 @@ def img_cropper(img, item_type):
 
     # 이미지 파일에서 자른 이미지를 저장합니다.
     for i, (start, end) in enumerate(crop_positions):
-        crop = image[start:end, :].copy()
+        crop = image[start:end, :]
 
         # 왼쪽, 오른쪽 여백을 제거합니다.
         gray = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
@@ -45,9 +44,11 @@ def img_cropper(img, item_type):
         elif width > height:
             diff = width - height
             crop = crop[diff // 2:height + diff // 2, :]
-        crop = np.zeros((3, 3), dtype=np.float32)[::2, :]
+
         crop = np.ascontiguousarray(crop)
         md5hash_2 = hashlib.md5(crop).hexdigest() + ".jpg"
+        if not crop.any():
+            continue
         cv2.imwrite(path_folder_outwear + md5hash_2, crop)
 
     return None
