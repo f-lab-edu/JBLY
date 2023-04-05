@@ -6,18 +6,21 @@ import numpy as np
 path_folder_outwear = 'D:\\morecherry_outwear\\'
 path_folder_top = 'D:\\morecherry_top\\'
 path_folder_bottom = 'D:\\morecherry_bottom\\'
-path_folder_acc = 'D:\\morecherry_acc\\'
-path_folder_shoes = 'D:\\morecherry_shoes\\'
-
 
 def img_cropper(img, item_type):
+
     # 이미지 파일을 불러옵니다.
     image = cv2.imdecode(img, cv2.IMREAD_COLOR)
 
     # 첫 번째 이미지를 800x1000으로 자릅니다.
     first_crop = image[:1000, :800].copy()
     md5hash = hashlib.md5(first_crop).hexdigest() + ".jpg"
-    cv2.imwrite(path_folder_outwear + md5hash, first_crop)
+    if item_type == product_types.OUTWEAR.name:
+        cv2.imwrite(path_folder_outwear + md5hash, first_crop)
+    elif item_type == product_types.TOP.name:
+        cv2.imwrite(path_folder_top + md5hash, first_crop)
+    else:
+        cv2.imwrite(path_folder_bottom + md5hash, first_crop)
 
     # 이후 이미지들을 800x800으로 자릅니다.
     num_crops = (image.shape[0] - 1000) // 800
@@ -49,6 +52,13 @@ def img_cropper(img, item_type):
         md5hash_2 = hashlib.md5(crop).hexdigest() + ".jpg"
         if not crop.any():
             continue
-        cv2.imwrite(path_folder_outwear + md5hash_2, crop)
-
+        if item_type == product_types.OUTWEAR.name:
+            cv2.imwrite(path_folder_outwear + md5hash_2, crop)
+        elif item_type == product_types.TOP.name:
+            cv2.imwrite(path_folder_top + md5hash_2, crop)
+        else:
+            cv2.imwrite(path_folder_bottom + md5hash_2, crop)
     return None
+
+
+
