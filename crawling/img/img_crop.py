@@ -16,11 +16,11 @@ def img_cropper(img, item_type):
     first_crop = image[:1000, :800].copy()
     md5hash = hashlib.md5(first_crop).hexdigest() + ".jpg"
     if item_type == product_types.OUTWEAR.name:
-        cv2.imwrite(path_folder_outwear + md5hash, first_crop)
+        cv2.imwrite(path_folder_outwear + md5hash + ".jpg", first_crop)
     elif item_type == product_types.TOP.name:
-        cv2.imwrite(path_folder_top + md5hash, first_crop)
+        cv2.imwrite(path_folder_top + md5hash + ".jpg", first_crop)
     else:
-        cv2.imwrite(path_folder_bottom + md5hash, first_crop)
+        cv2.imwrite(path_folder_bottom + md5hash + ".jpg", first_crop)
 
     # 이후 이미지들을 800x800으로 자릅니다.
     num_crops = (image.shape[0] - 1000) // 800
@@ -47,17 +47,17 @@ def img_cropper(img, item_type):
         elif width > height:
             diff = width - height
             crop = crop[diff // 2:height + diff // 2, :]
+        if crop is None or not crop.any():
+            continue
 
         crop = np.ascontiguousarray(crop)
-        md5hash_2 = hashlib.md5(crop).hexdigest() + ".jpg"
-        if not crop.any():
-            continue
+        md5hash_2 = hashlib.md5(crop).hexdigest()
         if item_type == product_types.OUTWEAR.name:
-            cv2.imwrite(path_folder_outwear + md5hash_2, crop)
+            cv2.imwrite(path_folder_outwear + md5hash_2 + ".jpg", crop)
         elif item_type == product_types.TOP.name:
-            cv2.imwrite(path_folder_top + md5hash_2, crop)
+            cv2.imwrite(path_folder_top + md5hash_2 + ".jpg", crop)
         else:
-            cv2.imwrite(path_folder_bottom + md5hash_2, crop)
+            cv2.imwrite(path_folder_bottom + md5hash_2 + ".jpg", crop)
     return None
 
 

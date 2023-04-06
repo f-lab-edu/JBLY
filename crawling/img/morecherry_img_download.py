@@ -70,9 +70,12 @@ def morecherry_img_downloader(target_url, item_type):
         detail_response = requests.get(detail_url, headers=detail_header)
         if find_key in detail_response.text:
             b_soup = BeautifulSoup(detail_response.text, 'html.parser')
-            detail_html = b_soup.find(id="prdDetail").find_all("img")
-            etc_img_tag = detail_html[0]
-            clothes_img_tag = detail_html[-1]
+            detail_html = b_soup.find(id="prdDetail")
+            try:
+                etc_img_tag = detail_html.find_all("img")[0]
+                clothes_img_tag = detail_html.find_all("img")[-1]
+            except IndexError:
+                logging.info("img 태그가 존재하지 않습니다.")
 
             if item_type == product_types.OUTWEAR.name or item_type == product_types.TOP.name or item_type == product_types.BOTTOM.name:
                 try:
@@ -92,7 +95,7 @@ def morecherry_img_downloader(target_url, item_type):
                         data = response.read()
                         img = np.asarray(bytearray(data), dtype=np.uint8)
                         etc_img_cropper(img, item_type)
-                except UnicodeEncodeError as e:
+                except UnicodeEncodeError:
                     logging.info("문자열 인코딩에 실패했습니다.")
         else:
             pass
