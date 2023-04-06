@@ -10,10 +10,8 @@ shop_name = "morecherry"
 
 
 def get_total_products(response, item_type):
-    result = []  # storeName, itemName, imageUrl, price, itemType, shopId
-
+    result = [] # storeName, itemName, getUrl, get_price, itemType, detailInfo, shopId
     soup = BeautifulSoup(response.text, 'html.parser')
-
     datas = soup.find("ul", "prdList grid4").find_all("li", recursive=False)  # return NoneType
 
     for data in datas:

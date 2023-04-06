@@ -9,10 +9,8 @@ shop_id = 3
 shop_name = "theverlin"
 
 def get_total_products(response, item_type):
-    result = []
-
+    result = [] # storeName, itemName, getUrl, get_price, itemType, detailInfo, shopId
     soup = BeautifulSoup(response.text, 'html.parser')
-
     datas = soup.find("ul", "prdList column4").find_all("li", recursive=False)
 
     for data in datas:

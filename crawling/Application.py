@@ -25,7 +25,7 @@ def run():
 
     # 아이템 리스트에서 상세 페이지 주소 추출 뒤 I/O 작업 진행
     extract_detail_page_url = list(map(lambda x: x[:1] + x[1:2] + x[5:6], crawling_total_items))  # [shop_name, item_name, detail_info_url]
-    detail_page_request_list = [] # 상세 페이지에 접근하기 위해 필요한 header 값들을 담고 있는 리스트
+    detail_page_request_list = [] # 상세 페이지에 접근하기 위해 필요한 header 값들을 담고 있는 리스트 [shop_name, detail_info_url, item_name, headers ]
 
     for extract_page in extract_detail_page_url:
         shop_name, item_name, detail_info_url = extract_page
