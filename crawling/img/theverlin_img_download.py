@@ -39,7 +39,6 @@ def find_last_page(target_url):
     return number
 
 def detail_url_scraper(target_url):
-    href_list = []
     for page_num in range(1, int(find_last_page(target_url)) + 1):
         header = {
             'Referrer': target_url + str(page_num),
@@ -55,8 +54,8 @@ def detail_url_scraper(target_url):
                 href = a_tag.get('href')
                 if href is not None:
                     href_set.add(href)
-        href_list += list(href_set)
-    return href_list
+        href_list = list(href_set)
+        return href_list
 
 
 def theverlin_img_downloader(target_url, item_type):
@@ -70,6 +69,8 @@ def theverlin_img_downloader(target_url, item_type):
         detail_response = requests.get(detail_url, headers=detail_header)
         b_soup = BeautifulSoup(detail_response.text, 'html.parser')
         detail_html = b_soup.find("div", "edibot-product-detail").find_all("img")
+
+
         link_img = []
         for img in detail_html:
             link_img.append("https://theverlin.com" + img['ec-data-src'])
