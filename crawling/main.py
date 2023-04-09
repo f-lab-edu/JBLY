@@ -1,24 +1,20 @@
-# from dbConnection import ProductQuery
-from urlCollection import UrlCollectionModule
-from util import Chunker
-from parsing import CrawlingSiteModule
 import datetime
+import Application
+import sys
+import logging
+
+sys.setrecursionlimit(10 ** 7) # RecursionError 방지
+logging.basicConfig(level=logging.INFO)
 
 if __name__ == '__main__':
 
     beforeCrawling = datetime.datetime.now()
     beforeCrawlingTime = beforeCrawling.strftime("%Y-%m-%d %H:%M:%S")
-    print(beforeCrawlingTime)
+    logging.info(f"크롤링 애플리케이션 시작 시간 : {beforeCrawlingTime}")
 
-    urls = UrlCollectionModule.url_collecting()
-    chunked_urls = Chunker.url_chunk(urls)
-
-    results = CrawlingSiteModule.crawling_each_site(chunked_urls)
-    for result in results:
-        print(len(result))
-
+    Application.run()
 
     afterCrawling = datetime.datetime.now()
     afterCrawlingTime = afterCrawling.strftime("%Y-%m-%d %H:%M:%S")
-    print(afterCrawlingTime)
+    logging.info(f"크롤링 애플리케이션 시작 시간 : {afterCrawlingTime}")
 
