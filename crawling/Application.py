@@ -3,6 +3,9 @@ from urlCollection import UrlCollectionModule
 from crawlingSite import CrawlingPageModule
 from util import Chunker
 from detailPage import DetailPageUrlProcess, DetailPageCrawlingModule
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 def run():
 
@@ -49,4 +52,4 @@ def run():
             if crawling_total_item[1] == item_name:
                 crawling_total_item.extend(detail_html_source)
 
-    print("크롤링한 아이템 수는 : ", len(crawling_total_items))
+    logging.info(f"크롤링한 아이템 수는 : {len(crawling_total_items)} 입니다.")

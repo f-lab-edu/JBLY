@@ -22,12 +22,12 @@ urls = [
 threads = []
 
 def fetch_url(url, item_type):
-    start_point = 1
+    page_number = 1
 
     while True:
-        temp_url = url + str(start_point)
+        temp_url = url + str(page_number)
         response = requests.get(temp_url, headers=header)
-        start_point += 1
+        page_number += 1
         if find_key in response.text:
             the_verlin_total_url.append([crawling_module_name, response, item_type])
         else:
