@@ -12,7 +12,6 @@ more_cherry_total_url = []
 
 
 def fetch_url(url):
-
     crawling_module_name = "MoreCherrySiteCrawling"
     find_key = '<ul class="prdList grid4">'
 
@@ -28,8 +27,8 @@ def fetch_url(url):
         else:
             break
 
-def gather_urls():
 
+def gather_urls():
     shop_name = "morecherry"
 
     urls = [

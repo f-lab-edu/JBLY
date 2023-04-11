@@ -1,10 +1,5 @@
 import requests
 import concurrent.futures
-import multiprocessing
-
-threads = []
-result = []
-
 
 def fetch_url(each_url):
     shop_name, item_name, detail_info_url, header_values = each_url
@@ -26,6 +21,5 @@ def get_total_detail_info_response(url):
         results = executor.map(fetch_url, url)
         for result in results:
             output.append(list(result))
-        executor.shutdown()
 
     return output
