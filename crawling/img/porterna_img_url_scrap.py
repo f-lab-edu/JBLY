@@ -1,23 +1,13 @@
-import os.path
 import re
 import urllib.request
-from urllib.request import urlretrieve
 from bs4 import BeautifulSoup
 import requests
-import uuid
 from common.ProductTypes import product_types
 import urllib3
 import ssl
-import urllib.request as req
-import json
-import os
-from datetime import datetime
 import hashlib
-from operator import length_hint
-from img import img_download
 
 urllib3.disable_warnings()
-
 ssl._create_default_https_context = ssl._create_unverified_context
 
 path_folder_outwear = 'D:\\Jblyoutwear\\'
@@ -31,14 +21,12 @@ user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 
 
 def find_last_page(target_url):
-    page_num = 1
     pattern = r'<li class="xans-record-"><a class="other" href="\?cate_no=\d+&amp;page=(\d+)">'
     header = {
         'Referrer': main_url,
         'user-agent': user_agent
     }
-
-    response = requests.get(target_url + str(page_num), headers=header)
+    response = requests.get(target_url, headers=header)
     soup = BeautifulSoup(response.text, 'html.parser')
     find_li = soup.find('div', 'xans-element- xans-product xans-product-normalpaging paging')
     find_li = find_li.find_all('li')
@@ -50,7 +38,7 @@ def find_last_page(target_url):
 
 
 def detail_url_scraper(target_url):
-
+    href_list = []
     for page_num in range(1, int(find_last_page(target_url)) + 1):
         header = {
             'Referrer': target_url + str(page_num),
@@ -66,8 +54,8 @@ def detail_url_scraper(target_url):
                 href = a_tag.get('href')
                 if href is not None:
                     href_set.add(href)
-        href_list = list(href_set)
-        return href_list
+        href_list += list(href_set)
+    return href_list
 
 
 def porterna_img_downloader(target_url, item_type):

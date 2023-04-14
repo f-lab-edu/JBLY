@@ -6,12 +6,11 @@ from common.ProductTypes import product_types
 import urllib3
 import ssl
 import hashlib
-from img import img_crop
-from img_crop import img_cropper
+from opencv.img_crop import img_cropper
 from urllib.parse import quote
 import numpy as np
 import cv2
-from img.etc_img_crop import etc_img_cropper
+from opencv.etc_img_crop import etc_img_cropper
 import encodings
 import logging
 
@@ -70,30 +69,32 @@ def morecherry_img_downloader(target_url, item_type):
         detail_response = requests.get(detail_url, headers=detail_header)
         if find_key in detail_response.text:
             b_soup = BeautifulSoup(detail_response.text, 'html.parser')
-            detail_html = b_soup.find(id="prdDetail").find_all("img")
-            etc_img_tag = detail_html[0]
-            clothes_img_tag = detail_html[-1]
-
-            if item_type == product_types.OUTWEAR.name or item_type == product_types.TOP.name or item_type == product_types.BOTTOM.name:
-                try:
-                    img_url = main_url + clothes_img_tag['ec-data-src']
-                    img_url = img_url.replace(" ", "%20")
-                    with urllib.request.urlopen(img_url) as response:
-                        data = response.read()
-                        img = np.asarray(bytearray(data), dtype=np.uint8)
-                        img_cropper(img, item_type)
-                except UnicodeEncodeError as e:
-                    logging.info("문자열 인코딩에 실패했습니다.")
-            else:
-                try:
-                    etc_img_url = main_url + etc_img_tag['ec-data-src']
-                    etc_img_url = etc_img_url.replace(" ", "%20")
-                    with urllib.request.urlopen(etc_img_url) as response:
-                        data = response.read()
-                        img = np.asarray(bytearray(data), dtype=np.uint8)
-                        etc_img_cropper(img, item_type)
-                except UnicodeEncodeError as e:
-                    logging.info("문자열 인코딩에 실패했습니다.")
+            detail_html = b_soup.find(id="prdDetail")
+            try:
+                etc_img_tag = detail_html.find_all("img")[0]
+                clothes_img_tag = detail_html.find_all("img")[-1]
+                if item_type == product_types.OUTWEAR.name or item_type == product_types.TOP.name or item_type == product_types.BOTTOM.name:
+                    try:
+                        img_url = main_url + clothes_img_tag['ec-data-src']
+                        img_url = img_url.replace(" ", "%20")
+                        with urllib.request.urlopen(img_url) as response:
+                            data = response.read()
+                            img = np.asarray(bytearray(data), dtype=np.uint8)
+                            img_cropper(img, item_type)
+                    except UnicodeEncodeError as e:
+                        logging.info("문자열 인코딩에 실패했습니다.")
+                else:
+                    try:
+                        etc_img_url = main_url + etc_img_tag['ec-data-src']
+                        etc_img_url = etc_img_url.replace(" ", "%20")
+                        with urllib.request.urlopen(etc_img_url) as response:
+                            data = response.read()
+                            img = np.asarray(bytearray(data), dtype=np.uint8)
+                            etc_img_cropper(img, item_type)
+                    except UnicodeEncodeError:
+                        logging.info("문자열 인코딩에 실패했습니다.")
+            except IndexError:
+                logging.info("img 태그가 존재하지 않습니다.")
         else:
             pass
     return None
