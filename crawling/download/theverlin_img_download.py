@@ -1,4 +1,3 @@
-import time
 from multiprocessing import Process
 from img.theverlin_img_url_scrap import theverlin_img_downloader
 from common.ProductTypes import product_types
