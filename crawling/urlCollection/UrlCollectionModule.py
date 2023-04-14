@@ -3,10 +3,12 @@ import importlib
 
 sub_directory_name = "urlCollection"
 
+
 def run_job(module_name):
     module_name = sub_directory_name + "." + module_name
     module = importlib.import_module(module_name)
     return module.gather_urls()
+
 
 def url_collecting():
     module_names = ['MoreCherryUrlsCollector', 'TheVerlinUrlsCollector', 'PorternaUrlsCollector']
