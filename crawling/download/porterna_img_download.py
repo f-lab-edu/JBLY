@@ -1,8 +1,5 @@
-import threading
-import time
 from multiprocessing import Pool
 from img import porterna_img_url_scrap
-import multiprocessing as mp
 from multiprocessing import Process
 from img.porterna_img_url_scrap import porterna_img_downloader
 from common.ProductTypes import product_types
