@@ -1,7 +1,23 @@
+import time
+from multiprocessing import Process
+from img.morecherry_img_url_scrap import morecherry_img_downloader
+from common.ProductTypes import product_types
 from href.morecherry_deatil_url_scrapy import detail_url_scraper
-from img.morecherry_img_url_scrap import morecherry_img_url_scrper
+if __name__ == '__main__':
+    p_outwear = Process(target=detail_url_scraper, args=("https://more-cherry.com/category/outwear/24/?page=", product_types.OUTWEAR.name))
+    p_top = Process(target=morecherry_img_downloader, args=("https://more-cherry.com/category/top/25/?page=", product_types.TOP.name))
+    p_bottom = Process(target=morecherry_img_downloader, args=("https://more-cherry.com/category/pants/26/?page==", product_types.BOTTOM.name))
+    p_acc = Process(target=morecherry_img_downloader, args=("https://more-cherry.com/category/accessory/28/?page=", product_types.ACCESSORY.name))
+    p_shoes = Process(target=morecherry_img_downloader, args=("https://more-cherry.com/category/shoes/42/?page=", product_types.SHOES.name))
 
-def morecherry_img_downloader(target_url, item_type):
-    detail_url_scraper(target_url)
-    morecherry_img_url_scrper(detail_url_scraper)
-    
+    p_outwear.start()
+    p_top.start()
+    p_bottom.start()
+    p_acc.start()
+    p_shoes.start()
+
+    p_outwear.join()
+    p_top.join()
+    p_bottom.join()
+    p_acc.join()
+    p_shoes.join()
