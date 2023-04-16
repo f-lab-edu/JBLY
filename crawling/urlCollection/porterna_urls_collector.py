@@ -12,7 +12,7 @@ porterna_total_url = []
 
 
 def fetch_url(url):
-    crawling_module_name = "PorternaSiteCrawling"
+    crawling_module_name = "porterna_site_crawling"
     find_key = 'col  col20 floatleft xans-record-'
 
     each_url, product_type = url

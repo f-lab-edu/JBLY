@@ -3,7 +3,7 @@ import logging
 
 logging.basicConfig(level=logging.INFO)
 
-def insertProductIsNotExist(products):
+def insert_product_not_exist(products):
     connectedDb = MysqlConnect.connect()
 
     insertSql = "INSERT INTO product (shopName, productName, image, price, productType, detailInfo, shopId, " \

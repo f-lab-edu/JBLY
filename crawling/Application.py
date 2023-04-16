@@ -1,7 +1,7 @@
 from collections import defaultdict
-from urlCollection import UrlCollectionModule
+from urlCollection import url_collection_module
 from crawlingSite import CrawlingPageModule
-from util import Chunker
+from util import chunker
 from detailPage import DetailPageUrlProcess, DetailPageCrawlingModule
 import logging
 
@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.INFO)
 def run():
 
     # 크롤링 대상 페이지 모음
-    total_pages = UrlCollectionModule.url_collecting()
+    total_pages = url_collection_module.url_collecting()
 
     shop_name_and_headers = defaultdict(list) # { shop_name : [base_url, user_agent]} 갖고 있어 상세 페이지 접근을 위해 사용
     page_items = [] # 페이지를 리스트로 갖고 있는 변수
@@ -39,7 +39,7 @@ def run():
             detail_page_request_list.append(temp_detail_list)
 
     # 상세 페이지 request 작업
-    chunked_detail_requests = Chunker.detail_urls_chunker(detail_page_request_list)
+    chunked_detail_requests = chunker.detail_urls_chunker(detail_page_request_list)
     detail_pages = DetailPageUrlProcess.get_detail_info_response(chunked_detail_requests)
 
     # 상세 페이지 CPU Bound 작업
@@ -53,3 +53,5 @@ def run():
                 crawling_total_item.extend(detail_html_source)
 
     logging.info(f"크롤링한 아이템 수는 : {len(crawling_total_items)} 입니다.")
+
+    # crawling_total_items를 DB에 insert해야 합니다.

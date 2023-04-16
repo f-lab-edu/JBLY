@@ -8,11 +8,11 @@ header = {
     'Referrer': base_url,
     'user-agent': user_agent
 }
-the_verlin_total_url = []
+theverlin_total_url = []
 
 
 def fetch_url(url):
-    crawling_module_name = "TheVerlinSiteCrawling"
+    crawling_module_name = "theverlin_site_crawling"
     find_key = 'class="item xans-record-">'
 
     each_url, product_type = url
@@ -23,7 +23,7 @@ def fetch_url(url):
         response = requests.get(temp_url, headers=header)
         page_number += 1
         if find_key in response.text:
-            the_verlin_total_url.append([crawling_module_name, response, product_type])
+            theverlin_total_url.append([crawling_module_name, response, product_type])
         else:
             break
 
@@ -42,4 +42,4 @@ def gather_urls():
     with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
         executor.map(fetch_url, urls)
 
-    return [the_verlin_total_url, base_url, user_agent, shop_name]
+    return [theverlin_total_url, base_url, user_agent, shop_name]

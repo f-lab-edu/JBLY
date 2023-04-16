@@ -11,7 +11,7 @@ def run_job(module_name):
 
 
 def url_collecting():
-    module_names = ['MoreCherryUrlsCollector', 'TheVerlinUrlsCollector', 'PorternaUrlsCollector']
+    module_names = ['morecherry_urls_collector', 'thrverlin_urls_collector', 'porterna_urls_collector']
     output = []
     with multiprocessing.Pool(3) as pool:
         results = pool.imap(run_job, module_names)
