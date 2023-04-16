@@ -1,10 +1,10 @@
-from dbConnection import MysqlConnect
+from dbConnection import mysql_connect
 import logging
 
 logging.basicConfig(level=logging.INFO)
 
 def insert_product_not_exist(products):
-    connectedDb = MysqlConnect.connect()
+    connectedDb = mysql_connect.connect()
 
     insertSql = "INSERT INTO product (shopName, productName, image, price, productType, detailInfo, shopId, " \
                 "detailHtml) SELECT %s, %s, %s, %s, %s, %s, %s, %s FROM DUAL WHERE NOT EXISTS (SELECT * FROM product " \
@@ -25,6 +25,6 @@ def insert_product_not_exist(products):
 
     connectedDb.commit()
     cursor.close()
-    MysqlConnect.disconnect(connectedDb)
+    mysql_connect.disconnect(connectedDb)
 
     return None
