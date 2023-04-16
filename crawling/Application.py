@@ -2,7 +2,7 @@ from collections import defaultdict
 from urlCollection import url_collection_module
 from crawlingSite import CrawlingPageModule
 from util import chunker
-from detailPage import DetailPageUrlProcess, DetailPageCrawlingModule
+from detailPage import detail_page_url_process, detail_page_crawling_module
 import logging
 
 logging.basicConfig(level=logging.INFO)
@@ -40,10 +40,10 @@ def run():
 
     # 상세 페이지 request 작업
     chunked_detail_requests = chunker.detail_urls_chunker(detail_page_request_list)
-    detail_pages = DetailPageUrlProcess.get_detail_info_response(chunked_detail_requests)
+    detail_pages = detail_page_url_process.get_detail_info_response(chunked_detail_requests)
 
     # 상세 페이지 CPU Bound 작업
-    crawling_detail_pages = DetailPageCrawlingModule.crawling_site(detail_pages)
+    crawling_detail_pages = detail_page_crawling_module.crawling_site(detail_pages)
 
     # 기존에 존재하는 아이템 리스트의 아이템 이름과 상세 페이지 리스트의 아이템 이름을 비교해 같다면 상세 페이지 html 소스를 리스트에 추가
     for crawling_detail_page in crawling_detail_pages:
