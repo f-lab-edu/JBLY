@@ -28,3 +28,15 @@ def insert_product_not_exist(products):
     mysql_connect.disconnect(connectedDb)
 
     return None
+
+# cloud db에 존재하는 데이터 전부를 가져옵니다. product_query 안에서 사용되는 메서드입니다.
+def get_whole_data_from_db():
+    connect = mysql_connect.connect()
+
+    query = "select * from product"
+    cursor = connect.cursor()
+
+    cursor.execute(query)
+    total_product_data = cursor.fetchall()
+
+    return list(map(lambda sub_list : sub_list[1:], total_product_data))
