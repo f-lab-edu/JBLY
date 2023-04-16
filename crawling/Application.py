@@ -1,6 +1,6 @@
 from collections import defaultdict
 from urlCollection import url_collection_module
-from crawlingSite import CrawlingPageModule
+from crawlingSite import crawling_page_module
 from util import chunker
 from detailPage import detail_page_url_process, detail_page_crawling_module
 import logging
@@ -21,7 +21,7 @@ def run():
         shop_name_and_headers[shop_name].append((base_url, user_agent))
 
     # 모은 대상 페이지 Crawling
-    items_lists = CrawlingPageModule.crawling_page(page_items)
+    items_lists = crawling_page_module.crawling_page(page_items)
     crawling_total_items = [] # 크롤링한 아이템 리스트
     for items_list in items_lists:
         crawling_total_items.extend(items_list)
