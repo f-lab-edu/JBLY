@@ -3,6 +3,7 @@ from urlCollection import url_collection_module
 from crawlingSite import crawling_page_module
 from util import chunker
 from detailPage import detail_page_url_process, detail_page_crawling_module
+import db_connection_application
 import logging
 
 logging.basicConfig(level=logging.INFO)
@@ -63,4 +64,28 @@ def run():
         if len(crawling_total_items[index]) != insert_data_capa:
             crawling_total_items[index] = crawling_total_items[index][:insert_data_capa]
 
-    # crawling_total_items를 DB에 insert해야 합니다.
+    crawling_data = crawling_data_list_to_dict(crawling_total_items)
+    db_connection_application.run(crawling_data)
+
+'''
+[{'shopName' : shopName, 
+ 'productName' : productName, 
+ 'image' : image, 
+ 'price' : price, 
+ 'productType' : productType, 
+ 'detailInfo' : detailInfo, 
+ 'shopId' : shopId, 
+ 'detailHtml' : detailHtml} .. 
+]
+'''
+def crawling_data_list_to_dict(crawling_data):
+    return [{
+        'shopName': shopName,
+        'productName': productName,
+        'image': image,
+        'price': price,
+        'productType': productType,
+        'detailInfo': detailInfo,
+        'shopId': shopId,
+        'detailHtml': detailHtml
+    } for shopName, productName, image, price, productType, detailInfo, shopId, detailHtml in crawling_data]
