@@ -14,4 +14,6 @@ def connector():
                            password=cloudPwd,
                            db=cloudName,
                            charset='utf8',
-                           port=cloudPort)
+                           port=cloudPort,
+                           cursorclass=pymysql.cursors.DictCursor
+                           )
