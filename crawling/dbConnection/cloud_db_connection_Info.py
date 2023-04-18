@@ -9,6 +9,8 @@ def connector():
     cloudPort = os.environ.get("DB_PORT")
 
     cloudPort = int(cloudPort)
+
+    # column 이름이 key값으로 들어간 형태로 {key : value} 반환합니다.
     return pymysql.connect(host=cloudHost,
                            user=cloudUser,
                            password=cloudPwd,

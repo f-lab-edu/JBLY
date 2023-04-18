@@ -3,7 +3,7 @@ from urlCollection import url_collection_module
 from crawlingSite import crawling_page_module
 from util import chunker
 from detailPage import detail_page_url_process, detail_page_crawling_module
-import db_connection_application
+from dbConnection import database_module
 import logging
 
 logging.basicConfig(level=logging.INFO)
@@ -64,8 +64,8 @@ def run():
         if len(crawling_total_items[index]) != insert_data_capa:
             crawling_total_items[index] = crawling_total_items[index][:insert_data_capa]
 
-    crawling_data = crawling_data_list_to_dict(crawling_total_items)
-    db_connection_application.run(crawling_data)
+    crawling_datas = crawling_data_list_to_dict(crawling_total_items)
+    database_module.run(crawling_datas)
 
 '''
 [{'shopName' : shopName, 
