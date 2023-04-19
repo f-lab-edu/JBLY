@@ -36,6 +36,7 @@ def get_whole_image_url_data_from_db():
     connect.close()
     return image_data
 
+# local db에서 cloud db로 데이터 insert 실험 시 필요한 Method입니다.
 def local_db_delete_id_column():
     key_to_remove = 'id'
 
