@@ -1,4 +1,4 @@
-from dbConnection import MysqlConnectionInfo, product_query
+from dbConnection import cloud_db_connection_Info
 import concurrent.futures
 import logging
 
@@ -8,7 +8,7 @@ logging.basicConfig(level=logging.INFO)
 DB 관련 처리 작업은 이곳 database_module에서 담당합니다.
 '''
 
-pool = MysqlConnectionInfo.cloud_db_connection()
+pool = cloud_db_connection_Info.cloud_db_connection()
 
 def run(crawling_datas):
     batch_size = 400
