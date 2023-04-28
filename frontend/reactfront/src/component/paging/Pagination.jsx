@@ -1,6 +1,13 @@
 import {useEffect, useState} from "react";
 
-function Pagination({currentPage, totalPages, handleClickPrevious, handleClickNext, getPageNumbers, setCurrentPage}) {
+function Pagination({
+    currentPage,
+    totalPages,
+    handleClickPrevious,
+    handleClickNext,
+    getPageNumbers,
+    setCurrentPage
+}) {
 
     // const [currentPgae, setCurrentPage] = useState(1);
     console.log(getPageNumbers())
@@ -9,7 +16,8 @@ function Pagination({currentPage, totalPages, handleClickPrevious, handleClickNe
         <div>
             <button onClick={handleClickPrevious}>이전</button>
             {getPageNumbers().map(pageNumber => (
-                <button key={pageNumber} onClick={() => setCurrentPage(pageNumber)}>
+                <button key={pageNumber}
+                        onClick={() => setCurrentPage(pageNumber)}>
                     {pageNumber}
                 </button>
             ))}

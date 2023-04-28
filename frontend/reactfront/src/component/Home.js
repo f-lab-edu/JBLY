@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router";
+import {useNavigate} from "react-router";
 import LoginFrom from "./LoginForm";
 
 const Home = () => {
@@ -12,7 +12,7 @@ const Home = () => {
         <div>
             <h1>JBLY</h1>
             <p>BY. SJ, YS</p>
-            <LoginFrom />
+            <LoginFrom/>
             <button id="button1" onClick={navigateToSignUp}>회원가입</button>
 
         </div>

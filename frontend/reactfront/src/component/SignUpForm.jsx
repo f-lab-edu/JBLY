@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import axios from "axios";
-import { useNavigate } from "react-router";
+import {useNavigate} from "react-router";
 
 const SignUpForm = () => {
     const navigate = useNavigate();
@@ -12,7 +12,6 @@ const SignUpForm = () => {
         email: "",
         address: "",
     })
-
 
     const handleChange = e => {
         setValues({
@@ -26,14 +25,14 @@ const SignUpForm = () => {
         console.log(values)
         console.log(e)
         axios.post('/api/users', {
-            userId: values.userId,
-            password: values.password,
-            name: values.name,
-            phone: values.phone,
-            email: values.email,
-            address: values.address
-        }
-        ).then(()=>{
+                userId: values.userId,
+                password: values.password,
+                name: values.name,
+                phone: values.phone,
+                email: values.email,
+                address: values.address
+            }
+        ).then(() => {
             navigate('/')
         })
     }
@@ -87,7 +86,6 @@ const SignUpForm = () => {
             </form>
         </div>
     )
-
 
 }
 
