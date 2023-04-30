@@ -1,4 +1,4 @@
-# ![image](https://user-images.githubusercontent.com/26570325/235338728-d573290c-b720-47a8-ad16-ad3a75f75aed.png) JBLY
+# ![32](https://user-images.githubusercontent.com/26570325/235338763-722ea700-eced-4479-9589-48d5e435b29e.png) JBLY
 
 두 팀원 모두 의류 산업에 관심이 많아 평소 자주 사용하는 패션 플랫폼을 직접 만들어보고자 시작하게 되었습니다. 사이트 구조와 특징이 각기 다른 세 개의 쇼핑몰에서 상품 데이터를 스크래핑한 후 화면에 사용자가 알아보기 쉽게 보여주는 서비스 입니다. 
 (추후 성과에 대한 내용을 추가 할 예정입니다)
