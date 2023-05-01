@@ -1,4 +1,12 @@
-# 👕  JBLY
+<p align="middle" >
+  <img src="https://ifh.cc/g/prA5lC.png" width="250">
+</p>
+  <div align=center>
+	
+  [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Ff-lab-edu%2FJBLY&count_bg=%23FF00EE&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://github.com/f-lab-edu/JBLY) 
+  </div>
+
+# 👚JBLY
 
 두 팀원 모두 의류 산업에 관심이 많아 평소 자주 사용하는 패션 플랫폼을 직접 만들어보고자 시작하게 되었습니다. 사이트 구조와 특징이 각기 다른 세 개의 쇼핑몰에서 상품 데이터를 스크래핑한 후 화면에 사용자가 알아보기 쉽게 보여주는 서비스 입니다. 
 (추후 성과에 대한 내용을 추가 할 예정입니다)
