@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import {useNavigate} from "react-router";
-import ProductList from "../component/paging/ProductList";
+import ProductList from "./ProductList";
 
 const ProductListPage = () => {
     const navigate = useNavigate();
