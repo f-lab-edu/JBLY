@@ -5,11 +5,13 @@ import ProductListPage from "./component/page/ProductListPage";
 import SignUpPage from "./component/page/SignUpPage";
 import Header from "./component/Header";
 import Footer from "./component/Footer";
+import SearchBox from "./component/searchBox/SearchBox";
 
 const App = () => {
     return (
         <div>
             <Header/>
+            <SearchBox/>
             <Routes>
                 <Route path="/" element={<Home/>}></Route>
                 <Route path="/signUp" element={<SignUpPage/>}></Route>

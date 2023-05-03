@@ -1,0 +1,27 @@
+.search-box-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  padding-bottom: 10px;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  font-size: 16px;
+  outline: none;
+  border: 2px solid black;
+  width: auto;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 0 5px 5px 0;
+  background-color: #1E90FF;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  border: 2px solid black;
+}
