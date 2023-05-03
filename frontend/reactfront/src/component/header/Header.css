@@ -1,0 +1,8 @@
+.header-container {
+  background: linear-gradient(to right, #5870FD, #9C6CE6);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
