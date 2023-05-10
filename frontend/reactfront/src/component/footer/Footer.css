@@ -1,0 +1,16 @@
+.footer-container {
+  background: #eee;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 50px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.footer-text {
+  margin-right: 10px;
+  text-align: right;
+}

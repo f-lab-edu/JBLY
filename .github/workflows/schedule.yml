@@ -1,28 +1,28 @@
-name: Python application
-
-on:
-  schedule:
-    - cron: '30 6 * * *'
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    env:
-      DB_HOST: ${{secrets.CRAWLING_APPLICATION_DB_HOST}}
-      DB_NAME: ${{secrets.CRAWLING_APPLICATION_DB_NAME}}
-      DB_USER: ${{secrets.CRAWLING_APPLICATION_DB_USER}}
-      DB_PWD: ${{secrets.CRAWLING_APPLICATION_DB_PWD}}
-      DB_PORT: ${{secrets.CRAWLING_APPLICATION_DB_PORT}}
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-      - name: Install dependencies
-        working-directory: "./crawling"
-        run: |
-          python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - name: Run main.py
-        working-directory: "./crawling"
-        run: python main.py
+#name: Python application
+#
+#on:
+#  schedule:
+#    - cron: '30 6 * * *'
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#    env:
+#      DB_HOST: ${{secrets.CRAWLING_APPLICATION_DB_HOST}}
+#      DB_NAME: ${{secrets.CRAWLING_APPLICATION_DB_NAME}}
+#      DB_USER: ${{secrets.CRAWLING_APPLICATION_DB_USER}}
+#      DB_PWD: ${{secrets.CRAWLING_APPLICATION_DB_PWD}}
+#      DB_PORT: ${{secrets.CRAWLING_APPLICATION_DB_PORT}}
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Set up Python
+#        uses: actions/setup-python@v2
+#        with:
+#          python-version: 3.9
+#      - name: Install dependencies
+#        working-directory: "./crawling"
+#        run: |
+#          python -m pip install --upgrade pip
+#          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+#      - name: Run main.py
+#        working-directory: "./crawling"
+#        run: python main.py

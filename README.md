@@ -43,6 +43,9 @@
 **Infra**
 - GithubAction Cron Scheduler, GithubAction CI
 
+## 🛠 Project UI/UX
+![Project UI/UX](image/JBLY_UI_UX.png)
+
 ## ✅ Project Goal
 **1. 요구사항 충족**
 
