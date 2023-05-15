@@ -12,7 +12,8 @@ if __name__ == '__main__':
     beforeCrawlingTime = beforeCrawling.strftime("%Y-%m-%d %H:%M:%S")
     logging.info(f"Crawling Application 실행 전 시간 : {beforeCrawlingTime}")
 
-    Application.run()
+    # Application.run()
+    logging.info("Crawling Application 입니다.")
 
     afterCrawling = datetime.datetime.now()
     afterCrawlingTime = afterCrawling.strftime("%Y-%m-%d %H:%M:%S")
