@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/main")
 public class MainPageController {
 
-    @GetMapping("/page")
+    @GetMapping("/deploy-test")
     public String mainPage() {
-        return "This is Main Page";
+        return "Success Deploy";
     }
 }
