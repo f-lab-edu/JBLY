@@ -6,6 +6,7 @@ import SignUpPage from "./component/page/SignUpPage";
 import Header from "./component/header/Header";
 import Footer from "./component/footer/Footer";
 import SearchBox from "./component/searchBox/SearchBox";
+import DeployTest from "./component/DeployTest";
 
 const App = () => {
     return (
@@ -16,6 +17,7 @@ const App = () => {
                 <Route path="/" element={<Home/>}></Route>
                 <Route path="/signUp" element={<SignUpPage/>}></Route>
                 <Route path="/productList" element={<ProductListPage/>}></Route>
+                <Route path="/deploy-test" element={<DeployTest/>}></Route>
             </Routes>
             <Footer/>
         </div>
