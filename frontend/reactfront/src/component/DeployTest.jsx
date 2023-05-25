@@ -9,8 +9,9 @@ const DeployTest = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
+                console.log('DeployTest는 호출되었습니다.');
                 const response = await axios.get(
-                    'http://localhost:8080/main/deploy-test');
+                    process.env.REACT_APP_API_URL + '/main/deploy-test');
                 console.log(response.data);
                 setData(response.data);
             } catch (error) {
