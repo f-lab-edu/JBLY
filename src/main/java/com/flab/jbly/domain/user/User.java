@@ -1,28 +1,25 @@
 package com.flab.jbly.domain.user;
 
+import com.flab.jbly.domain.common.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import java.time.Instant;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @AllArgsConstructor
 @Builder
 @Getter
-@Table(name = "user")
-public class User {
+@Table(name = "users")
+public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,28 +28,20 @@ public class User {
     @Column(name = "userId", nullable = false, length = 100)
     private String userId;
 
-    @Column(name = "password", nullable = false, length = 500)
+    @Column(nullable = false, length = 500)
     private String password;
 
-    @Column(name = "name", nullable = false, length = 100)
+    @Column(nullable = false, length = 100)
     private String name;
 
-    @Column(name = "phone", nullable = false)
+    @Column(nullable = false)
     private String phone;
 
-    @Column(name = "email", nullable = false)
+    @Column(nullable = false)
     private String email;
 
-    @Column(name = "address", nullable = false)
+    @Column(nullable = false)
     private String address;
-
-    @CreationTimestamp
-    @Column(name = "createdAt")
-    private Instant createdAt;
-
-    @UpdateTimestamp
-    @Column(name = "updatedAt")
-    private Instant updatedAt;
 
     // Test 시에만 사용됩니다.
     public void currentId(Long id) {

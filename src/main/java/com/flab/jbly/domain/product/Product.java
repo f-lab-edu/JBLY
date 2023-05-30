@@ -7,7 +7,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -20,43 +19,34 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Getter
-@Table(name = "product")
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "shopId", nullable = false)
+    @Column(nullable = false)
     private Long shopId;
 
-    @Column(name = "shopName", nullable = false)
+    @Column(nullable = false)
     private String shopName;
 
-    @Column(name = "productName", nullable = false)
+    @Column(nullable = false)
     private String productName;
 
-    @Column(name = "price", nullable = false)
+    @Column(nullable = false)
     private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "productType", nullable = false)
+    @Column(nullable = false)
     private Category productType;
 
-    @Column(name = "image", nullable = false)
-    private String productImage;
+    @Column(nullable = false)
+    private String image;
 
-    @Column(name = "detailInfo", nullable = false, columnDefinition = "TEXT")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String detailInfo;
 
-    @Column(name = "detailHtml", nullable = false, columnDefinition = "LONGTEXT")
+    @Column(nullable = false, columnDefinition = "LONGTEXT")
     private String detailHtml;
-
-    public enum Category {
-        TOP,
-        BOTTOM,
-        OUTWEAR,
-        SHOES,
-        ACCESSORY,
-    }
 }
