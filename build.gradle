@@ -31,6 +31,7 @@ dependencies {
     // DB 관련
     implementation 'com.h2database:h2'
     implementation 'mysql:mysql-connector-java'
+    implementation 'mysql:mysql-connector-java'
     implementation "org.flywaydb:flyway-mysql"
 
     // Help
