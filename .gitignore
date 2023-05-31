@@ -41,3 +41,11 @@ application-local.yml
 
 ### VS Code ###
 .vscode/
+
+### Docker ###
+.idea/
+*.iml
+*.iws
+target/
+.sonar/
+.sonarlint/
