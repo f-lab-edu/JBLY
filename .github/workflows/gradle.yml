@@ -1,10 +1,3 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
-
 name: Spring Boot & Gradle CI/CD
 
 on:
@@ -26,6 +19,7 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
+
     - name: Grant execute permission for gradlew # gradle build 시 사용할 명령어에 대한 권한 부여
       run: chmod +x gradlew
 
@@ -33,11 +27,3 @@ jobs:
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
         arguments: build
-
-
-    - name: Run tests with H2 database
-      env:
-        SPRING_DATASOURCE_URL: jdbc:h2:mem:jblyInMemory
-        SPRING_DATASOURCE_USERNAME: lee
-        SPRING_DATASOURCE_PASSWORD:
-      run: ./gradlew test

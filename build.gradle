@@ -29,8 +29,6 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     // DB 관련
-    implementation 'com.h2database:h2'
-    implementation 'mysql:mysql-connector-java'
     implementation 'mysql:mysql-connector-java'
     implementation "org.flywaydb:flyway-mysql"
 
