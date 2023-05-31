@@ -38,9 +38,3 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-    # Hub에 있는 Mysql Image Pull
-    # github secret key 외부 주입
-    # ./graglew test Test run. looking for mysql 8
-
-    - name: Run Test Mysql env
