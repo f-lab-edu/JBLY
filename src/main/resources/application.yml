@@ -5,7 +5,7 @@ spring:
   jpa:
     database: mysql
     open-in-view: false # OSIV 설정
-    hibernate: # application 실행 시 table create and drop
+    hibernate:
       ddl-auto: none
     properties: # 실행 시 어떤 쿼리가 발생하는지 확인하기 위한 설정
       hibernate:
