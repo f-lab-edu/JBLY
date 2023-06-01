@@ -11,4 +11,6 @@ public interface UserRepository {
     User getUserById(Long id);
 
     void deleteUserById(Long id);
+
+    void deleteAllInBatch();
 }

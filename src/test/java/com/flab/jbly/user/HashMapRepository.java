@@ -60,4 +60,11 @@ public class HashMapRepository implements UserRepository {
         }
         throw new IllegalArgumentException();
     }
+
+    @Override
+    public void deleteAllInBatch() {
+        this.inMemoryRepo.clear();
+    }
+
+
 }

@@ -17,7 +17,7 @@ public class ProductPagingService {
     public PagingDataResult getPages(Long start, Long size) {
         var request = PageRequest.of(start.intValue() - 1, size.intValue());
         var pages = pageRepository.findAll(request);
-        var totalPages = Math.ceilDiv(productRepository.findAllProduct().size(), size.intValue());
+        var totalPages = Math.floorDiv(productRepository.findAllProduct().size(), size.intValue());
         return new PagingDataResult(pages.getContent(), totalPages);
     }
 }

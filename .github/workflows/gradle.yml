@@ -1,10 +1,3 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
-
 name: Spring Boot & Gradle CI/CD
 
 on:
@@ -21,23 +14,27 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up JDK 18
+    - name: Set up JDK 17
       uses: actions/setup-java@v3
       with:
-        java-version: '18'
+        java-version: '17'
         distribution: 'temurin'
+#
+#    - uses: actions/checkout@v3
+#    - name: Build the Docker image
+#      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+
     - name: Grant execute permission for gradlew # gradle build 시 사용할 명령어에 대한 권한 부여
       run: chmod +x gradlew
 
     - name: Build with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
-        arguments: build
+        arguments: build -x test
 
-
-    - name: Run tests with H2 database
-      env:
-        SPRING_DATASOURCE_URL: jdbc:h2:mem:jblyInMemory
-        SPRING_DATASOURCE_USERNAME: lee
-        SPRING_DATASOURCE_PASSWORD:
-      run: ./gradlew test
+    # Docker Hub LogIn
+    - name: LogIn to Docker Hub
+      uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}

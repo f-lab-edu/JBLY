@@ -1,17 +1,20 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:jblyInMemory;MODE=MYSQL;NON_KEYWORDS=USER
-    username: lee
-    password:
-    driver-class-name: org.h2.Driver
+    url: jdbc:mysql://localhost:3306/jbly?characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
 
   jpa:
     hibernate:
       ddl-auto: create-drop
     show-sql: true
-    database: h2
-    database-platform: org.hibernate.dialect.H2Dialect
+    database: mysql
+    open-in-view: false
+    database-platform: org.hibernate.dialect.MySQLDialect
+    properties:
+      hibernate:
+        format_sql: true
 
-  h2:
-    console:
-      enabled: true
+  flyway:
+    enabled: false

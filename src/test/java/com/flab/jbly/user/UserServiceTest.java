@@ -5,16 +5,16 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.flab.jbly.application.user.LoginService;
 import com.flab.jbly.application.user.UserServiceImpl;
+import com.flab.jbly.domain.user.UserRepository;
 import com.flab.jbly.infrastructure.exception.user.EncoderNoSuchAlgorithmException;
 import com.flab.jbly.presentation.user.request.LoginRequest;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
 
 @SpringBootTest
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class UserServiceTest {
 
     @Autowired
@@ -23,6 +23,13 @@ class UserServiceTest {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @AfterEach
+    void tearDown() {
+        userRepository.deleteAllInBatch();
+    }
 
     @DisplayName("사용자 로그인을 테스트합니다.")
     @Test

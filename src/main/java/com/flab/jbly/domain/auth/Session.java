@@ -6,7 +6,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import lombok.AccessLevel;
@@ -14,7 +13,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "session")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Session implements Serializable {
@@ -24,11 +22,9 @@ public class Session implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "userId")
     @NotNull
     private Long userId;
 
-    @Column(name = "sessionToken")
     private String sessionToken;
 
     private Session(Long userId, String sessionToken) {
