@@ -13,16 +13,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+    - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      # Docker Hub LogIn
+    - name: LogIn to Docker Hub
+      uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
     - uses: actions/checkout@v3
     - name: Set up JDK 17
       uses: actions/setup-java@v3
       with:
         java-version: '17'
         distribution: 'temurin'
-#
-#    - uses: actions/checkout@v3
-#    - name: Build the Docker image
-#      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
 
     - name: Grant execute permission for gradlew # gradle build 시 사용할 명령어에 대한 권한 부여
       run: chmod +x gradlew
@@ -30,11 +37,5 @@ jobs:
     - name: Build with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
-        arguments: build -x test
+        arguments: build
 
-    # Docker Hub LogIn
-    - name: LogIn to Docker Hub
-      uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
