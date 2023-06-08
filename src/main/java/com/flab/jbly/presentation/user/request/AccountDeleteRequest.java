@@ -13,7 +13,7 @@ public record AccountDeleteRequest(
         Assert.isTrue(userId.length() > 0, "사용자 ID는 필수 입력입니다.");
     }
 
-    public AccountDeleteServiceRequest toCommand() {
+    public AccountDeleteServiceRequest toService() {
         return new AccountDeleteServiceRequest(
             this.id,
             this.userId

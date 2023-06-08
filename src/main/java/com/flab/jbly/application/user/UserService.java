@@ -3,6 +3,7 @@ package com.flab.jbly.application.user;
 import com.flab.jbly.application.user.request.AccountDeleteServiceRequest;
 import com.flab.jbly.application.user.request.AccountUpdateServiceRequest;
 import com.flab.jbly.application.user.request.SignUpServiceRequest;
+import com.flab.jbly.application.user.response.UserResponse;
 import com.flab.jbly.domain.user.PasswordEncryption;
 import com.flab.jbly.domain.user.User;
 import com.flab.jbly.domain.user.UserRepository;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional(readOnly = true)
 public class UserService {
 
     private final UserRepository repository;
@@ -24,56 +26,54 @@ public class UserService {
     }
 
     @Transactional
-    public void saveUser(SignUpServiceRequest command) {
-        if (isUserExist(command.getUserId())) {
+    public UserResponse saveUser(SignUpServiceRequest request) {
+        if (repository.existsByUserId(request.getUserId())) {
             throw new DuplicatedUserException("DuplicatedUserException",
                 ErrorCode.USER_DUPLICATION);
         }
         User newUser = User.builder()
-            .userId(command.getUserId())
-            .name(command.getName())
-            .phone(command.getPhone())
-            .email(command.getEmail())
-            .address(command.getAddress())
-            .password(passwordEncoder.encode(command.getPassword()))
+            .userId(request.getUserId())
+            .name(request.getName())
+            .phone(request.getPhone())
+            .email(request.getEmail())
+            .address(request.getAddress())
+            .password(passwordEncoder.encode(request.getPassword()))
             .build();
         repository.save(newUser);
+
+        return new UserResponse(newUser.getUserId());
     }
 
-    @Transactional(readOnly = true)
-    public boolean isUserExist(String userId) {
+    public UserResponse isUserExist(String userId) {
         if (repository.existsByUserId(userId)) {
             throw new DuplicatedUserException("DuplicatedUserException",
                 ErrorCode.USER_DUPLICATION);
         }
-        return false;
-    }
-
-    @Transactional(readOnly = true)
-    public User getUserById(Long id) {
-        return repository.getUserById(id);
+        return new UserResponse(userId);
     }
 
     @Transactional
-    public void deleteAccount(AccountDeleteServiceRequest command) {
+    public UserResponse deleteAccount(AccountDeleteServiceRequest command) {
         User user = repository.getUserById(command.Id());
         if (!user.getUserId().equals(command.userId())) {
             throw new AccountMisMatchInfoException("AccountMisMatchInfoException",
                 ErrorCode.USER_INFO_MISMATCH);
         }
         repository.deleteUserById(user.getId());
+        return new UserResponse(user.getUserId());
     }
 
     @Transactional
-    public void update(AccountUpdateServiceRequest command) {
-        User user = repository.getUserById(command.id());
+    public UserResponse update(AccountUpdateServiceRequest request) {
+        User user = repository.getUserById(request.id());
         repository.save(user.update(
-            command.userId(),
-            passwordEncoder.encode(command.password()),
-            command.name(),
-            command.phone(),
-            command.email(),
-            command.address()
+            request.userId(),
+            passwordEncoder.encode(request.password()),
+            request.name(),
+            request.phone(),
+            request.email(),
+            request.address()
         ));
+        return new UserResponse(user.getUserId());
     }
 }

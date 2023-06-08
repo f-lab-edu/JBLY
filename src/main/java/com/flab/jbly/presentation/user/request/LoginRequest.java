@@ -13,7 +13,7 @@ public record LoginRequest(
 		Assert.isTrue(password.length() > 7, "비밀번호는 8~16자 영문, 숫자, 특수문자를 사용하세요.");
 	}
 
-	public LoginServiceRequest toCommand() {
+	public LoginServiceRequest toService() {
 				return new LoginServiceRequest(
 						this.userId,
 						this.password

@@ -1,15 +1,13 @@
 package com.flab.jbly.presentation.user;
 
-import static com.flab.jbly.infrastructure.common.ResponseEntityConstants.OK;
-
 import com.flab.jbly.application.user.UserService;
-import com.flab.jbly.infrastructure.common.ResponseEntityConstants;
+import com.flab.jbly.application.user.response.UserResponse;
+import com.flab.jbly.infrastructure.common.ApiResponse;
 import com.flab.jbly.presentation.user.request.AccountDeleteRequest;
 import com.flab.jbly.presentation.user.request.AccountUpdateRequest;
 import com.flab.jbly.presentation.user.request.SignUpRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -31,26 +29,22 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> signUp(@RequestBody @Valid SignUpRequest request) {
-        userService.saveUser(request.toCommand());
-        return ResponseEntityConstants.CREATED;
+    public ApiResponse<UserResponse> signUp(@RequestBody @Valid SignUpRequest request) {
+        return ApiResponse.create(userService.saveUser(request.toService()));
     }
 
     @GetMapping("/{userId}/duplicate")
-    public ResponseEntity<Void> isIdDuplicated(@PathVariable String userId) {
-        userService.isUserExist(userId);
-        return OK;
+    public ApiResponse<UserResponse> isIdDuplicated(@PathVariable String userId) {
+        return ApiResponse.ok(userService.isUserExist(userId));
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Void> delete(@RequestBody AccountDeleteRequest request) {
-        userService.deleteAccount(request.toCommand());
-        return OK;
+    public ApiResponse<UserResponse> delete(@RequestBody AccountDeleteRequest request) {
+        return ApiResponse.ok(userService.deleteAccount(request.toService()));
     }
 
     @PatchMapping("/update")
-    public ResponseEntity<Void> update(@RequestBody AccountUpdateRequest request) {
-        userService.update(request.toCommand());
-        return OK;
+    public ApiResponse<UserResponse> update(@RequestBody AccountUpdateRequest request) {
+        return ApiResponse.ok(userService.update(request.toService()));
     }
 }

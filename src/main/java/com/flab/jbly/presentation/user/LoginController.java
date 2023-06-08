@@ -19,7 +19,7 @@ public class LoginController {
 
 	@PostMapping("")
 	public LoginResponse login(@RequestBody LoginRequest request) {
-		var result = service.login(request.toCommand());
+		var result = service.login(request.toService());
 		return result;
 	}
 

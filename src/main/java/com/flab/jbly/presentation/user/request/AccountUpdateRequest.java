@@ -23,7 +23,7 @@ public record AccountUpdateRequest(
         Assert.isTrue(address.length() > 0, "필수적으로 입력해야합니다.");
     }
 
-    public AccountUpdateServiceRequest toCommand() {
+    public AccountUpdateServiceRequest toService() {
         return new AccountUpdateServiceRequest(
             this.id,
             this.userId,

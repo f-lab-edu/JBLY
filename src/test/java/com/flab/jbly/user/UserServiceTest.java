@@ -36,11 +36,11 @@ class UserServiceTest {
     public void loginTest() throws Exception {
         // given
         var signUp = UserSteps.AddUser();
-        userService.saveUser(signUp.toCommand());
+        userService.saveUser(signUp.toService());
         var loginRequest = UserSteps.logInUser();
 
         // when
-        var loginResult = loginService.login(loginRequest.toCommand());
+        var loginResult = loginService.login(loginRequest.toService());
 
         // then
         assertThat(loginResult.userId()).isEqualTo(signUp.getUserId());
@@ -51,13 +51,13 @@ class UserServiceTest {
     public void loginFailTest() throws Exception {
 
         var signUp = UserSteps.AddUser();
-        userService.saveUser(signUp.toCommand());
+        userService.saveUser(signUp.toService());
         String userId = "yeun";
         String pw = "!abcd1234";
 
         var loginRequest = new LoginRequest(userId, pw);
 
-        assertThatThrownBy(() -> loginService.login(loginRequest.toCommand())).isInstanceOf(EncoderNoSuchAlgorithmException.class);
+        assertThatThrownBy(() -> loginService.login(loginRequest.toService())).isInstanceOf(EncoderNoSuchAlgorithmException.class);
     }
 
 }
