@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.flab.jbly.application.user.LoginService;
-import com.flab.jbly.application.user.UserServiceImpl;
+import com.flab.jbly.application.user.UserService;
 import com.flab.jbly.domain.user.UserRepository;
 import com.flab.jbly.infrastructure.exception.user.EncoderNoSuchAlgorithmException;
 import com.flab.jbly.presentation.user.request.LoginRequest;
@@ -18,7 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class UserServiceTest {
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Autowired
     private LoginService loginService;

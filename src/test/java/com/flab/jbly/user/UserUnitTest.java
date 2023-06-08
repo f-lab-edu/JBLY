@@ -3,7 +3,7 @@ package com.flab.jbly.user;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import com.flab.jbly.application.user.UserServiceImpl;
+import com.flab.jbly.application.user.UserService;
 import com.flab.jbly.infrastructure.encryption.Encryption;
 import com.flab.jbly.infrastructure.exception.user.AccountMisMatchInfoException;
 import com.flab.jbly.infrastructure.exception.user.DuplicatedUserException;
@@ -19,13 +19,13 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class UserUnitTest {
 
-    private UserServiceImpl userService;
+    private UserService userService;
     private HashMapRepository repository = new HashMapRepository();
 
     @BeforeEach
     void setUp() {
         repository.clearDB();
-        userService = new UserServiceImpl(repository, new Encryption());
+        userService = new UserService(repository, new Encryption());
     }
 
     @DisplayName("회원 가입 성공하는 경우")

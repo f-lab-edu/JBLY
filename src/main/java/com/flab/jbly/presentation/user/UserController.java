@@ -8,7 +8,6 @@ import com.flab.jbly.presentation.user.request.AccountDeleteRequest;
 import com.flab.jbly.presentation.user.request.AccountUpdateRequest;
 import com.flab.jbly.presentation.user.request.UserSignUpRequest;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,11 +21,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping
     public ResponseEntity<Void> signUp(@RequestBody @Valid UserSignUpRequest request) {
