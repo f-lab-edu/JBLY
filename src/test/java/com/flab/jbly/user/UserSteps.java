@@ -1,7 +1,7 @@
 package com.flab.jbly.user;
 
 import com.flab.jbly.presentation.user.request.AccountDeleteRequest;
-import com.flab.jbly.presentation.user.request.LoginRequest;
+import com.flab.jbly.presentation.auth.request.SigninRequest;
 import com.flab.jbly.presentation.user.request.AccountUpdateRequest;
 import com.flab.jbly.presentation.user.request.SignUpRequest;
 import io.restassured.RestAssured;
@@ -23,10 +23,10 @@ public class UserSteps {
             phone, email, address);
     }
 
-    public static LoginRequest logInUser() {
+    public static SigninRequest logInUser() {
         String userId = "yeun";
         String password = "!1234abcd";
-        return new LoginRequest(userId, password);
+        return new SigninRequest(userId, password);
     }
 
     public static AccountDeleteRequest deleteRequest() {

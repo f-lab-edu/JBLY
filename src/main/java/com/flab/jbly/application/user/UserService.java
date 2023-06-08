@@ -76,4 +76,8 @@ public class UserService {
         ));
         return new UserResponse(user.getUserId());
     }
+
+    @Transactional
+    public void logout(){
+    }
 }

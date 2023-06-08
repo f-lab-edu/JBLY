@@ -1,4 +1,4 @@
-package com.flab.jbly.infrastructure.common;
+package com.flab.jbly.presentation;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

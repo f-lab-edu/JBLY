@@ -8,7 +8,7 @@ import com.flab.jbly.infrastructure.encryption.Encryption;
 import com.flab.jbly.infrastructure.exception.user.AccountMisMatchInfoException;
 import com.flab.jbly.infrastructure.exception.user.DuplicatedUserException;
 import com.flab.jbly.presentation.user.request.AccountDeleteRequest;
-import com.flab.jbly.presentation.user.request.LoginRequest;
+import com.flab.jbly.presentation.auth.request.SigninRequest;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -104,7 +104,7 @@ public class UserUnitTest {
     @ParameterizedTest
     @MethodSource("failLoginRequestSet")
     public void loginRequestExceptionTest(String userId, String pwd) throws Exception {
-        assertThatThrownBy(() -> new LoginRequest(userId, pwd)).isInstanceOf(
+        assertThatThrownBy(() -> new SigninRequest(userId, pwd)).isInstanceOf(
             IllegalArgumentException.class);
     }
 

@@ -1,4 +1,4 @@
-package com.flab.jbly.application.user.response;
+package com.flab.jbly.application.auth.response;
 
 import com.flab.jbly.domain.auth.Session;
 import jakarta.validation.constraints.NotNull;

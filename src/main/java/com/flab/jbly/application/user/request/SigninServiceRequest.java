@@ -1,6 +1,6 @@
 package com.flab.jbly.application.user.request;
 
-public record LoginServiceRequest(
+public record SigninServiceRequest(
 		String userId,
 		String password
 ) {
