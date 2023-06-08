@@ -1,0 +1,12 @@
+body {
+  display: flex;
+  justify-content: center;
+  background-color: ghostwhite;
+}
+
+#root {
+  position: relative;
+  width: 600px;
+  height: 100vh;
+  background-color: white;
+}

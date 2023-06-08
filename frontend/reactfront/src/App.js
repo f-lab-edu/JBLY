@@ -1,4 +1,5 @@
 import "./App.css"
+import "./Globals.css"
 import {Route, Routes} from "react-router-dom";
 import Home from "./component/Home";
 import ProductListPage from "./component/page/ProductListPage";
@@ -10,7 +11,7 @@ import DeployTest from "./component/DeployTest";
 
 const App = () => {
     return (
-        <div>
+        <div id="root">
             <Header/>
             <SearchBox/>
             <Routes>
