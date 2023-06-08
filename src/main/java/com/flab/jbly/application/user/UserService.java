@@ -1,8 +1,8 @@
 package com.flab.jbly.application.user;
 
-import com.flab.jbly.application.user.command.AccountDeleteCommand;
-import com.flab.jbly.application.user.command.AccountUpdateCommand;
-import com.flab.jbly.application.user.command.UserSignUpCommand;
+import com.flab.jbly.application.user.request.AccountDeleteServiceRequest;
+import com.flab.jbly.application.user.request.AccountUpdateServiceRequest;
+import com.flab.jbly.application.user.request.SignUpServiceRequest;
 import com.flab.jbly.domain.user.PasswordEncryption;
 import com.flab.jbly.domain.user.User;
 import com.flab.jbly.domain.user.UserRepository;
@@ -24,7 +24,7 @@ public class UserService {
     }
 
     @Transactional
-    public void saveUser(UserSignUpCommand command) {
+    public void saveUser(SignUpServiceRequest command) {
         if (isUserExist(command.getUserId())) {
             throw new DuplicatedUserException("DuplicatedUserException",
                 ErrorCode.USER_DUPLICATION);
@@ -55,7 +55,7 @@ public class UserService {
     }
 
     @Transactional
-    public void deleteAccount(AccountDeleteCommand command) {
+    public void deleteAccount(AccountDeleteServiceRequest command) {
         User user = repository.getUserById(command.Id());
         if (!user.getUserId().equals(command.userId())) {
             throw new AccountMisMatchInfoException("AccountMisMatchInfoException",
@@ -65,7 +65,7 @@ public class UserService {
     }
 
     @Transactional
-    public void update(AccountUpdateCommand command) {
+    public void update(AccountUpdateServiceRequest command) {
         User user = repository.getUserById(command.id());
         repository.save(user.update(
             command.userId(),

@@ -1,6 +1,6 @@
 package com.flab.jbly.presentation.user.request;
 
-import com.flab.jbly.application.user.command.LoginCommand;
+import com.flab.jbly.application.user.request.LoginServiceRequest;
 import org.springframework.util.Assert;
 
 public record LoginRequest(
@@ -13,8 +13,8 @@ public record LoginRequest(
 		Assert.isTrue(password.length() > 7, "비밀번호는 8~16자 영문, 숫자, 특수문자를 사용하세요.");
 	}
 
-	public LoginCommand toCommand() {
-				return new LoginCommand(
+	public LoginServiceRequest toCommand() {
+				return new LoginServiceRequest(
 						this.userId,
 						this.password
 				);

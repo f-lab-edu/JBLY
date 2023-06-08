@@ -1,6 +1,6 @@
 package com.flab.jbly.application.user;
 
-import com.flab.jbly.application.user.result.AuthorizationResult;
+import com.flab.jbly.application.user.response.AuthorizationResponse;
 import com.flab.jbly.domain.auth.Session;
 import com.flab.jbly.domain.auth.SessionRepository;
 import com.flab.jbly.infrastructure.exception.auth.EmptySessionException;
@@ -14,14 +14,14 @@ public class AuthorizationService {
 
     private final SessionRepository repository;
 
-    public AuthorizationResult getCurrentUser(HttpServletRequest request) {
+    public AuthorizationResponse getCurrentUser(HttpServletRequest request) {
         // TODO: 2023/02/14 Casting Exception 발생
         var session = (Session) request.getSession().getAttribute("session");
         if (session == null) {
             throw new EmptySessionException();
         }
         var currentUserSession = repository.findBySession(session.getSessionToken());
-        return AuthorizationResult.fromSessionEntity(currentUserSession);
+        return AuthorizationResponse.fromSessionEntity(currentUserSession);
     }
 
 }

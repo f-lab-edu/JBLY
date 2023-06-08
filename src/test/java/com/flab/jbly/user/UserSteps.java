@@ -3,7 +3,7 @@ package com.flab.jbly.user;
 import com.flab.jbly.presentation.user.request.AccountDeleteRequest;
 import com.flab.jbly.presentation.user.request.LoginRequest;
 import com.flab.jbly.presentation.user.request.AccountUpdateRequest;
-import com.flab.jbly.presentation.user.request.UserSignUpRequest;
+import com.flab.jbly.presentation.user.request.SignUpRequest;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 
 public class UserSteps {
 
-    public static UserSignUpRequest AddUser() {
+    public static SignUpRequest AddUser() {
         String userId = "yeun";
         String password = "!1234abcd";
         String name = "수연";
@@ -19,7 +19,7 @@ public class UserSteps {
         String email = "lee@email.com";
         String address = "Seoul";
 
-        return new UserSignUpRequest(userId, password, name,
+        return new SignUpRequest(userId, password, name,
             phone, email, address);
     }
 
@@ -45,7 +45,7 @@ public class UserSteps {
         return new AccountUpdateRequest(id, userId, password, name, phone, email, address);
     }
 
-    public static ExtractableResponse<Response> signUpAccountApi(UserSignUpRequest request) {
+    public static ExtractableResponse<Response> signUpAccountApi(SignUpRequest request) {
         return RestAssured.given().log().headers()
             .contentType(MediaType.APPLICATION_JSON_VALUE)
             .body(request)

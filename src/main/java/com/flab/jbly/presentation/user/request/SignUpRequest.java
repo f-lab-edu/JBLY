@@ -1,6 +1,6 @@
 package com.flab.jbly.presentation.user.request;
 
-import com.flab.jbly.application.user.command.UserSignUpCommand;
+import com.flab.jbly.application.user.request.SignUpServiceRequest;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.AccessLevel;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserSignUpRequest {
+public class SignUpRequest {
 
     @NotBlank(message = "아이디는 필수 입력 값입니다.")
     private String userId;
@@ -34,8 +34,8 @@ public class UserSignUpRequest {
     @NotBlank(message = "주소는 필수 입력 값입니다.")
     private String address;
 
-    public UserSignUpCommand toCommand() {
-        return new UserSignUpCommand(
+    public SignUpServiceRequest toCommand() {
+        return new SignUpServiceRequest(
             this.userId,
             this.password,
             this.name,

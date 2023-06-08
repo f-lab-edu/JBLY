@@ -1,7 +1,7 @@
 package com.flab.jbly.presentation.page;
 
 import com.flab.jbly.application.product.ProductPagingService;
-import com.flab.jbly.application.product.result.PagingDataResult;
+import com.flab.jbly.application.product.response.PagingDataResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,7 +19,7 @@ public class PageController {
 
     @CrossOrigin
     @GetMapping("/product")
-    public ResponseEntity<PagingDataResult> getPages(
+    public ResponseEntity<PagingDataResponse> getPages(
         @RequestParam Long page,
         @RequestParam Long size) {
         return ResponseEntity.ok(service.getPages(page, size));

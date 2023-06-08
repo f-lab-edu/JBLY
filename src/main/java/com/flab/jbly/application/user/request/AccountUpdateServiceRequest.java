@@ -1,6 +1,6 @@
-package com.flab.jbly.application.user.command;
+package com.flab.jbly.application.user.request;
 
-public record AccountUpdateCommand(
+public record AccountUpdateServiceRequest(
     Long id,
     String userId,
     String password,

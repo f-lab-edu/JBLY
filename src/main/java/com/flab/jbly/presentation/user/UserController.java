@@ -6,7 +6,7 @@ import com.flab.jbly.application.user.UserService;
 import com.flab.jbly.infrastructure.common.ResponseEntityConstants;
 import com.flab.jbly.presentation.user.request.AccountDeleteRequest;
 import com.flab.jbly.presentation.user.request.AccountUpdateRequest;
-import com.flab.jbly.presentation.user.request.UserSignUpRequest;
+import com.flab.jbly.presentation.user.request.SignUpRequest;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> signUp(@RequestBody @Valid UserSignUpRequest request) {
+    public ResponseEntity<Void> signUp(@RequestBody @Valid SignUpRequest request) {
         userService.saveUser(request.toCommand());
         return ResponseEntityConstants.CREATED;
     }

@@ -1,7 +1,7 @@
 package com.flab.jbly.application.user;
 
-import com.flab.jbly.application.user.command.LoginCommand;
-import com.flab.jbly.application.user.result.LoginResult;
+import com.flab.jbly.application.user.request.LoginServiceRequest;
+import com.flab.jbly.application.user.response.LoginResponse;
 import com.flab.jbly.domain.auth.Session;
 import com.flab.jbly.domain.auth.SessionRepository;
 import com.flab.jbly.domain.user.PasswordEncryption;
@@ -27,7 +27,7 @@ public class LoginService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Transactional
-    public LoginResult login(LoginCommand command) {
+    public LoginResponse login(LoginServiceRequest command) {
         var user = repository.findByUserId(command.userId());
 
         if (!encryption.decode(command.password(), user.getPassword())) {
@@ -38,6 +38,6 @@ public class LoginService {
         var session = Session.of(user.getId(), httpSession.getId());
         sessionRepository.save(session);
         httpSession.setAttribute("session",session);
-        return new LoginResult(user.getUserId());
+        return new LoginResponse(user.getUserId());
     }
 }

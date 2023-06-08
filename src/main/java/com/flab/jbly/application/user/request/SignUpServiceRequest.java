@@ -1,4 +1,4 @@
-package com.flab.jbly.application.user.command;
+package com.flab.jbly.application.user.request;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserSignUpCommand {
+public class SignUpServiceRequest {
 
     private String userId;
 

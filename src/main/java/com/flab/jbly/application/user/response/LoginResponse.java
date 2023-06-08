@@ -1,8 +1,8 @@
-package com.flab.jbly.application.user.result;
+package com.flab.jbly.application.user.response;
 
 import jakarta.validation.constraints.NotNull;
 
-public record LoginResult(
+public record LoginResponse(
 		@NotNull
 		String userId
 ) {
