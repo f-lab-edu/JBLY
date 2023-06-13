@@ -14,7 +14,7 @@ public class WebConfig implements WebMvcConfigurer {
     * - 회원 가입 url, main page url을 excludePath에 추가해야합니다.
     * */
 
-    private final CustomInterceptor interceptor;
+    private final SigninCheckInterceptor interceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

@@ -6,7 +6,9 @@ import com.flab.jbly.domain.auth.Token;
 import com.flab.jbly.domain.auth.TokenRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.UUID;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TokenAuthorizationService implements AuthorizationService {
 
     private final TokenRepository tokenRepository;
