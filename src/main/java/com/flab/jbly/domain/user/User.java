@@ -1,8 +1,11 @@
 package com.flab.jbly.domain.user;
 
 import com.flab.jbly.domain.common.BaseEntity;
+import com.flab.jbly.infrastructure.common.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -42,6 +45,9 @@ public class User extends BaseEntity {
 
     @Column(nullable = false)
     private String address;
+
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
 
     // Test 시에만 사용됩니다.
     public void currentId(Long id) {
