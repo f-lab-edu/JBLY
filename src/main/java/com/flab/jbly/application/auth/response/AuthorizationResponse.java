@@ -1,16 +1,12 @@
 package com.flab.jbly.application.auth.response;
 
-import com.flab.jbly.domain.auth.Session;
+import com.flab.jbly.infrastructure.common.Role;
 import jakarta.validation.constraints.NotNull;
 
 public record AuthorizationResponse(
     @NotNull
-    Long userId
+    Long userId,
+    @NotNull
+    Role role
 ) {
-
-    public static AuthorizationResponse fromSessionEntity(Session session) {
-        return new AuthorizationResponse(
-            session.getUserId()
-        );
-    }
 }
