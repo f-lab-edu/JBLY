@@ -1,5 +1,6 @@
 package com.flab.jbly.presentation.user;
 
+import com.flab.jbly.application.auth.AuthorizationService;
 import com.flab.jbly.application.user.UserService;
 import com.flab.jbly.application.user.response.UserResponse;
 import com.flab.jbly.presentation.ApiResponse;
@@ -25,9 +26,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
+    private final AuthorizationService authorizationService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, AuthorizationService authorizationService) {
         this.userService = userService;
+        this.authorizationService = authorizationService;
     }
 
     @PostMapping

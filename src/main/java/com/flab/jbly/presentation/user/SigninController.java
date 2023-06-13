@@ -1,9 +1,9 @@
-package com.flab.jbly.presentation.auth;
+package com.flab.jbly.presentation.user;
 
 import com.flab.jbly.application.user.SigninService;
 import com.flab.jbly.application.user.response.UserResponse;
 import com.flab.jbly.presentation.ApiResponse;
-import com.flab.jbly.presentation.auth.request.SigninRequest;
+import com.flab.jbly.presentation.user.request.SigninRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

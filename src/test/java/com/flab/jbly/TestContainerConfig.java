@@ -9,7 +9,9 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 @Testcontainers
-public class BasicMySqlContainer {
+public class TestContainerConfig {
+
+    // Local에 Docker Desktop이 실행 중에 있어야합니다.
 
     private static final String MYSQL_VERSION = "mysql:8";
     private static final String REDIS_VERSION = "redis:7.0.11";

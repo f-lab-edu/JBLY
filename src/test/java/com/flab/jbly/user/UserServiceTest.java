@@ -7,7 +7,7 @@ import com.flab.jbly.application.user.SigninService;
 import com.flab.jbly.application.user.UserService;
 import com.flab.jbly.domain.user.UserRepository;
 import com.flab.jbly.infrastructure.exception.user.EncoderNoSuchAlgorithmException;
-import com.flab.jbly.presentation.auth.request.SigninRequest;
+import com.flab.jbly.presentation.user.request.SigninRequest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -8,7 +8,7 @@ import com.flab.jbly.infrastructure.encryption.Encryption;
 import com.flab.jbly.infrastructure.exception.user.AccountMisMatchInfoException;
 import com.flab.jbly.infrastructure.exception.user.DuplicatedUserException;
 import com.flab.jbly.presentation.user.request.AccountDeleteRequest;
-import com.flab.jbly.presentation.auth.request.SigninRequest;
+import com.flab.jbly.presentation.user.request.SigninRequest;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

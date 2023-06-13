@@ -1,7 +1,7 @@
 package com.flab.jbly.user;
 
 import com.flab.jbly.presentation.user.request.AccountDeleteRequest;
-import com.flab.jbly.presentation.auth.request.SigninRequest;
+import com.flab.jbly.presentation.user.request.SigninRequest;
 import com.flab.jbly.presentation.user.request.AccountUpdateRequest;
 import com.flab.jbly.presentation.user.request.SignUpRequest;
 import io.restassured.RestAssured;

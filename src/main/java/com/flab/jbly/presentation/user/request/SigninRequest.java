@@ -1,4 +1,4 @@
-package com.flab.jbly.presentation.auth.request;
+package com.flab.jbly.presentation.user.request;
 
 import com.flab.jbly.application.user.request.SigninServiceRequest;
 import org.springframework.util.Assert;
