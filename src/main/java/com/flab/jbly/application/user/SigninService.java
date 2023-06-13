@@ -36,7 +36,7 @@ public class SigninService {
 
         // TODO: 2023/02/14 Session SetAttribute 시 key-value refactoring 필요
         var session = Session.of(user.getId(), httpSession.getId());
-        tokenRepository.save(session);
+//        tokenRepository.save(session);
         httpSession.setAttribute("session",session);
         return new UserResponse(user.getUserId());
     }

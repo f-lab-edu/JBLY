@@ -2,7 +2,7 @@ package com.flab.jbly.domain.auth;
 
 public interface TokenRepository {
 
-    void save(Session session);
+    void save(Token token);
 
     Token findByToken(String token);
 
