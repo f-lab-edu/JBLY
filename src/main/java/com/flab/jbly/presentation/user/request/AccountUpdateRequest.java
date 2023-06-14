@@ -1,6 +1,6 @@
 package com.flab.jbly.presentation.user.request;
 
-import com.flab.jbly.application.user.command.AccountUpdateCommand;
+import com.flab.jbly.application.user.request.AccountUpdateServiceRequest;
 import org.springframework.util.Assert;
 
 public record AccountUpdateRequest(
@@ -23,8 +23,8 @@ public record AccountUpdateRequest(
         Assert.isTrue(address.length() > 0, "필수적으로 입력해야합니다.");
     }
 
-    public AccountUpdateCommand toCommand() {
-        return new AccountUpdateCommand(
+    public AccountUpdateServiceRequest toService() {
+        return new AccountUpdateServiceRequest(
             this.id,
             this.userId,
             this.password,

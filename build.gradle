@@ -30,10 +30,12 @@ dependencies {
     testImplementation 'org.testcontainers:testcontainers:1.17.6'
     testImplementation 'org.testcontainers:junit-jupiter:1.17.6'
     testImplementation 'org.testcontainers:mysql:1.17.6'
+    implementation 'com.redis.testcontainers:testcontainers-redis-junit-jupiter:1.4.6'
 
     // DB 관련
     implementation 'mysql:mysql-connector-java'
     implementation "org.flywaydb:flyway-mysql"
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
     // Help
     compileOnly 'org.projectlombok:lombok'

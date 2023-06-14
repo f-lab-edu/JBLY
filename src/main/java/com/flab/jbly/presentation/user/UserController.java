@@ -1,16 +1,17 @@
 package com.flab.jbly.presentation.user;
 
-import static com.flab.jbly.infrastructure.common.ResponseEntityConstants.OK;
-
+import com.flab.jbly.application.auth.AuthorizationService;
 import com.flab.jbly.application.user.UserService;
-import com.flab.jbly.infrastructure.common.ResponseEntityConstants;
+import com.flab.jbly.application.user.response.UserResponse;
+import com.flab.jbly.presentation.ApiResponse;
 import com.flab.jbly.presentation.user.request.AccountDeleteRequest;
 import com.flab.jbly.presentation.user.request.AccountUpdateRequest;
-import com.flab.jbly.presentation.user.request.UserSignUpRequest;
+import com.flab.jbly.presentation.user.request.SignUpRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import java.io.IOException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -18,37 +19,47 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
+    private final AuthorizationService authorizationService;
 
-    @PostMapping
-    public ResponseEntity<Void> signUp(@RequestBody @Valid UserSignUpRequest request) {
-        userService.saveUser(request.toCommand());
-        return ResponseEntityConstants.CREATED;
+    public UserController(UserService userService, AuthorizationService authorizationService) {
+        this.userService = userService;
+        this.authorizationService = authorizationService;
+    }
+
+    @ResponseStatus(code = HttpStatus.CREATED)
+    @PostMapping("/signUp")
+    public ApiResponse<UserResponse> signUp(@RequestBody @Valid SignUpRequest request) {
+        return ApiResponse.create(userService.saveUser(request.toService()));
     }
 
     @GetMapping("/{userId}/duplicate")
-    public ResponseEntity<Void> isIdDuplicated(@PathVariable String userId) {
-        userService.isUserExist(userId);
-        return OK;
+    public ApiResponse<UserResponse> isIdDuplicated(@PathVariable String userId) {
+        return ApiResponse.ok(userService.isUserExist(userId));
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Void> delete(@RequestBody AccountDeleteRequest request) {
-        userService.deleteAccount(request.toCommand());
-        return OK;
+    public ApiResponse<UserResponse> delete(@RequestBody AccountDeleteRequest request) {
+        return ApiResponse.ok(userService.deleteAccount(request.toService()));
     }
 
     @PatchMapping("/update")
-    public ResponseEntity<Void> update(@RequestBody AccountUpdateRequest request) {
-        userService.update(request.toCommand());
-        return OK;
+    public ApiResponse<UserResponse> update(@RequestBody AccountUpdateRequest request) {
+        return ApiResponse.ok(userService.update(request.toService()));
+    }
+
+    @PostMapping("/logout")
+    public void logout(HttpServletResponse response) throws IOException {
+        // TODO: 2023/06/08 redis 사용한 인가 처리 적용 후 새롭게 구현해야합니다.
+        userService.logout();
+        response.sendRedirect("http://localhost:8080/main/page");
     }
 }

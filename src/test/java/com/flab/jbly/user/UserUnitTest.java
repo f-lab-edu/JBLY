@@ -3,12 +3,12 @@ package com.flab.jbly.user;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import com.flab.jbly.application.user.UserServiceImpl;
+import com.flab.jbly.application.user.UserService;
 import com.flab.jbly.infrastructure.encryption.Encryption;
 import com.flab.jbly.infrastructure.exception.user.AccountMisMatchInfoException;
 import com.flab.jbly.infrastructure.exception.user.DuplicatedUserException;
 import com.flab.jbly.presentation.user.request.AccountDeleteRequest;
-import com.flab.jbly.presentation.user.request.LoginRequest;
+import com.flab.jbly.presentation.user.request.SigninRequest;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,13 +19,13 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 public class UserUnitTest {
 
-    private UserServiceImpl userService;
+    private UserService userService;
     private HashMapRepository repository = new HashMapRepository();
 
     @BeforeEach
     void setUp() {
         repository.clearDB();
-        userService = new UserServiceImpl(repository, new Encryption());
+        userService = new UserService(repository, new Encryption());
     }
 
     @DisplayName("회원 가입 성공하는 경우")
@@ -33,7 +33,7 @@ public class UserUnitTest {
     public void signUpSuccessTest() throws Exception {
         var request = UserSteps.AddUser();
         var userPk = 1L;
-        userService.saveUser(request.toCommand());
+        userService.saveUser(request.toService());
         var user = repository.getUserById(userPk);
         assertThat(user.getId()).isEqualTo(userPk);
     }
@@ -43,8 +43,8 @@ public class UserUnitTest {
     public void signUpFailTest() throws Exception {
         var user1 = UserSteps.AddUser();
         var user2 = UserSteps.AddUser();
-        userService.saveUser(user1.toCommand());
-        assertThatThrownBy(() -> userService.saveUser(user2.toCommand())).isInstanceOf(
+        userService.saveUser(user1.toService());
+        assertThatThrownBy(() -> userService.saveUser(user2.toService())).isInstanceOf(
             DuplicatedUserException.class);
     }
 
@@ -52,10 +52,10 @@ public class UserUnitTest {
     @Test
     public void deleteUserSuccessTest() throws Exception {
         var user = UserSteps.AddUser();
-        userService.saveUser(user.toCommand());
+        userService.saveUser(user.toService());
 
         var request = UserSteps.deleteRequest();
-        userService.deleteAccount(request.toCommand());
+        userService.deleteAccount(request.toService());
 
         assertThat(repository.getUserById(request.id())).isNull();
     }
@@ -64,10 +64,10 @@ public class UserUnitTest {
     @Test
     public void deleteUserFailTest() throws Exception {
         var signUpRequest = UserSteps.AddUser();
-        userService.saveUser(signUpRequest.toCommand());
+        userService.saveUser(signUpRequest.toService());
 
         var request = new AccountDeleteRequest(1L, "abc");
-        assertThatThrownBy(() -> userService.deleteAccount(request.toCommand())).isInstanceOf(
+        assertThatThrownBy(() -> userService.deleteAccount(request.toService())).isInstanceOf(
             AccountMisMatchInfoException.class);
     }
 
@@ -75,12 +75,12 @@ public class UserUnitTest {
     @Test
     public void updateSuccessTest() throws Exception {
         var signUpRequest = UserSteps.AddUser();
-        userService.saveUser(signUpRequest.toCommand());
+        userService.saveUser(signUpRequest.toService());
         var signUpUser = repository.getUserById(1L);
         String signUpUserId = signUpUser.getUserId();
 
         var updateRequest = UserSteps.updateRequest(1L);
-        userService.update(updateRequest.toCommand());
+        userService.update(updateRequest.toService());
         var updateUser = repository.getUserById(1L);
 
         assertThat(updateUser.getId()).isEqualTo(signUpUser.getId());
@@ -91,11 +91,11 @@ public class UserUnitTest {
     @Test
     public void updateFailTest() throws Exception {
         var signUpRequest = UserSteps.AddUser();
-        userService.saveUser(signUpRequest.toCommand());
+        userService.saveUser(signUpRequest.toService());
 
         var updateRequest = UserSteps.updateRequest(2L);
 
-        assertThatThrownBy(() -> userService.update(updateRequest.toCommand())).isInstanceOf(
+        assertThatThrownBy(() -> userService.update(updateRequest.toService())).isInstanceOf(
             NullPointerException.class);
     }
 
@@ -104,7 +104,7 @@ public class UserUnitTest {
     @ParameterizedTest
     @MethodSource("failLoginRequestSet")
     public void loginRequestExceptionTest(String userId, String pwd) throws Exception {
-        assertThatThrownBy(() -> new LoginRequest(userId, pwd)).isInstanceOf(
+        assertThatThrownBy(() -> new SigninRequest(userId, pwd)).isInstanceOf(
             IllegalArgumentException.class);
     }
 

@@ -4,7 +4,7 @@
   justify-content: flex-end;
   align-items: center;
   height: 50px;
-  position: fixed;
+  position: absolute;
   bottom: 0;
   right: 0;
   left: 0;

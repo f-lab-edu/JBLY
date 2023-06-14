@@ -1,6 +1,6 @@
 package com.flab.jbly.presentation.user.request;
 
-import com.flab.jbly.application.user.command.AccountDeleteCommand;
+import com.flab.jbly.application.user.request.AccountDeleteServiceRequest;
 import org.springframework.util.Assert;
 
 public record AccountDeleteRequest(
@@ -13,8 +13,8 @@ public record AccountDeleteRequest(
         Assert.isTrue(userId.length() > 0, "사용자 ID는 필수 입력입니다.");
     }
 
-    public AccountDeleteCommand toCommand() {
-        return new AccountDeleteCommand(
+    public AccountDeleteServiceRequest toService() {
+        return new AccountDeleteServiceRequest(
             this.id,
             this.userId
         );

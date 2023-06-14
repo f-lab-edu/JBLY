@@ -16,3 +16,8 @@ spring:
 
   profiles:
     include: local
+
+  data:
+    redis:
+      host: localhost
+      port: 6379

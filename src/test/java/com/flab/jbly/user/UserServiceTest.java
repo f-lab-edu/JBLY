@@ -3,11 +3,11 @@ package com.flab.jbly.user;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import com.flab.jbly.application.user.LoginService;
-import com.flab.jbly.application.user.UserServiceImpl;
+import com.flab.jbly.application.user.SigninService;
+import com.flab.jbly.application.user.UserService;
 import com.flab.jbly.domain.user.UserRepository;
 import com.flab.jbly.infrastructure.exception.user.EncoderNoSuchAlgorithmException;
-import com.flab.jbly.presentation.user.request.LoginRequest;
+import com.flab.jbly.presentation.user.request.SigninRequest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,10 +18,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 class UserServiceTest {
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Autowired
-    private LoginService loginService;
+    private SigninService signinService;
 
     @Autowired
     private UserRepository userRepository;
@@ -36,11 +36,11 @@ class UserServiceTest {
     public void loginTest() throws Exception {
         // given
         var signUp = UserSteps.AddUser();
-        userService.saveUser(signUp.toCommand());
+        userService.saveUser(signUp.toService());
         var loginRequest = UserSteps.logInUser();
 
         // when
-        var loginResult = loginService.login(loginRequest.toCommand());
+        var loginResult = signinService.login(loginRequest.toService());
 
         // then
         assertThat(loginResult.userId()).isEqualTo(signUp.getUserId());
@@ -51,13 +51,13 @@ class UserServiceTest {
     public void loginFailTest() throws Exception {
 
         var signUp = UserSteps.AddUser();
-        userService.saveUser(signUp.toCommand());
+        userService.saveUser(signUp.toService());
         String userId = "yeun";
         String pw = "!abcd1234";
 
-        var loginRequest = new LoginRequest(userId, pw);
+        SigninRequest signinRequest = new SigninRequest(userId, pw);
 
-        assertThatThrownBy(() -> loginService.login(loginRequest.toCommand())).isInstanceOf(EncoderNoSuchAlgorithmException.class);
+        assertThatThrownBy(() -> signinService.login(signinRequest.toService())).isInstanceOf(EncoderNoSuchAlgorithmException.class);
     }
 
 }
