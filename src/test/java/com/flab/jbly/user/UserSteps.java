@@ -50,7 +50,7 @@ public class UserSteps {
             .contentType(MediaType.APPLICATION_JSON_VALUE)
             .body(request)
             .when()
-            .post("/users")
+            .post("/users/signUp")
             .then()
             .log().headers().extract();
     }
