@@ -11,6 +11,16 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    container: node:10.18-jessie
+
+    services:
+      redis:
+        image: redis
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
 
@@ -30,6 +40,15 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Connect to Redis
+      run: node client.js
+      env:
+        REDIS_HOST: redis
+        REDIS_PORT: 6379
 
     - name: Grant execute permission for gradlew # gradle build 시 사용할 명령어에 대한 권한 부여
       run: chmod +x gradlew
